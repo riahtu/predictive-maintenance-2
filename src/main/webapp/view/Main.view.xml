@@ -1,0 +1,55 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="Test.controller.Main" displayBlock="true">
+	<App>
+		<pages><Page title="Display Invoice">
+			<content><sap.ui.layout.form:SimpleForm xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns:sap.ui.core="sap.ui.core" editable="true" layout="ResponsiveGridLayout" id="__form0">
+			        <sap.ui.layout.form:content>
+			            <sap.ui.core:Title text="Enter Details:" id="__title0"/>
+			            <Label text="Business Partner" id="__label4"/>
+			            <Input width="80%" id="companyName" value="" placeholder="Company Name"/><Button text="Run" width="80px" id="__button0" type="Accept" press="onFilterInvoices"/><Button text="Reset" width="80px" type="Reject" press="onResetFilter"/></sap.ui.layout.form:content>
+			    <sap.ui.layout.form:customData>
+			        <sap.ui.core:CustomData key="w5g.dt.editable" value="true" id="__data5"/>
+			    </sap.ui.layout.form:customData>
+			    </sap.ui.layout.form:SimpleForm>
+			    <Table id="invoicesTable" items="{path: 'invoices>/blocks'}">
+					<columns>
+						<Column id="invoiceNumber">
+							<header>
+								<Text text="Invoice Number"/>
+							</header>
+						</Column>
+						<Column id="GrossTotal" hAlign="Right">
+							<header>
+								<Text text="Gross Total"/>
+							</header>
+						</Column>
+						<Column id="DiscountTotal" hAlign="Right">
+							<header>
+								<Text text="Discount Total"/>
+							</header>
+						</Column>
+						<Column id="NetTotal" hAlign="Right">
+							<header>
+								<Text text="Net Total"/>
+							</header>
+						</Column>
+						<Column id="TaxTotal" hAlign="Right">
+							<header>
+								<Text text="Tax Total"/>
+							</header>
+						</Column>
+					</columns>
+					<ColumnListItem id="reportingListItem" vAlign="Middle">
+						<cells>
+							<Text text="{path: 'invoices>data/Document/InvoiceNumber'}"/>
+							<Text text="{path: 'invoices>data/Document/Amounts/GrossTotal'}"/>
+							<Text text="{path: 'invoices>data/Document/Amounts/DiscountTotal'}"/>
+							<Text text="{path: 'invoices>data/Document/Amounts/NetTotal'}"/>
+							<Text text="{path: 'invoices>data/Document/Amounts/TaxTotal'}"/>
+						</cells>
+					</ColumnListItem>
+				</Table>
+			</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
