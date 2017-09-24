@@ -1,7 +1,81 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 
-<web-app>
-  <display-name>Archetype Created Web Application</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	<error-page>
+		<error-code>400</error-code>
+		<location>/400-error-page.html</location>
+	</error-page>
+	<error-page>
+		<!-- Missing login -->
+		<error-code>401</error-code>
+		<location>/401-error-page.html</location>
+	</error-page>
+	<error-page>
+		<!-- Forbidden directory listing -->
+		<error-code>403</error-code>
+		<location>/403-error-page.html</location>
+	</error-page>
+	<error-page>
+		<!-- Missing resource -->
+		<error-code>404</error-code>
+		<location>/404-error-page.html</location>
+	</error-page>
+	<error-page>
+		<!-- Uncaught exception -->
+		<error-code>500</error-code>
+		<location>/500-error-page.html</location>
+	</error-page>
+	<error-page>
+		<!-- Unsupported servlet method -->
+		<error-code>503</error-code>
+		<location>/503-general-error.html</location>
+	</error-page>
+	<error-page>
+		<location>/general-error.html</location>
+	</error-page>
+	<resource-ref>
+		<res-ref-name>TenantContext</res-ref-name>
+		<res-type>com.sap.cloud.account.TenantContext</res-type>
+	</resource-ref>
+	<resource-ref>
+		<res-ref-name>jdbc/acrscoredb</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+	</resource-ref>
+	<resource-ref>
+		<res-ref-name>EcmService</res-ref-name>
+		<res-type>com.sap.ecm.api.EcmService</res-type>
+	</resource-ref>
+	<resource-ref>
+		<res-ref-name>user/Provider</res-ref-name>
+		<res-type>com.sap.security.um.user.UserProvider</res-type>
+	</resource-ref>
+	<resource-ref>
+		<res-ref-name>myAuthHeaderProvider</res-ref-name>
+		<res-type>com.sap.core.connectivity.api.authentication.AuthenticationHeaderProvider</res-type>
+	</resource-ref>
+	<resource-ref>
+		<res-ref-name>connectivityConfiguration</res-ref-name>
+		<res-type>com.sap.core.connectivity.api.configuration.ConnectivityConfiguration</res-type>
+	</resource-ref>
+	<login-config>
+		<auth-method>FORM</auth-method>
+	</login-config>
+	
+	<session-config>
+		<session-timeout>20</session-timeout>
+		<cookie-config>
+			<http-only>true</http-only>
+			<secure>true</secure>
+		</cookie-config>	
+	</session-config>
 </web-app>
