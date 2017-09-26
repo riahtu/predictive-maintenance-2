@@ -67,6 +67,21 @@
 		<res-ref-name>connectivityConfiguration</res-ref-name>
 		<res-type>com.sap.core.connectivity.api.configuration.ConnectivityConfiguration</res-type>
 	</resource-ref>
+		<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>protected area</web-resource-name>
+			<url-pattern>/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>user</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>INTEGRAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	<security-role>
+		<role-name>user</role-name>
+	</security-role>
 	<login-config>
 		<auth-method>FORM</auth-method>
 	</login-config>

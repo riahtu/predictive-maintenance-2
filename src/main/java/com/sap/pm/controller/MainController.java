@@ -28,7 +28,7 @@ public class MainController {
 	@RequestMapping("/testDestination")
 	public String testDestination(){
 		String result = "success";
-		result = mainService.readDB();
+		result = mainService.registerData();
 		return result;
 	}
 }

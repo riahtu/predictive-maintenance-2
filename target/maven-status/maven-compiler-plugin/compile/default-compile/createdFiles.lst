@@ -1,0 +1,7 @@
+com\sap\pm\controller\MainController.class
+com\sap\pm\controller\ScheduledTasks.class
+com\sap\pm\model\BodySave.class
+com\sap\pm\service\MainService.class
+com\sap\pm\util\DestinationUtil.class
+com\sap\pm\SpringBootWebApplication.class
+com\sap\pm\util\DBUtils.class
