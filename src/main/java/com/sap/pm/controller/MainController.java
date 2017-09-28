@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 import org.springframework.scheduling.quartz.SimpleTriggerFactoryBean;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sap.pm.service.MainService;
@@ -112,5 +113,18 @@ public class MainController implements ApplicationContextAware {
 		}
 		return jd;
 		
+	}	
+	@RequestMapping("/registerDataSource")
+	public String registerDataSource(@RequestParam("tableName")String tableName){
+		String result = "success";
+		result = mainService.registerDataSource(tableName);
+		return result;
+	}
+	
+	@RequestMapping("/forecastMetric")
+	public String forecastMetric(){
+		String result = "success";
+		result = mainService.forecastMetric();
+		return result;
 	}
 }
