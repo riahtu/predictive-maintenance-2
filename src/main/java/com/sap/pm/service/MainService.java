@@ -184,4 +184,25 @@ public class MainService {
 		
 		return responseBody;
 	}
+	
+	
+	public List<Metrics> getMetrics(){
+		ResponseEntity<List> response;
+		
+		List<Metrics> metricList = new ArrayList<>();
+		
+		Metrics metrics1 = new Metrics();
+		metrics1.setMax(1000);
+		metricList.add(metrics1);
+		
+		Metrics metrics2 = new Metrics();
+		metrics1.setMax(1800);
+		metricList.add(metrics2);
+		
+		Metrics metrics3 = new Metrics();
+		metrics1.setMax(1090);
+		metricList.add(metrics3);
+		return metricList;
+		
+	}
 }

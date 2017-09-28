@@ -1,5 +1,7 @@
 package com.sap.pm.controller;
 
+import java.util.List;
+
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sap.pm.model.Metrics;
 import com.sap.pm.service.MainService;
 
 @RestController
@@ -31,7 +34,7 @@ public class MainController implements ApplicationContextAware {
 	private MainService mainService;
 	
 	
-	@RequestMapping("/start")
+	@RequestMapping("/starthgf")
 	public String sayHi(){
 		Scheduler scheduler = getSchedulerInstance();
 		try {
@@ -78,6 +81,17 @@ public class MainController implements ApplicationContextAware {
 		result = mainService.registerData();
 		return result;
 	}
+	
+	@RequestMapping("/metrics")
+	public List<Metrics> metrics(){
+		List<Metrics> result = null;
+		result = mainService.getMetrics();
+		return result;
+	}
+	
+	
+	
+	
 
 	@Override
 	public void setApplicationContext(ApplicationContext ac) throws BeansException {
