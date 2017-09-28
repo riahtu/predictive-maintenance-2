@@ -12,6 +12,11 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.4.2.RELEASE</version>
 	</parent>
+	
+	<properties>
+        <quartz.version>2.2.3</quartz.version>
+        <java.version>1.8</java.version>
+    </properties>
 
 	<dependencies>
 		<dependency>
@@ -99,11 +104,29 @@
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 		</dependency>
+		
+		<dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>${quartz.version}</version>
+        </dependency>
+        
+         <!-- spring's support for quartz -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-tx</artifactId>
+    <version>4.3.6.RELEASE</version>
+</dependency>
+        
+        
 	</dependencies>
 
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
   <build>
 		<finalName>predictivemaintenance</finalName>
 		<plugins>
