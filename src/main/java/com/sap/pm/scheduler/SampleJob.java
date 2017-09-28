@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.sap.pm.service.MainService;
 import com.sap.pm.service.SampleJobService;
 
 @Component
@@ -17,12 +18,16 @@ public class SampleJob implements Job {
 
     @Autowired
     private SampleJobService jobService;
+    
+    @Autowired
+    private MainService mainService;
 
     public void execute(JobExecutionContext context) throws JobExecutionException {
 
         logger.info("Job ** {} ** fired @ {}", context.getJobDetail().getKey().getName(), context.getFireTime());
 
-        jobService.executeSampleJob();
+        //jobService.executeSampleJob();
+        mainService.forecastMetric();
 
         logger.info("Next job scheduled @ {}", context.getNextFireTime());
     }

@@ -146,6 +146,8 @@ public class MainService {
 	}
 	
 	public String forecastMetric(){
+		log.info("forecastmetric ---- ");
+		
 		ResponseEntity<String> response = null;
 		String responseBody = null;
 
