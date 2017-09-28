@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity
@@ -13,10 +15,11 @@ import javax.persistence.Table;
 public class MetricOriginal {
 	
 	@Id
-	@Column(name = "")
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "Date")
 	private Date date;
 	
-	@Column(name = "")
+	@Column(name = "Data", columnDefinition = "decimal(16,6)")
 	private double value;
 
 }
