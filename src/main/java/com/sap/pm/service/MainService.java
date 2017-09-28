@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +23,7 @@ import com.google.gson.Gson;
 import com.sap.core.connectivity.api.authentication.AuthenticationHeader;
 import com.sap.pm.model.BodySave;
 import com.sap.pm.model.ForecastBody;
+import com.sap.pm.model.Metrics;
 import com.sap.pm.util.DBUtils;
 import com.sap.pm.util.DestinationUtil;
 
