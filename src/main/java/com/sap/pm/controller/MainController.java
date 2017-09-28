@@ -34,7 +34,7 @@ public class MainController implements ApplicationContextAware {
 	private MainService mainService;
 	
 	
-	@RequestMapping("/starthgf")
+	@RequestMapping("/start")
 	public String sayHi(){
 		Scheduler scheduler = getSchedulerInstance();
 		try {
