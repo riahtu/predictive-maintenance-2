@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -21,9 +22,11 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 import com.sap.core.connectivity.api.authentication.AuthenticationHeader;
+import com.sap.pm.entity.MetricOriginal;
 import com.sap.pm.model.BodySave;
 import com.sap.pm.model.ForecastBody;
 import com.sap.pm.model.Metrics;
+import com.sap.pm.repository.MetricOrgRepo;
 import com.sap.pm.util.DBUtils;
 import com.sap.pm.util.DestinationUtil;
 
@@ -35,6 +38,9 @@ public class MainService {
 	private static final String REG_URL = "https://aac4paservicesi322364trial.hanatrial.ondemand.com/com.sap.aa.c4pa.services/api/analytics/dataset/sync";
 	
 	private static final String FORECAST_URL = "https://aac4paservicesi322364trial.hanatrial.ondemand.com/com.sap.aa.c4pa.services/api/analytics/forecast/sync";
+	
+	@Autowired 
+	MetricOrgRepo metricOrgRepo;
 	
 	public String readDB(){
 		String result = "success";
@@ -209,5 +215,12 @@ public class MainService {
 		metricList.add(metrics3);
 		return metricList;
 		
+	}
+	
+	public List<MetricOriginal> getMetricData(String metricName){
+		
+		List<MetricOriginal> metricOriginals = metricOrgRepo.findAll();
+		
+		return metricOriginals;
 	}
 }

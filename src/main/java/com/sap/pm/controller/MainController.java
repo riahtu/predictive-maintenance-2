@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sap.pm.entity.MetricOriginal;
 import com.sap.pm.model.Metrics;
 import com.sap.pm.service.MainService;
 
@@ -141,4 +142,11 @@ public class MainController implements ApplicationContextAware {
 		result = mainService.forecastMetric();
 		return result;
 	}
+	@RequestMapping("/getMetricData")
+	public List<MetricOriginal> getMetricData(@RequestParam("metricName")String metricName){
+		List<MetricOriginal> result;
+		result = mainService.getMetricData(metricName);
+		return result;
+	}
+	
 }
