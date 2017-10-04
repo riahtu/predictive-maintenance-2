@@ -11,7 +11,7 @@ import javax.persistence.TemporalType;
 
 
 @Entity
-@Table(name = "CPU_METRIC_FORECASTS")
+@Table(name = "CPU_METRIC_FORECASTS", schema = "PS_USER")
 public class MetricForecast {
 	
 	@Id
@@ -37,5 +37,10 @@ public class MetricForecast {
 	public void setValue(double value) {
 		this.value = value;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "MetricForecast [date=" + date + ", value=" + value + "]";
+	}
+
 }

@@ -48,7 +48,7 @@
 		<res-type>com.sap.cloud.account.TenantContext</res-type>
 	</resource-ref>
 	<resource-ref>
-		<res-ref-name>jdbc/acrscoredb</res-ref-name>
+		<res-ref-name>jdbc/DefaultDB</res-ref-name>
 		<res-type>javax.sql.DataSource</res-type>
 	</resource-ref>
 	<resource-ref>

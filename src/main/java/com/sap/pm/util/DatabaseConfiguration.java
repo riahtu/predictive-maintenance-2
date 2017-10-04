@@ -20,7 +20,7 @@ import org.springframework.transaction.jta.JtaTransactionManager;
 
 @Profile("!test")
 @Configuration
-@EntityScan(basePackages={"com.sap.pm.model"})
+@EntityScan(basePackages={"com.sap.pm.entity"})
 @EnableJpaRepositories(basePackages={"com.sap.pm.repository"})
 public class DatabaseConfiguration extends JpaBaseConfiguration {
 
@@ -41,16 +41,17 @@ public class DatabaseConfiguration extends JpaBaseConfiguration {
 	@Override
 	protected Map<String, Object> getVendorProperties() {
 		HashMap<String, Object> hMap = new HashMap<String, Object>();
-		//hMap.put("eclipselink.ddl-generation", "none");
+		hMap.put("eclipselink.ddl-generation", "drop-and-create-tables");
 		hMap.put("eclipselink.weaving", "false");
 		hMap.put("eclipselink.logging.level", "FINE");
 		hMap.put("eclipselink.logging.level.sql", "FINE");
 		hMap.put("eclipselink.logging.parameters", "true");
 		hMap.put("eclipselink.cache.shared.default", "false");
 		//hMap.put("packagesToScan", "com.sap.srfaas.entity");
-		hMap.put("persistence-unit", "persistence-with-jpa");
+		hMap.put("persistence-unit", "persistence-with-jpa-pm");
 		return hMap;
 	}
 	
 
 }
+

@@ -11,7 +11,7 @@ import javax.persistence.TemporalType;
 
 
 @Entity
-@Table(name = "CPU_METRIC_ORGINAL")
+@Table(name = "CPU_METRIC_ORIGINAL", schema = "PS_USER")
 public class MetricOriginal {
 	
 	@Id
@@ -37,7 +37,10 @@ public class MetricOriginal {
 	public void setValue(double value) {
 		this.value = value;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "MetricOriginal [date=" + date + ", value=" + value + "]";
+	}
+
 }

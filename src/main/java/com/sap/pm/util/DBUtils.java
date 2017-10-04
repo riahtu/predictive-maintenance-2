@@ -30,7 +30,7 @@ public class DBUtils {
         try {
         	Context initContext = new InitialContext();
 			Context envContext = (Context) initContext.lookup("java:comp/env");
-			ds = (DataSource) envContext.lookup("jdbc/acrscoredb");
+			ds = (DataSource) envContext.lookup("jdbc/DefaultDB");
         }
         catch (NamingException e) { 
         	LOGGER.error("Naming Exception occured in DBUtils");
