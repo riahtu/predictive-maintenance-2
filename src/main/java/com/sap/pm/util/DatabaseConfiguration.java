@@ -48,7 +48,7 @@ public class DatabaseConfiguration extends JpaBaseConfiguration {
 		hMap.put("eclipselink.logging.parameters", "true");
 		hMap.put("eclipselink.cache.shared.default", "false");
 		//hMap.put("packagesToScan", "com.sap.srfaas.entity");
-		hMap.put("persistence-unit", "persistence-with-jpa-pm");
+		hMap.put("persistence-unit", "persistence-with-jpa-pm2");
 		return hMap;
 	}
 	

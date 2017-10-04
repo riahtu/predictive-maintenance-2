@@ -27,13 +27,13 @@ public class MetricInfo {
 	@Column(name = "RAM_USAGE", columnDefinition = "decimal(16,6)")
 	private double ramUsage;
 	
-	@Column(name = "RAM_USAGE_FORECAST", columnDefinition = "INT(5)")
+	@Column(name = "RAM_USAGE_FORECAST", columnDefinition = "decimal(16,6)")
 	private double ramUsageFC;
 	
-	@Column(name = "BUSY_THREADS", columnDefinition = "INT(5)")
+	@Column(name = "BUSY_THREADS", columnDefinition = "INT")
 	private Integer busyThreads;
 	
-	@Column(name = "BUSY_THREADS_FORECAST")
+	@Column(name = "BUSY_THREADS_FORECAST", columnDefinition = "INT")
 	private Integer busyThreadsFC;
 
 	public Date getDate() {
@@ -98,5 +98,7 @@ public class MetricInfo {
 				+ ", ramUsage=" + ramUsage + ", ramUsageFC=" + ramUsageFC + ", busyThreads=" + busyThreads
 				+ ", busyThreadsFC=" + busyThreadsFC + "]";
 	}
+
+
 	
 }
