@@ -1,35 +1,987 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta charset="UTF-8">
+    <title>SAP - Cloud Management</title>
 
-		<title>Test</title>
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+	<link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">    
+        
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style-responsive.css" rel="stylesheet">
+	
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+	<style>
+		body
+		{
+			color: #bebebe;
+		}
+		.notify-row
+		{
+			float: right;
+			margin-top: 15px;
+			margin-left: 32px;
+			margin-right: 10px;
+		}
+		
+		.notification
+		{
+			float:left;
+			margin-left: 35px;			
+		}
+		
+		.notification ul
+		{
+			margin-left: 0px;
+			padding:0px;
+		}
+		
+		.fa-power-off
+		{
+			font-size: 30px;
+			color:#d4cece;
+			cursor:pointer;
+		}
+		
+		.fa-bell
+		{
+			font-size: 30px;
+			color:#d4cece;
+			cursor:pointer;
+		}
+		
+		.logout-selected
+		{
+			color:#006b9d;
+		}
+		
+		#sidebar .main-tab-selected h5
+		{
+			color:#006b9d;
+		}
+		
+		.black-bg
+		{
+			background: #2a2a2a;
+			border-bottom: 1px solid #2a2a2a;
+		}
+		
+		ul.top-menu > li > a
+		{
+			color: #d4cece;
+		}
+		
+		#sidebar
+		{
+			width: 110px;
+			background: #2a2a2a;
+		}
+		
+		#main-content
+		{
+			margin-left: 110px;
+		}
+		
+		#container
+		{
+			background: #393636;
+		}
+		
+		.site-footer
+		{
+			background: #393636;
+			color: #fff;
+		}
+		
+		.content-panel
+		{
+			background: #494848;
+			box-shadow: 0px 3px 2px #202020;
+		}
+		
+		.sidebar-toggle-box .fa-bars
+		{
+			font-size: 30px;
+			color: #006b9d;
+		}
+	
+		.metric-drop-down
+		{
+			width: 250px;
+			margin-top: 10px;
+			margin-left: 15px;
+			background-color: #3d3d3d;
+			float: left;
+			color: whitesmoke;
+		}
+		
+		.metric-donut
+		{
+			color: white;
+		}
+		
+		#chartData .c3-legend-item
+		{
+			font-size: 18px;
+			fill:whitesmoke;
+		}
+		
+		#chartData .c3-axis, .c3-axis-x
+		{
+			fill: whitesmoke;
+			font-size: 14px;
+		}
+		
+		#chartData .c3-brush .extent {
+			fill-opacity: .2;
+			fill: white;
+		}
 
-		<script id="sap-ui-bootstrap"
-			src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
-			data-sap-ui-libs="sap.m"
-			data-sap-ui-theme="sap_belize"
-			data-sap-ui-compatVersion="edge"
-			data-sap-ui-resourceroots='{"Test": ""}'>
-		</script>
+		
+		#chartUsage .c3-chart-arcs-title
+		{
+			font-size: 18px;
+			fill:whitesmoke;
+		}
+		
+		#chartUsage .c3-legend-item 
+		{
+			font-size: 18px;
+			fill:whitesmoke;
+		}
+		
+		#chartData .c3-line-Actual {
+			stroke-width: 5px;
+		}
+		
+		#chartData .c3-line-Predicted {
+			stroke-width: 5px;
+		}
+		
+		#chartData .c3-line-Issues {
+			stroke-width: 3px;
+		}
+		
+		
+		
+		#chartGauge .c3-chart-arcs-gauge-max
+		{
+			font-size: 12px;
+			fill: whitesmoke;
+		}
+		
+		.c3-chart-arc .c3-gauge-value {
+			fill: #ddd5d5 !IMPORTANT;
+		}
+		
+		#chartGauge .c3-chart-arcs .c3-chart-arcs-gauge-min
+		{ 
+			fill: whitesmoke;
+			font-size: 12px;
+		}
+		
+		.notify-row .badge
+		{
+			background-color: #c52828;
+			padding: 5px 8px;
+			border-radius: 50%;
+			font-size: 14px;
+		}
+		
+		.open > a, .nav .open > a:hover, .nav .open > a:focus
+		{
+			background-color: transparent !IMPORTANT;
+		}
+		
+		
+		ul.dropdown-menu.extended
+		{
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.676) !important;
+			width:300px !IMPORTANT;
+			max-height: 200px;
+			overflow-y: auto;
+		}
+		
+		.dropdown-menu.extended li a
+		{
+			background: #424242;
+			color: whitesmoke;
+			white-space: unset;
+			border-bottom: 1px solid #1c1c1c !important;
+		}
+		
+		.dropdown-menu.extended li p
+		{
+			border-radius: 0px;
+		}
+		
+		.dropdown-menu.extended li a:hover
+		{
+			background-color:#313131 !IMPORTANT;
+			color:whitesmoke !IMPORTANT;
+		}
+		
+		.dropdown-menu.inbox li a .subject {
+			display: inherit;
+		}
+		
+		.dropdown-menu.inbox li a .subject .from{
+			font-size: 13px;
+		}
+		
+		.dropdown-menu.inbox li a .message
+		{
+			font-size:13px;
+		}
+		
+		.dropdown-menu.extended li p.green {
+			background-color: #1d1d1d;
+			color: #b98e28;
+		}
+		
+		
+		.dropdown-menu.extended li:last-child a {
+			background-color: #333131;
+		}
+		
+		.notify-arrow-green {
+			border-color: transparent transparent #1d1d1d;
+			border-bottom-color: #1d1d1d !important;
+			border-top-color: #1d1d1d !important;
+		}
+		
+		div.nicescroll-rails div
+		{
+			background-color: rgb(222, 197, 25) !IMPORTANT;
+		}
+		
+		.content-panel
+		{
+			overflow: hidden !IMPORTANT;
+		}
+		.photo
+		{
+			transition: ease 1s;
+			transform: scale(0.8);
+		}
+		
+		.col-lg-4
+		{
+			margin-top: 10px;
+		}
+		
+		.time-stream-playpause-selected
+		{
+			color:#006b9d !IMPORTANT;
+		}
+		
+	</style>
+  </head>
 
-		<link rel="stylesheet" type="text/css" href="css/style.css">
+  <body>
 
-		<script>
-			sap.ui.getCore().attachInit(function() {
-				new sap.m.Shell({
-					app: new sap.ui.core.ComponentContainer({
-						height : "100%",
-						name : "Test"
-					})
-				}).placeAt("content");
+  <section id="container" >
+      <!-- **********************************************************************************************************************************************************
+      TOP BAR CONTENT & NOTIFICATIONS
+      *********************************************************************************************************************************************************** -->
+      <!--header start-->
+      <header class="header black-bg">
+				<div class="sidebar-toggle-box">
+					<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Hide Navigation"></div>
+				</div>
+				<!--logo start-->
+				<div class="logo-icon" style="
+					float: left;
+					background: url('https://vignette.wikia.nocookie.net/logopedia/images/1/13/SAP-Logo.png') no-repeat;
+					width: 66px;
+					height: 40px;
+					background-size: contain;
+					margin-top: 15px;
+					margin-right: 10px;
+				"></div>
+				<a href="#" class="logo"><b>Cloud Management</b></a>
+				<!--logo end-->
+				
+				<div class="metric-group">
+				  <select class="form-control metric-drop-down" id="metricDropDown">
+					<option selected disabled>Select Metric</option>
+					<option id="cpu">CPU Usage</option>
+					<option id="ram">RAM Consumption</option>
+					<option id="disk">Disk Capacity</option>
+					<!-- <option id="overall">Overall Health</option> -->
+				  </select>
+				</div>
+
+				<!-- Notification Icon: START -->
+				<div class="nav notify-row tooltips notification" id="top_menu_new" data-placement="left" data-original-title="Notifications">
+					<!--  notification start -->
+					<ul id="header_notification_bar">
+						<li class="dropdown">
+
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+								<i class="fa fa-bell"></i>
+								<span class="badge bg-theme">2</span>
+							</a>
+							<ul class="dropdown-menu extended inbox">
+								<div class="notify-arrow notify-arrow-green"></div>
+								<li>
+									<p class="green">You have <span id="notifCount">2</span> new incident(s)</p>
+								</li>
+								<li>
+									<a href="#">
+										<div class="photo" style="
+											border-radius: 2px 2px 2px 2px;
+											float: left;
+											height: 10px;
+											margin-top: 4px;
+											margin-right: 6px;
+											width: 10px;
+											vertical-align: middle;
+											background-color: #d34021;
+										"></div>
+										<span class="subject">
+											<span class="from">Job Serer JS001</span>										
+										</span>
+										<div class="photo" style="
+											border-radius: 2px 2px 2px 2px;
+											float: right;
+											vertical-align: middle;
+										">
+										<img src="images/refresh.png" style="
+											height: 20px;
+											width: 20px;
+										">
+										</div>
+										<span class="message" style="margin-top: 5px;">Job server JS001 has gone out of threshold limit and needs an immediate restart.</span>
+										<span class="time" style="
+											float: right;
+											margin-top: 5px;
+											color: #b5b4b4;
+										">Sep 29, 2017  9:06:54 PM</span>
+										<span class="time" style="
+											float: left;
+											margin-top: 5px;
+											font-family: monospace;
+											font-weight: 700;
+											color: #dbc571;
+											font-size: 15px;
+										">RESTART</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<div class="photo" style="
+											border-radius: 2px 2px 2px 2px;
+											float: left;
+											height: 10px;
+											margin-top: 4px;
+											margin-right: 6px;
+											width: 10px;
+											vertical-align: middle;
+											background-color: #2191d3;
+										"></div>
+										<span class="subject">
+											<span class="from">Reporting Serer RS015</span>										
+										</span>
+										<div class="photo" style="
+											border-radius: 2px 2px 2px 2px;
+											float: right;
+											vertical-align: middle;
+										">
+										<img src="images/check.png" style="
+											height: 20px;
+											width: 20px;
+										">
+										</div>
+										<span class="message" style="margin-top: 5px;">Server RS015 for reporting the User Logs has been reset based on the predicted loss of data due to insufficient capacity.</span>
+										<span class="time" style="
+											float: right;
+											margin-top: 5px;
+											color: #b5b4b4;
+										">Sep 27, 2017  11:59:37 AM</span>
+										<span class="time" style="
+											float: left;
+											margin-top: 5px;
+											font-family: monospace;
+											font-weight: 700;
+											color: #dbc571;
+											font-size: 15px;
+										">INFO</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<!--  notification end -->
+				</div>
+				<!-- Notification Icon: END -->
+				
+				<div class="nav notify-row tooltips" id="top_menu" data-placement="left" data-original-title="Logout">
+					<!--  notification start -->
+					<i class="fa fa-power-off"></i>
+					<!--  notification end -->
+				</div>
+				
+				
+				<div class="nav notify-row tooltips" id="top_menu">
+					<span style="font-size: 18px;font-weight: 900;color: #929191;">USER: </span>
+					<span id="userName" style="font-size: 18px;font-weight: 900;color: #d3d3d3;text-decoration: underline;cursor: pointer;">Prakash</span>
+					<span style="color: whitesmoke;">&nbsp;| &nbsp;SYSTEM</span>
+				</div>
+										
+			</header>
+      <!--header end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      MAIN SIDEBAR MENU
+      *********************************************************************************************************************************************************** -->
+      <!--sidebar start-->
+      <aside>
+          <div id="sidebar" class="nav-collapse " tabindex="5000" style="overflow: hidden; outline: none; margin-left: 0px;">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu" id="nav-accordion" style="display: block;">
+              
+					<div class="main-tab">
+						<p class="centered"><a href="#"><img src="images/menu_icon_dashboard_selected.png" class="" width="60"></a></p>
+						<h5 class="centered" style="color: #2e6ca4;">DASHBOARD</h5></br>
+					</div>
+					<div class="main-tab">
+						<p class="centered"><a href="#users"><img src="images/menu_icon_users.png" class="" width="60"></a></p>
+						<h5 class="centered">USERS</h5></br>
+					</div>
+					<div class="main-tab">
+						<p class="centered"><a href="#settings"><img src="images/menu_icon_settings.png" class="" width="60"></a></p>
+						<h5 class="centered">SETTINGS</h5></br>
+					</div>
+					<div class="main-tab">
+						<p class="centered"><a href="#support"><img src="images/menu_icon_support.png" class="" width="60"></a></p>
+						<h5 class="centered">SUPPORT</h5></ul>
+					</div>
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+      <!--sidebar end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper site-min-height">
+          <h3><i class="fa fa-caret-right"></i> <span id="contentMainTitle"></span> Analysis</h3>
+              <!-- page start-->
+              <div id="morris">
+                  <div class="row mt">
+                      <div class="col-lg-12">
+                          <div class="content-panel">
+								<div class="nav notify-row tooltips time-stream-playpause" data-placement="left" data-original-title="Pause">
+									<i class="fa fa-pause" style="
+										font-size: 30px;
+										color: #d4cece;
+										cursor: pointer;
+										margin-right: 15px;
+									"></i>
+								</div>
+								
+								<select class="form-control metric-drop-down" id="metricDropDown" style="
+									float: right;
+								">
+									<option selected="" disabled="">Select</option>
+									<option id="cpu" selected>Minute Level</option>
+									<option id="ram">15 Minutes</option>
+									<option id="disk">Hourly</option>
+									<!-- <option id="overall">Overall Health</option> -->
+								</select>
+								<h4 style="float:right; margin-top:18px;">Granularity: </h4>
+								<h4><i class="fa fa-caret-right"></i> Timeseries <span id="timeseriesTitle"></span> Analysis</h4>
+								<div class="panel-body">
+									<div id="chartData"></div>
+								</div>
+                          </div>
+                      </div>
+                  </div>
+				  
+				  <div class="row mt">
+					<div class="col-lg-4">
+                          <div class="content-panel">
+                              <h4><i class="fa fa-caret-right"></i> <span id="donutText">Key Influencer</span> Pie Chart Analysis</h4>
+                              <div class="panel-body">
+								<div id="chartUsage"></div>
+                              </div>
+                          </div>
+                    </div>
+					<div class="col-lg-4">
+						<div class="content-panel">
+							<h4><i class="fa fa-caret-right"></i> <span id="overallHealthText">Overall</span> Health</h4>
+							<div class="panel-body">
+								<div class="photo" style="
+									border-radius: 2px 2px 2px 2px;
+									float: left;
+									height: 132px;
+									margin-top: 30px;
+									margin-right: 6px;
+									width: 48%;
+									vertical-align: middle;
+									background-color: rgba(225, 232, 104, 0.19);
+									overflow:hidden;
+								">
+									<div style="
+										width: 100%;
+										height: 63px;
+										display: inline-block;
+										overflow: hidden;
+										padding-right: 5px;
+									">
+										<span id="overallCPUValue" class="metric-value-large" style="
+											font-size: 35px;
+											/* text-align: center; */
+											color: #ac92cf;
+											font-family: impact;
+											font-weight: lighter;
+											margin: 0;
+											/* background-color: #3b3b3b; */
+											margin-left: 10px;
+											margin-top: 10px;
+											padding: 5px;
+											display: inline-block;
+											line-height: 1;
+											">_%</span>
+										<span style="
+											font-size: 18px;
+											/* text-align: center; */
+											color: #e6e3ea;
+											font-family: impact;
+											font-weight: lighter;
+											margin: 0;
+											/* background-color: #3b3b3b; */
+											/* margin-left: 20px; */
+											margin-top: 0;
+											padding: 5px;
+											display: inline-block;
+											line-height: 1;
+													 "></span>
+									</div>
+									<p class="metric-label-large" style="
+										font-size: 25px;
+										text-align: left;
+										font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+										font-weight: bold;
+										color: #cceaf0;
+										margin: 0px;
+										margin-left: 15px;
+										margin-top: 7px;
+										width: 75%;
+										float: left;
+									">CPU Usage</p>
+									<img src="images/cpu.png" style="
+										height: 40px;
+										width: 40px;
+										float: right;
+										margin-top: -15px;
+										margin-right: 13px;
+										position: absolute;
+									"/>
+
+								</div>
+								<div class="photo" style="
+									border-radius: 2px 2px 2px 2px;
+									float: left;
+									height: 132px;
+									margin-top: 30px;
+									margin-right: 6px;
+									width: 49%;
+									vertical-align: middle;
+									background-color: rgba(104, 191, 232, 0.19);
+									/* text-align: center; */
+									overflow:hidden;
+								">
+									<div style="
+										width: 100%;
+										height: 63px;
+										display: inline-block;
+										overflow: hidden;
+										padding-right: 5px;
+									">
+										<span  id="overallRAMValue" class="metric-value-large" style="
+											font-size: 35px;
+											/* text-align: center; */
+											color: #ac92cf;
+											font-family: impact;
+											font-weight: lighter;
+											margin: 0;
+											/* background-color: #3b3b3b; */
+											margin-left: 10px;
+											margin-top: 10px;
+											padding: 5px;
+											display: inline-block;
+											line-height: 1;
+											">_%</span>
+										<span style="
+											font-size: 18px;
+											/* text-align: center; */
+											color: #e6e3ea;
+											font-family: impact;
+											font-weight: lighter;
+											margin: 0;
+											/* background-color: #3b3b3b; */
+											/* margin-left: 20px; */
+											margin-top: 0;
+											padding: 5px;
+											display: inline-block;
+											line-height: 1;
+													 ">| 64 GB</span>
+									</div>
+									<p class="metric-label-large" style="
+										font-size: 25px;
+										text-align: left;
+										font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+										font-weight: bold;
+										color: #cceaf0;
+										margin: 0px;
+										margin-left:15px;
+										margin-top: 7px;
+										width: 75%;
+										float: left;
+									">RAM Usage</p>
+									<img src="images/ram.png" style="
+										height: 40px;
+										width: 40px;
+										float: right;
+										margin-top: -15px;
+										margin-right: 13px;
+										position: absolute;
+									"/>
+								</div>
+								<div class="photo" style="
+										border-radius: 2px 2px 2px 2px;
+										float: left;
+										height: 132px;
+										margin-top: 26px;
+										margin-right: 6px;
+										width: 48%;
+										vertical-align: middle;
+										background-color: rgba(135, 104, 232, 0.19);
+										overflow:hidden;
+									">
+									<div style="
+										width: 100%;
+										height: 63px;
+										display: inline-block;
+										overflow: hidden;
+										padding-right: 5px;
+									">
+										<span  id="overallDiskValue" class="metric-value-large" style="
+											font-size: 35px;
+											/* text-align: center; */
+											color: #ac92cf;
+											font-family: impact;
+											font-weight: lighter;
+											margin: 0;
+											/* background-color: #3b3b3b; */
+											margin-left: 10px;
+											margin-top: 10px;
+											padding: 5px;
+											display: inline-block;
+											line-height: 1;
+											">_%</span>
+										<span style="
+											font-size: 18px;
+											/* text-align: center; */
+											color: #e6e3ea;
+											font-family: impact;
+											font-weight: lighter;
+											margin: 0;
+											/* background-color: #3b3b3b; */
+											/* margin-left: 20px; */
+											margin-top: 0;
+											padding: 5px;
+											display: inline-block;
+											line-height: 1;
+													 ">| 650 GB</span>
+									</div>
+									<p class="metric-label-large" style="
+										font-size: 25px;
+										text-align: left;
+										font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+										font-weight: bold;
+										color: #cceaf0;
+										margin: 0px;
+										margin-left:15px;
+										margin-top: 7px;
+										width: 75%;
+										float: left;
+									">Disk Capacity</p>
+									<img src="images/disk.png" style="
+										height: 40px;
+										width: 40px;
+										float: right;
+										margin-top: -15px;
+										margin-right: 13px;
+										position: absolute;
+									"/>
+
+								</div>
+								<div class="photo" style="
+										border-radius: 2px 2px 2px 2px;
+										float: left;
+										height: 132px;
+										margin-top: 26px;
+										margin-right: 6px;
+										width: 49%;
+										vertical-align: middle;
+										background-color: rgba(142, 232, 104, 0.19);
+										overflow:hidden;
+									">
+									<div style="
+										width: 100%;
+										height: 63px;
+										display: inline-block;
+										overflow: hidden;
+										padding-right: 5px;
+									">
+										<span id="overallHealthValue" class="metric-value-large" style="
+											font-size: 35px;
+											/* text-align: center; */
+											color: #ac92cf;
+											font-family: impact;
+											font-weight: lighter;
+											margin: 0;
+											/* background-color: #3b3b3b; */
+											margin-left: 10px;
+											margin-top: 10px;
+											padding: 5px;
+											display: inline-block;
+											line-height: 1;
+											">_%</span>
+										<span style="
+											font-size: 18px;
+											/* text-align: center; */
+											color: #e6e3ea;
+											font-family: impact;
+											font-weight: lighter;
+											margin: 0;
+											/* background-color: #3b3b3b; */
+											/* margin-left: 20px; */
+											margin-top: 0;
+											padding: 5px;
+											display: inline-block;
+											line-height: 1;
+													 "></span>
+									</div>
+									<p class="metric-label-large" style="
+										font-size: 25px;
+										text-align: left;
+										font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+										font-weight: bold;
+										color: #cceaf0;
+										margin: 0px;
+										margin-left:15px;
+										margin-top: 7px;
+										width: 75%;
+										float: left;
+									">Overall Health</p>
+									<img src="images/overallhealth.png" style="
+										height: 40px;
+										width: 40px;
+										float: right;
+										margin-top: -15px;
+										margin-right: 13px;
+										position: absolute;
+									"/>
+
+								</div>
+							
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="content-panel">
+							<h4><i class="fa fa-caret-right"></i> <span id="gaugeText">Gauge</span> Consumption</h4>
+							<div class="panel-body">
+								<div id="chartGauge"></div>
+							</div>
+						</div>
+					</div>
+				  </div>
+				  
+				  <!-- <div class="row mt"> -->
+                      <!-- <div class="col-lg-6"> -->
+                          <!-- <div class="content-panel"> -->
+                              <!-- <h4><i class="fa fa-caret-right"></i> Chart Example 1</h4> -->
+                              <!-- <div class="panel-body"> -->
+                                  <!-- <div id="hero-graph" class="graph"></div> -->
+                              <!-- </div> -->
+                          <!-- </div> -->
+                      <!-- </div> -->
+                      <!-- <div class="col-lg-6"> -->
+                          <!-- <div class="content-panel"> -->
+                              <!-- <h4><i class="fa fa-caret-right"></i> Chart Example 2</h4> -->
+                              <!-- <div class="panel-body"> -->
+                                  <!-- <div id="hero-bar" class="graph"></div> -->
+                              <!-- </div> -->
+                          <!-- </div> -->
+                      <!-- </div> -->
+                  <!-- </div> -->
+                  <!-- <div class="row mt"> -->
+                      <!-- <div class="col-lg-6"> -->
+                          <!-- <div class="content-panel"> -->
+                              <!-- <h4><i class="fa fa-caret-right"></i> Chart Example 3</h4> -->
+                              <!-- <div class="panel-body"> -->
+                                  <!-- <div id="hero-area" class="graph"></div> -->
+                              <!-- </div> -->
+                          <!-- </div> -->
+                      <!-- </div> -->
+                      <!-- <div class="col-lg-6"> -->
+                          <!-- <div class="content-panel"> -->
+                              <!-- <h4><i class="fa fa-caret-right"></i> <span id="donutText">Memory</span> Usage</h4> -->
+                              <!-- <div class="panel-body"> -->
+                                  <!-- <div id="metric-donut" class="graph"></div> -->
+                              <!-- </div> -->
+                          <!-- </div> -->
+                      <!-- </div> -->
+                  <!-- </div> -->
+              </div>
+              <!-- page end-->
+          </section>
+      </section><!-- /MAIN CONTENT -->
+
+      <!--main content end-->
+      <!--footer start-->
+      <footer class="site-footer">
+          <div class="text-center" style="font-size: 18px;color: #a2a2a2;">
+              2017 &copy; SAP SE
+              <a href="#" class="go-top">
+                  <i class="fa fa-angle-up"></i>
+              </a>
+          </div>
+      </footer>
+      <!--footer end-->
+  </section>
+	<!-- Loading Local JSON Data -->
+	<script src="assets/js/data.js"></script>
+	
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="assets/js/jquery.scrollTo.min.js"></script>
+    <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+
+
+    <!--common script for all pages-->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+	<script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
+	
+	
+	<link href="assets/js/c3.css" rel="stylesheet">
+	<script src="assets/js/d3.js" charset="utf-8"></script>
+	<script src="assets/js/c3.min.js"></script>
+	
+	
+    <script src="assets/js/common-scripts.js"></script>
+
+    <!--script for this page-->
+    <script src="assets/js/morris-conf.js"></script>
+	<script src="assets/js/c3-custom-conf.js"></script>
+    
+	
+  <script>
+      //custom select box
+
+		$(function(){
+			$('select.styled').customSelect();
+		});
+		
+		$(window).load(function() {
+			console.log( "Loaded!" );
+			
+			$('ul.dropdown-menu').niceScroll({
+				
 			});
-		</script>
-	</head>
+			
+			$('.fa-power-off, .fa-bell').on('mouseover', function(){
+				$(this).addClass('logout-selected');
+			});
+			
+			$('.fa-power-off, .fa-bell').on('mouseout', function(){
+				$(this).removeClass('logout-selected');
+			});
+			
+			
+			$('.main-tab').on('mouseover', function(){
+				$(this).addClass('main-tab-selected');
+				<!-- $(this).next().addClass('main-tab-selected'); -->
+			});
+			
+			$('.main-tab').on('mouseout', function(){
+				$(this).removeClass('main-tab-selected');
+				<!-- $(this).next().removeClass('main-tab-selected'); -->
+			});
+					
+			
+			$('.photo').css('transform', 'scale(1)');
+			
+			
+			// Playing/Pausing the Time Chart
+			$('.fa-pause').on('mouseover', function(){
+				$(this).addClass('time-stream-playpause-selected');
+				$(this).next().addClass('main-tab-selected');
+			});
+			
+			$('.fa-pause').on('mouseout', function(){
+				$(this).removeClass('time-stream-playpause-selected');
+				$(this).next().removeClass('main-tab-selected');
+			});
+			
+			$('.fa-pause').on('click',function(){
+				//alert('clicked');
+				if($(this).hasClass('fa-play'))
+				{
+					isLiveStreamPaused = false;
+					loadChartData();
+				}
+				if($(this).hasClass('fa-pause'))
+				{
+					isLiveStreamPaused = true;
+				}
+				$(this).toggleClass('fa-play');
+				$(this).toggleClass('fa-pause');
+			});
+			
+			
+			// Trigger for Metric Drop-down selection
+			$('#metricDropDown').on('change',function(){
+				console.log('Selected Metric Value: '+$(this).val()+'\nSelected Metric ID: '+$(this).children(":selected").attr("id"));
+				metricGlobal = $(this).children(":selected").attr("id");
+				$('#contentMainTitle').text($(this).val());
+				$('#timeseriesTitle').text($(this).val());
+				$('#donutText').text($(this).val());
+				$('#gaugeText').text($(this).val());
+				triggerDashboardChange($(this).children(":selected").attr("id"));
+				
+			});
+			
+			
+			
 
-	<body class="sapUiBody" id="content">
-	</body>
+		});
+	  
+		
+  </script>
 
+  </body>
 </html>

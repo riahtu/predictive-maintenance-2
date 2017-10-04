@@ -1,0 +1,41 @@
+.black-bg
+{
+	background: #0a4e5d;
+}
+
+.logo-icon
+{
+	float: left;
+    background: url('../img/siteimg/sap-logo.png') no-repeat;
+    width: 66px;
+    height: 40px;
+    background-size: contain;
+    margin-top: 15px;
+    margin-right: 10px;
+}
+
+.twPc-avatarLink {
+    background-color: #fff;
+    border-radius: 6px;
+    display: inline-block !important;
+    margin: 30px 0px 0px 0px;
+    max-width: 100%;
+    padding: 1px;
+    border: 1px solid #032644;
+}
+
+.twPc-avatarImg {
+    border: 2px solid #fff;
+    border-radius: 7px;
+    box-sizing: border-box;
+    color: #fff;
+    height: 100px;
+    width: 100px;
+}
+
+.instagram-panel
+{
+	background: url(https://cdn0.onlinemba.unc.edu/content/ba94f5ea3a4b44e4bbe746af3871e9c2/ClassProfile_B.jpg) no-repeat center top;
+    text-align: center;
+    background-position: center center;
+}

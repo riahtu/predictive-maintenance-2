@@ -10,7 +10,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "CPU_METRIC_INFO")
+@Table(name = "CPU_METRIC_INFO", schema = "PS_USER")
 public class MetricInfo {
 	
 	@Id
@@ -90,6 +90,13 @@ public class MetricInfo {
 
 	public void setBusyThreadsFC(Integer busyThreadsFC) {
 		this.busyThreadsFC = busyThreadsFC;
+	}
+
+	@Override
+	public String toString() {
+		return "MetricInfo [date=" + date + ", cpuUsage=" + cpuUsage + ", cpuUsageForecast=" + cpuUsageForecast
+				+ ", ramUsage=" + ramUsage + ", ramUsageFC=" + ramUsageFC + ", busyThreads=" + busyThreads
+				+ ", busyThreadsFC=" + busyThreadsFC + "]";
 	}
 	
 }
