@@ -22,4 +22,20 @@ public class MetricForecast {
 	@Column(name = "Data", columnDefinition = "decimal(16,6)")
 	private double value;
 
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public double getValue() {
+		return value;
+	}
+
+	public void setValue(double value) {
+		this.value = value;
+	}
+	
 }
