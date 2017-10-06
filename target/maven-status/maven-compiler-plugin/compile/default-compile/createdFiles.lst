@@ -2,8 +2,11 @@ com\sap\pm\AutoWiringSpringBeanJobFactory.class
 com\sap\pm\repository\MetricOrgRepo.class
 com\sap\pm\controller\SchedulerController.class
 com\sap\pm\model\ForecastBody.class
+com\sap\pm\entity\MetricData.class
 com\sap\pm\repository\MetricForecastRepo.class
+com\sap\pm\service\MetricsDataService.class
 com\sap\pm\util\DestinationUtil.class
+com\sap\pm\entity\MetricForecast2.class
 com\sap\pm\model\Metrics.class
 com\sap\pm\repository\MetricInfoRepository.class
 com\sap\pm\SpringBootWebApplication.class
@@ -13,10 +16,15 @@ com\sap\pm\controller\MainController.class
 com\sap\pm\scheduler\SampleJob.class
 com\sap\pm\controller\ScheduledTasks.class
 com\sap\pm\entity\MetricInfo.class
+com\sap\pm\pojo\Process.class
 com\sap\pm\model\BodySave.class
 com\sap\pm\scheduler\SpringQrtzScheduler.class
 com\sap\pm\service\MainService.class
+com\sap\pm\service\ForecastService.class
 com\sap\pm\scheduler\QrtzScheduler.class
+com\sap\pm\pojo\Metric.class
+com\sap\pm\entity\MetricActions.class
 com\sap\pm\service\SampleJobService.class
+com\sap\pm\pojo\AccountMetric.class
 com\sap\pm\entity\MetricForecast.class
 com\sap\pm\util\DatabaseConfiguration.class
