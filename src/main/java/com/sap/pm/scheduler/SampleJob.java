@@ -29,13 +29,13 @@ public class SampleJob implements Job {
 
     public void execute(JobExecutionContext context) throws JobExecutionException {
 
-        logger.info("Job ** {} ** fired @ {}", context.getJobDetail().getKey().getName(), context.getFireTime());
+        logger.error("Job ** {} ** fired @ {}", context.getJobDetail().getKey().getName(), context.getFireTime());
 
         //jobService.executeSampleJob();
         //mainService.forecastMetric();
-        
-        metricDataService.getMetricDataFromApi();
+        //mainService.getMetrics2();
+        metricDataService.storeMetricsData();
 
-        logger.info("Next job scheduled @ {}", context.getNextFireTime());
+        logger.error("Next job scheduled @ {}", context.getNextFireTime());
     }
 }

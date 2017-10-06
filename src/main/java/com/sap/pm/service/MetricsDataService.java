@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -17,11 +18,10 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sap.core.connectivity.api.authentication.AuthenticationHeader;
 import com.sap.pm.entity.MetricData;
 import com.sap.pm.pojo.AccountMetric;
 import com.sap.pm.pojo.Metric;
-import com.sap.pm.util.DestinationUtil;
+import com.sap.pm.repository.MetricDataRepository;
 
 @Service
 public class MetricsDataService {
@@ -30,39 +30,36 @@ public class MetricsDataService {
 
 	private static final String METRICS_DATA_URL = "https://api.int.sap.hana.ondemand.com/monitoring/v1/accounts/wae679e83/apps/acrscore1/metrics";
 
+	@Autowired
+	MetricDataRepository metricDataRepository;
+	
 	public String getMetricDataFromApi() {
-
+		log.info("getMetrics2 ---- ");
+		
+		ResponseEntity<String> response = null;
 		String responseBody = null;
+		
 		try {
-
-			AuthenticationHeader appToAppSSOHeader = DestinationUtil.getAuthenticationHeader(METRICS_DATA_URL);
-			if (null == appToAppSSOHeader) {
-				log.info("appToAppSSOHeader : NULL");
-			}
-
+			String url = "https://api.hana.ondemand.com/monitoring/v1/accounts/a9ef421ca/apps/gstrapp/metrics";
+			
 			RestTemplate restTemplate = new RestTemplate();
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
-			//headers.add(appToAppSSOHeader.getName(), appToAppSSOHeader.getValue());
-			headers.add("Authorization","Basic STMzMzYzNDpTZXBAMTk5Nw==");
+			headers.add("Authorization", "Basic cDE5NDI5NTY3OTU6V2VsY29tZUAxMjM=");
 			HttpEntity<String> entity = new HttpEntity<String>(headers);
-
-			ResponseEntity<String> response = restTemplate.exchange(METRICS_DATA_URL, HttpMethod.GET, entity,
-					String.class);
+			response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
 
 			if (response != null) {
 				responseBody = response.getBody();
-			}
-			log.debug("response payload : " + response);
+			}			log.debug("response payload : " + response);
 
 		} catch (HttpClientErrorException | HttpServerErrorException e) {
 			log.error("Exception ");
 			responseBody = e.getResponseBodyAsString();
 			log.debug("response payload " + responseBody);
 		}
-
+		
 		return responseBody;
-
 	}
 	
 	
@@ -95,7 +92,7 @@ public class MetricsDataService {
 							metricdata.setIsWeekDay(0);
 						else
 							metricdata.setIsWeekDay(1);
-
+						metricDataRepository.save(metricdata);
 					}
 				}
 			}
