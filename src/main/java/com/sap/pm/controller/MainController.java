@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sap.core.connectivity.api.configuration.DestinationConfiguration;
 import com.sap.pm.entity.MetricOriginal;
 import com.sap.pm.model.Metrics;
 import com.sap.pm.service.MainService;
+import com.sap.pm.util.DestinationUtil;
 
 @RestController
 public class MainController implements ApplicationContextAware {
@@ -76,8 +78,8 @@ public class MainController implements ApplicationContextAware {
 		return result;
 	}
 	
-	@RequestMapping("/testDestination")
-	public String testDestination(){
+	@RequestMapping("/registerData")
+	public String registerData(){
 		String result = "success";
 		result = mainService.registerData();
 		return result;
@@ -147,6 +149,17 @@ public class MainController implements ApplicationContextAware {
 		List<MetricOriginal> result;
 		result = mainService.getMetricData(metricName);
 		return result;
+	}
+	
+	@RequestMapping("/getDestinationURL")
+	public String getDestinationURL(){
+		DestinationConfiguration destConfig = DestinationUtil.getDestConfig("ps");
+		return destConfig.getProperty("URL");
+	}
+	
+	@RequestMapping("/getMetrics2")
+	public String getMetrics2(){		
+		return mainService.getMetrics2();
 	}
 	
 }

@@ -22,9 +22,11 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 import com.sap.core.connectivity.api.authentication.AuthenticationHeader;
+import com.sap.core.connectivity.api.configuration.DestinationConfiguration;
 import com.sap.pm.entity.MetricOriginal;
-import com.sap.pm.model.BodySave;
+import com.sap.pm.model.RegDatasource;
 import com.sap.pm.model.ForecastBody;
+import com.sap.pm.model.Location;
 import com.sap.pm.model.Metrics;
 import com.sap.pm.repository.MetricOrgRepo;
 import com.sap.pm.util.DBUtils;
@@ -35,9 +37,9 @@ public class MainService {
 
 	private static final Logger log = LoggerFactory.getLogger(MainService.class);
 	
-	private static final String REG_URL = "https://aac4paservicesi322364trial.hanatrial.ondemand.com/com.sap.aa.c4pa.services/api/analytics/dataset/sync";
+	private static final String REG_URL = "https://aac4paservicesp1942956795trial.hanatrial.ondemand.com/com.sap.aa.c4pa.services/api/analytics/dataset/sync";
 	
-	private static final String FORECAST_URL = "https://aac4paservicesi322364trial.hanatrial.ondemand.com/com.sap.aa.c4pa.services/api/analytics/forecast/sync";
+	private static final String FORECAST_URL = "https://aac4paservicesp1942956795trial.hanatrial.ondemand.com/com.sap.aa.c4pa.services/api/analytics/forecast/sync";
 	
 	@Autowired 
 	MetricOrgRepo metricOrgRepo;
@@ -76,15 +78,19 @@ public class MainService {
 		ResponseEntity<String> response = null;
 		String responseBody = null;
 		
-		BodySave body = new BodySave();
-		body.setHanaURL("PS_DATA/SALES");
+		RegDatasource body = new RegDatasource();
+		Location location = new Location();
+		location.setSchema("PS_DATA");
+		location.setTable("SALES");
+		body.setLocation(location);
 		
 		Gson gson = new Gson();
 		String jsonObject = gson.toJson(body);
 		log.info("Request body - " + jsonObject);
 		
 		try {
-			String url = "https://aac4paservicesi322364trial.hanatrial.ondemand.com/com.sap.aa.c4pa.services/api/analytics/dataset/sync";
+			DestinationConfiguration destConfig = DestinationUtil.getDestConfig("ps");			
+			String url = destConfig.getProperty("URL")+"/dataset/sync";
 			
 			AuthenticationHeader appToAppSSOHeader = DestinationUtil.getAuthenticationHeader(url);
 			if (null == appToAppSSOHeader) {
@@ -116,8 +122,9 @@ public class MainService {
 		ResponseEntity<String> response = null;
 		String responseBody = null;
 		
-		BodySave body = new BodySave();
-		body.setHanaURL(tableName);
+		RegDatasource body = new RegDatasource();
+		body.getLocation().setSchema("PS_DATA");
+		body.getLocation().setTable(tableName);
 		
 		Gson gson = new Gson();
 		String jsonObject = gson.toJson(body);
@@ -196,6 +203,34 @@ public class MainService {
 		return responseBody;
 	}
 	
+	public String getMetrics2(){
+		log.info("getMetrics2 ---- ");
+		
+		ResponseEntity<String> response = null;
+		String responseBody = null;
+		
+		try {
+			String url = "https://api.hana.ondemand.com/monitoring/v1/accounts/a9ef421ca/apps/gstrapp/metrics";
+			
+			RestTemplate restTemplate = new RestTemplate();
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			headers.add("Authorization", "Basic cDE5NDI5NTY3OTU6V2VsY29tZUAxMjM=");
+			HttpEntity<String> entity = new HttpEntity<String>(headers);
+			response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+
+			if (response != null) {
+				responseBody = response.getBody();
+			}			log.debug("response payload : " + response);
+
+		} catch (HttpClientErrorException | HttpServerErrorException e) {
+			log.error("Exception ");
+			responseBody = e.getResponseBodyAsString();
+			log.debug("response payload " + responseBody);
+		}
+		
+		return responseBody;
+	}
 	
 	public List<Metrics> getMetrics(){
 		ResponseEntity<List> response;
