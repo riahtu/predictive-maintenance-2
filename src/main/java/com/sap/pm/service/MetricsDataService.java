@@ -1,6 +1,7 @@
 package com.sap.pm.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sap.pm.entity.MetricData;
@@ -68,9 +70,9 @@ public class MetricsDataService {
 		String response = getMetricDataFromApi();
 
 		ObjectMapper mapper = new ObjectMapper();
-		AccountMetric obj = null;
+		List<AccountMetric> obj = null;
 		try {
-			obj = mapper.readValue(response, AccountMetric.class);
+			obj = mapper.readValue(response, new TypeReference<List<AccountMetric>>(){});
 		} catch (JsonGenerationException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
@@ -79,14 +81,15 @@ public class MetricsDataService {
 			e.printStackTrace();
 		}
 
-		if (null != obj) {
-			for (com.sap.pm.pojo.Process process : obj.getProcesses()) {
+		if (null != obj ) {
+			for(AccountMetric acMetr : obj){
+			for (com.sap.pm.pojo.Process process :  acMetr.getProcesses()) {
 				for (Metric metric : process.getMetrics()) {
 					if (metric.getName().equals("CPU Load")) {
 						MetricData metricdata = new MetricData();
-						java.sql.Date date = new java.sql.Date(metric.getTimestamp().getTime());
+						java.util.Date date = new java.util.Date();
 						int day = date.getDay();
-						metricdata.setDate(date);
+						metricdata.setDate(new java.util.Date());
 						metricdata.setCpuUsage(metric.getValue());
 						if (day == 0 || day == 1)
 							metricdata.setIsWeekDay(0);
@@ -96,6 +99,7 @@ public class MetricsDataService {
 					}
 				}
 			}
+		}
 		}
 
 	}

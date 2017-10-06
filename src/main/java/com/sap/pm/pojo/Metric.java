@@ -2,6 +2,7 @@
 package com.sap.pm.pojo;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -40,7 +41,7 @@ public class Metric {
     @JsonProperty("errorThreshold")
     private Integer errorThreshold;
     @JsonProperty("timestamp")
-    private Timestamp timestamp;
+    private Date timestamp;
     @JsonProperty("output")
     private String output;
     @JsonProperty("metricType")
@@ -113,12 +114,12 @@ public class Metric {
     }
 
     @JsonProperty("timestamp")
-    public Timestamp getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 
     @JsonProperty("timestamp")
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
 
