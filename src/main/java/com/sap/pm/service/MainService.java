@@ -118,13 +118,15 @@ public class MainService {
 		return responseBody;
 	}
 	
-	public String registerDataSource(String tableName){
+	public String registerDataSource(String schemaName, String tableName){
 		ResponseEntity<String> response = null;
 		String responseBody = null;
 		
 		RegDatasource body = new RegDatasource();
-		body.getLocation().setSchema("PS_DATA");
-		body.getLocation().setTable(tableName);
+		Location location = new Location();
+		location.setSchema(schemaName);
+		location.setTable(tableName);
+		body.setLocation(location);
 		
 		Gson gson = new Gson();
 		String jsonObject = gson.toJson(body);

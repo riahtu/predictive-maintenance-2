@@ -132,9 +132,11 @@ public class MainController implements ApplicationContextAware {
 		
 	}	
 	@RequestMapping("/registerDataSource")
-	public String registerDataSource(@RequestParam("tableName")String tableName){
+	public String registerDataSource(
+			@RequestParam("schemaName")String schemaName,
+			@RequestParam("tableName")String tableName){
 		String result = "success";
-		result = mainService.registerDataSource(tableName);
+		result = mainService.registerDataSource(schemaName, tableName);
 		return result;
 	}
 	

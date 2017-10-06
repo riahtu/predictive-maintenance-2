@@ -5,7 +5,6 @@
 		
 		<class>com.sap.pm.entity.MetricOriginal</class>
 		<class>com.sap.pm.entity.MetricForecast</class>
-		<class>com.sap.pm.entity.MetricForecast2</class>
 		<class>com.sap.pm.entity.MetricInfo</class>
 				
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
