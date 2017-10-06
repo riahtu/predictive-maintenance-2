@@ -11,7 +11,7 @@ import javax.persistence.TemporalType;
 
 
 @Entity
-@Table(name = "CPU_METRIC_FORECASTS", schema = "PS_USER")
+@Table(name = "CPU_METRIC_FORECASTS", schema = "PM_USER")
 public class MetricForecast {
 	
 	@Id

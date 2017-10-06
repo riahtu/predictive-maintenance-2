@@ -11,7 +11,7 @@ import javax.persistence.TemporalType;
 
 
 @Entity
-@Table(name = "CPU_METRIC_ORIGINAL", schema = "PS_USER")
+@Table(name = "CPU_METRIC_ORIGINAL", schema = "PM_USER")
 public class MetricOriginal {
 	
 	@Id

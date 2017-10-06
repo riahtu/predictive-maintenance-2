@@ -10,7 +10,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "CPU_METRIC_INFO", schema = "PS_USER")
+@Table(name = "CPU_METRIC_INFO", schema = "PM_USER")
 public class MetricInfo {
 	
 	@Id
