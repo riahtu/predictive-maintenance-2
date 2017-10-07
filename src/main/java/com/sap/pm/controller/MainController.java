@@ -2,6 +2,8 @@ package com.sap.pm.controller;
 
 import java.util.List;
 
+import org.quartz.JobExecutionContext;
+import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.impl.JobDetailImpl;
@@ -24,17 +26,21 @@ import com.sap.pm.util.DestinationUtil;
 @RestController
 public class MainController implements ApplicationContextAware {
 
+	@Autowired
+	private MainService mainService;
+	
 	private static ApplicationContext applicationContext;
 	
 	public static ApplicationContext getApplicationContext() {
 		return applicationContext;
 	}
 	
-	@Autowired
-	private MainService mainService;
+	@Override
+	public void setApplicationContext(ApplicationContext ac) throws BeansException {
+		applicationContext = ac;
+	}
 	
-	
-	@RequestMapping("/startscheduler")
+	@RequestMapping("/startFetchingMonitoringData")
 	public String startFetchingMonitoringData(){
 		Scheduler scheduler = getSchedulerInstance();
 		try {
@@ -42,7 +48,7 @@ public class MainController implements ApplicationContextAware {
 			
 			SimpleTriggerImpl trigger =  getTriggerInstance();
 			JobDetailImpl jdd = getJobDetailFactoryBean();
-			
+
 			/*SimpleTriggerImpl trigger2 =  getTriggerInstance2();
 			JobDetailImpl jdd2 = getJobDetailFactoryBean2();*/
 			
@@ -58,17 +64,28 @@ public class MainController implements ApplicationContextAware {
 	}
 	
 	
-	@RequestMapping("/stop")
-	public String sayStop(){
+	@RequestMapping("/stopFetchingMonitoringData")
+	public String stopFetchingMonitoringData(){
 		Scheduler scheduler = getSchedulerInstance();
+		boolean result;
 		try {
 			scheduler.standby();
+			
+			//List<JobExecutionContext> currentlyExecuting = scheduler.getCurrentlyExecutingJobs();
+
+			//verifying if job is running       
+//			for (JobExecutionContext jobExecutionContext : currentlyExecuting) {
+//			    if(jobExecutionContext.getJobDetail().getKey().getName().equals("fetchData")){
+//			         result = scheduler.interrupt(jobExecutionContext.getJobDetail().getKey());
+//			    }
+//			}
 			
 		} catch (SchedulerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		return "Scheduler is stopped";
+		}			return "Scheduler is stopped";
+			
+		
 	}
 	
 	@RequestMapping("/testDB")
@@ -92,14 +109,42 @@ public class MainController implements ApplicationContextAware {
 		return result;
 	}
 	
-	
-	
-	
-
-	@Override
-	public void setApplicationContext(ApplicationContext ac) throws BeansException {
-		applicationContext = ac;
+	@RequestMapping("/registerDataSource")
+	public String registerDataSource(
+			@RequestParam("schemaName")String schemaName,
+			@RequestParam("tableName")String tableName){
+		String result = "success";
+		result = mainService.registerDataSource(schemaName, tableName);
+		return result;
 	}
+	
+	@RequestMapping("/forecastMetric")
+	public String forecastMetric(){
+		String result = "success";
+		result = mainService.forecastMetric();
+		return result;
+	}
+	
+	@RequestMapping("/getDestinationURL")
+	public String getDestinationURL(){
+		DestinationConfiguration destConfig = DestinationUtil.getDestConfig("ps");
+		return destConfig.getProperty("URL");
+	}
+	
+	@RequestMapping("/getMetrics2")
+	public String getMetrics2(){		
+		return mainService.getMetrics2();
+	}
+	
+	@RequestMapping("/getMetricData")
+	public List<MetricUI> getMetricData(
+			@RequestParam("metricName")String metricName,
+			@RequestParam(value="date", required=false) String date,
+			@RequestParam("granularity")String granularity
+			){		
+		return mainService.getMetricData2(metricName, date, granularity);
+	}
+	
 	
 	private Scheduler getSchedulerInstance() {
 		Scheduler scheduler = null;
@@ -152,40 +197,4 @@ public class MainController implements ApplicationContextAware {
 		return jd;
 		
 	}
-	@RequestMapping("/registerDataSource")
-	public String registerDataSource(
-			@RequestParam("schemaName")String schemaName,
-			@RequestParam("tableName")String tableName){
-		String result = "success";
-		result = mainService.registerDataSource(schemaName, tableName);
-		return result;
-	}
-	
-	@RequestMapping("/forecastMetric")
-	public String forecastMetric(){
-		String result = "success";
-		result = mainService.forecastMetric();
-		return result;
-	}
-	
-	@RequestMapping("/getDestinationURL")
-	public String getDestinationURL(){
-		DestinationConfiguration destConfig = DestinationUtil.getDestConfig("ps");
-		return destConfig.getProperty("URL");
-	}
-	
-	@RequestMapping("/getMetrics2")
-	public String getMetrics2(){		
-		return mainService.getMetrics2();
-	}
-	
-	@RequestMapping("/getMetricData")
-	public List<MetricUI> getMetricData(
-			@RequestParam("metricName")String metricName,
-			@RequestParam("date")String date,
-			@RequestParam("granularity")String granularity
-			){		
-		return mainService.getMetricData(metricName, date, granularity);
-	}
-	
 }
