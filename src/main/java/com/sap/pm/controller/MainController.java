@@ -46,9 +46,12 @@ public class MainController implements ApplicationContextAware {
 			SimpleTriggerImpl trigger =  getTriggerInstance();
 			JobDetailImpl jdd = getJobDetailFactoryBean();
 			
+			/*SimpleTriggerImpl trigger2 =  getTriggerInstance2();
+			JobDetailImpl jdd2 = getJobDetailFactoryBean2();*/
+			
 			scheduler.scheduleJob( jdd, trigger);
 			
-			
+			//scheduler.scheduleJob(jdd2, trigger2);
 			
 		} catch (SchedulerException e) {
 			// TODO Auto-generated catch block
@@ -121,6 +124,16 @@ public class MainController implements ApplicationContextAware {
 		return scheduler;
 	}
 	
+	private SimpleTriggerImpl getTriggerInstance2(){
+		SimpleTriggerImpl scheduler = null;
+		try {
+			scheduler =  (SimpleTriggerImpl) getApplicationContext().getBean("trigger2");
+		} catch (BeansException ex) {
+			//logger.error("Scheduler Bean", ex.getMessage());
+		}
+		return scheduler;
+	}
+	
 	private JobDetailImpl getJobDetailFactoryBean(){
 		JobDetailImpl jd = null;
 		try {
@@ -130,7 +143,18 @@ public class MainController implements ApplicationContextAware {
 		}
 		return jd;
 		
-	}	
+	}
+	
+	private JobDetailImpl getJobDetailFactoryBean2(){
+		JobDetailImpl jd = null;
+		try {
+			jd =  (JobDetailImpl) getApplicationContext().getBean("jobDetail2");
+		} catch (BeansException ex) {
+			//logger.error("Scheduler Bean", ex.getMessage());
+		}
+		return jd;
+		
+	}
 	@RequestMapping("/registerDataSource")
 	public String registerDataSource(
 			@RequestParam("schemaName")String schemaName,
