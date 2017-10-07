@@ -30,7 +30,8 @@ import com.sap.pm.model.Location;
 import com.sap.pm.model.MetricUI;
 import com.sap.pm.model.Metrics;
 import com.sap.pm.model.RegDatasourceBody;
-import com.sap.pm.repository.MetricDataRepository;
+import com.sap.pm.repository.MetricData1Min2Repository;
+import com.sap.pm.repository.MetricData1MinRepository;
 import com.sap.pm.util.DBUtils;
 import com.sap.pm.util.DestinationUtil;
 
@@ -44,7 +45,10 @@ public class MainService {
 	private static final String FORECAST_URL = "https://aac4paservicesp1942956795trial.hanatrial.ondemand.com/com.sap.aa.c4pa.services/api/analytics/forecast/sync";
 	
 	@Autowired 
-	MetricDataRepository metricDataRepository;
+	MetricData1MinRepository metricData1MinRepository;
+	
+	@Autowired 
+	MetricData1Min2Repository metricData1Min2Repository;
 	
 	public String readDB(){
 		String result = "success";
@@ -255,16 +259,21 @@ public class MainService {
 		return metricList;
 		
 	}
-	public List<MetricData1Min> getData(String metricName) {
+	public List<MetricUI> getMetricData(String metricName,String date,String granularity) {
 		List<MetricUI> metricUIs = new ArrayList<MetricUI>();
-		MetricUI metricUI = new MetricUI();
 		
-		List<MetricData1Min> metricData = metricDataRepository.findAll();
-//		metricUI.setDate(metricData.getDate());
-//		metricUI.setActual(metricData.getCpuUsage());
-//		metricUI.setPredicted(metricData.getCpuUsageForecast());
-//		metricUIs.add(metricUI);
+		List<MetricData1Min> metricData1Mins = metricData1MinRepository.findAll();
+		if(metricData1Mins != null){
+			for(int i=0; i< metricData1Mins.size(); i++){
+				MetricUI metricUI = new MetricUI();
+
+				metricUI.setDate(metricData1Mins.get(i).getDate());
+				metricUI.setActual(metricData1Mins.get(i).getCpuUsage());
+				metricUI.setPredicted(metricData1Mins.get(i).getCpuUsageEnsembleForecast());
+				metricUIs.add(metricUI);
+			}
+		}
 		
-		return metricData;
+		return metricUIs;
 	}
 }

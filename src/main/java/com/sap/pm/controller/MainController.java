@@ -35,7 +35,7 @@ public class MainController implements ApplicationContextAware {
 	
 	
 	@RequestMapping("/startscheduler")
-	public String sayHi(){
+	public String startFetchingMonitoringData(){
 		Scheduler scheduler = getSchedulerInstance();
 		try {
 			scheduler.start();
@@ -179,10 +179,13 @@ public class MainController implements ApplicationContextAware {
 		return mainService.getMetrics2();
 	}
 	
-	@RequestMapping("/getData")
-	public List<MetricData1Min> getData(
-			@RequestParam("metricName")String metricName){		
-		return mainService.getData(metricName);
+	@RequestMapping("/getMetricData")
+	public List<MetricUI> getMetricData(
+			@RequestParam("metricName")String metricName,
+			@RequestParam("date")String date,
+			@RequestParam("granularity")String granularity
+			){		
+		return mainService.getMetricData(metricName, date, granularity);
 	}
 	
 }

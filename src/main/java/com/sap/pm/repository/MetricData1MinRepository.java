@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.sap.pm.entity.MetricData1Min;
 
 @Repository
-public interface MetricDataRepository  extends JpaRepository<MetricData1Min, Date>  {
+public interface MetricData1MinRepository  extends JpaRepository<MetricData1Min, Date>  {
 
 }

@@ -21,9 +21,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sap.pm.entity.MetricData1Min;
+import com.sap.pm.entity.MetricData1Min2;
 import com.sap.pm.pojo.AccountMetric;
 import com.sap.pm.pojo.Metric;
-import com.sap.pm.repository.MetricDataRepository;
+import com.sap.pm.repository.MetricData1Min2Repository;
+import com.sap.pm.repository.MetricData1MinRepository;
 
 @Service
 public class MetricsDataService {
@@ -33,7 +35,7 @@ public class MetricsDataService {
 	private static final String METRICS_DATA_URL = "https://api.int.sap.hana.ondemand.com/monitoring/v1/accounts/wae679e83/apps/acrscore1/metrics";
 
 	@Autowired
-	MetricDataRepository metricDataRepository;
+	MetricData1Min2Repository metricData1Min2Repository;
 	
 	public String getMetricDataFromApi() {
 		log.info("getMetrics2 ---- ");
@@ -86,16 +88,16 @@ public class MetricsDataService {
 			for (com.sap.pm.pojo.Process process :  acMetr.getProcesses()) {
 				for (Metric metric : process.getMetrics()) {
 					if (metric.getName().equals("CPU Load")) {
-						MetricData1Min metricdata = new MetricData1Min();
+						MetricData1Min2 metricdata1Min2 = new MetricData1Min2();
 						java.util.Date date = new java.util.Date();
 						int day = date.getDay();
-						metricdata.setDate(new java.util.Date());
-						metricdata.setCpuUsage(metric.getValue());
+						metricdata1Min2.setDate(new java.util.Date());
+						metricdata1Min2.setCpuUsage(metric.getValue());
 						if (day == 0 || day == 1)
-							metricdata.setIsWeekDay(0);
+							metricdata1Min2.setIsWeekDay(0);
 						else
-							metricdata.setIsWeekDay(1);
-						metricDataRepository.save(metricdata);
+							metricdata1Min2.setIsWeekDay(1);
+						metricData1Min2Repository.save(metricdata1Min2);
 					}
 				}
 			}
