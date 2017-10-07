@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "CPU_METRIC_ORIGINAL", schema = "PM_USER")
+@Table(name = "METRIC_THRESHOLD_CONFIG", schema = "PM_USER")
 @IdClass(MetricThresholdConfigID.class)
 public class MetricThresholdConfig {
 	
