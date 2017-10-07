@@ -2,14 +2,11 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="persistence-with-jpa-pm2" transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		
-		<class>com.sap.pm.entity.MetricOriginal</class>
-		<class>com.sap.pm.entity.MetricForecast</class>
 		<class>com.sap.pm.entity.MetricInfo</class>
 				
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
-			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
+			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
 		</properties>
 	</persistence-unit>
 </persistence>

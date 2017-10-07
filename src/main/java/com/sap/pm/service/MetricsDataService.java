@@ -20,7 +20,7 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sap.pm.entity.MetricData;
+import com.sap.pm.entity.MetricData1Min;
 import com.sap.pm.pojo.AccountMetric;
 import com.sap.pm.pojo.Metric;
 import com.sap.pm.repository.MetricDataRepository;
@@ -86,7 +86,7 @@ public class MetricsDataService {
 			for (com.sap.pm.pojo.Process process :  acMetr.getProcesses()) {
 				for (Metric metric : process.getMetrics()) {
 					if (metric.getName().equals("CPU Load")) {
-						MetricData metricdata = new MetricData();
+						MetricData1Min metricdata = new MetricData1Min();
 						java.util.Date date = new java.util.Date();
 						int day = date.getDay();
 						metricdata.setDate(new java.util.Date());

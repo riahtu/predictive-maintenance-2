@@ -5,9 +5,9 @@ import java.util.Date;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.sap.pm.entity.MetricData;
+import com.sap.pm.entity.MetricData1Min;
 
 @Repository
-public interface MetricDataRepository  extends JpaRepository<MetricData, Date>  {
+public interface MetricDataRepository  extends JpaRepository<MetricData1Min, Date>  {
 
 }

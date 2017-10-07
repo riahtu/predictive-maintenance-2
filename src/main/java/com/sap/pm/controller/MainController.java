@@ -2,24 +2,21 @@ package com.sap.pm.controller;
 
 import java.util.List;
 
-import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
-import org.quartz.Trigger;
 import org.quartz.impl.JobDetailImpl;
 import org.quartz.impl.triggers.SimpleTriggerImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.scheduling.quartz.JobDetailFactoryBean;
-import org.springframework.scheduling.quartz.SimpleTriggerFactoryBean;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sap.core.connectivity.api.configuration.DestinationConfiguration;
-import com.sap.pm.entity.MetricOriginal;
+import com.sap.pm.entity.MetricData1Min;
+import com.sap.pm.model.MetricUI;
 import com.sap.pm.model.Metrics;
 import com.sap.pm.service.MainService;
 import com.sap.pm.util.DestinationUtil;
@@ -170,12 +167,6 @@ public class MainController implements ApplicationContextAware {
 		result = mainService.forecastMetric();
 		return result;
 	}
-	@RequestMapping("/getMetricData")
-	public List<MetricOriginal> getMetricData(@RequestParam("metricName")String metricName){
-		List<MetricOriginal> result;
-		result = mainService.getMetricData(metricName);
-		return result;
-	}
 	
 	@RequestMapping("/getDestinationURL")
 	public String getDestinationURL(){
@@ -186,6 +177,12 @@ public class MainController implements ApplicationContextAware {
 	@RequestMapping("/getMetrics2")
 	public String getMetrics2(){		
 		return mainService.getMetrics2();
+	}
+	
+	@RequestMapping("/getData")
+	public List<MetricData1Min> getData(
+			@RequestParam("metricName")String metricName){		
+		return mainService.getData(metricName);
 	}
 	
 }

@@ -1,6 +1,6 @@
 package com.sap.pm.model;
 
-public class RegDatasource {
+public class RegDatasourceBody {
 
 	Location location;
 	

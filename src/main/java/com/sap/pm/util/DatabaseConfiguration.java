@@ -41,7 +41,7 @@ public class DatabaseConfiguration extends JpaBaseConfiguration {
 	@Override
 	protected Map<String, Object> getVendorProperties() {
 		HashMap<String, Object> hMap = new HashMap<String, Object>();
-		hMap.put("eclipselink.ddl-generation", "drop-and-create-tables");
+		hMap.put("eclipselink.ddl-generation", "create-or-extend-tables");
 		hMap.put("eclipselink.weaving", "false");
 		hMap.put("eclipselink.logging.level", "FINE");
 		hMap.put("eclipselink.logging.level.sql", "FINE");

@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -23,12 +24,13 @@ import org.springframework.web.client.RestTemplate;
 import com.google.gson.Gson;
 import com.sap.core.connectivity.api.authentication.AuthenticationHeader;
 import com.sap.core.connectivity.api.configuration.DestinationConfiguration;
-import com.sap.pm.entity.MetricOriginal;
-import com.sap.pm.model.RegDatasource;
+import com.sap.pm.entity.MetricData1Min;
 import com.sap.pm.model.ForecastBody;
 import com.sap.pm.model.Location;
+import com.sap.pm.model.MetricUI;
 import com.sap.pm.model.Metrics;
-import com.sap.pm.repository.MetricOrgRepo;
+import com.sap.pm.model.RegDatasourceBody;
+import com.sap.pm.repository.MetricDataRepository;
 import com.sap.pm.util.DBUtils;
 import com.sap.pm.util.DestinationUtil;
 
@@ -42,7 +44,7 @@ public class MainService {
 	private static final String FORECAST_URL = "https://aac4paservicesp1942956795trial.hanatrial.ondemand.com/com.sap.aa.c4pa.services/api/analytics/forecast/sync";
 	
 	@Autowired 
-	MetricOrgRepo metricOrgRepo;
+	MetricDataRepository metricDataRepository;
 	
 	public String readDB(){
 		String result = "success";
@@ -78,7 +80,7 @@ public class MainService {
 		ResponseEntity<String> response = null;
 		String responseBody = null;
 		
-		RegDatasource body = new RegDatasource();
+		RegDatasourceBody body = new RegDatasourceBody();
 		Location location = new Location();
 		location.setSchema("PS_DATA");
 		location.setTable("SALES");
@@ -122,7 +124,7 @@ public class MainService {
 		ResponseEntity<String> response = null;
 		String responseBody = null;
 		
-		RegDatasource body = new RegDatasource();
+		RegDatasourceBody body = new RegDatasourceBody();
 		Location location = new Location();
 		location.setSchema(schemaName);
 		location.setTable(tableName);
@@ -167,11 +169,11 @@ public class MainService {
 		String responseBody = null;
 
 		ForecastBody body = new ForecastBody();
-		body.setDatasetID(11);
-		body.setTargetColumn("Cash");
-		body.setDateColumn("Date");
-		body.setNumberOfForecasts(10);
-		body.setReferenceDate("2001-12-01");
+		body.setDatasetID(6);
+		body.setTargetColumn("CPU_USAGE");
+		body.setDateColumn("DATE");
+		body.setNumberOfForecasts(1);
+		body.setReferenceDate("2017-10-06 19:40:28");
 		
 		Gson gson = new Gson();
 		String jsonObject = gson.toJson(body);
@@ -253,11 +255,16 @@ public class MainService {
 		return metricList;
 		
 	}
-	
-	public List<MetricOriginal> getMetricData(String metricName){
+	public List<MetricData1Min> getData(String metricName) {
+		List<MetricUI> metricUIs = new ArrayList<MetricUI>();
+		MetricUI metricUI = new MetricUI();
 		
-		List<MetricOriginal> metricOriginals = metricOrgRepo.findAll();
+		List<MetricData1Min> metricData = metricDataRepository.findAll();
+//		metricUI.setDate(metricData.getDate());
+//		metricUI.setActual(metricData.getCpuUsage());
+//		metricUI.setPredicted(metricData.getCpuUsageForecast());
+//		metricUIs.add(metricUI);
 		
-		return metricOriginals;
+		return metricData;
 	}
 }

@@ -92,7 +92,7 @@ public class SpringQrtzScheduler {
         SimpleTriggerFactoryBean trigger = new SimpleTriggerFactoryBean();
         trigger.setJobDetail(job);
 
-        int frequencyInSec = 45;
+        int frequencyInSec = 60;
         logger.info("Configuring trigger to fire every {} seconds", frequencyInSec);
 
         trigger.setRepeatInterval(frequencyInSec * 1000);
