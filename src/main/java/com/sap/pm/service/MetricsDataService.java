@@ -1,6 +1,7 @@
 package com.sap.pm.service;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -20,12 +21,14 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sap.pm.entity.MetricData1Min;
+import com.sap.pm.entity.MetricData15Min2;
 import com.sap.pm.entity.MetricData1Min2;
+import com.sap.pm.entity.MetricData60Min2;
 import com.sap.pm.pojo.AccountMetric;
 import com.sap.pm.pojo.Metric;
+import com.sap.pm.repository.MetricData15Min2Repository;
 import com.sap.pm.repository.MetricData1Min2Repository;
-import com.sap.pm.repository.MetricData1MinRepository;
+import com.sap.pm.repository.MetricData60Min2Repository;
 
 @Service
 public class MetricsDataService {
@@ -36,6 +39,12 @@ public class MetricsDataService {
 
 	@Autowired
 	MetricData1Min2Repository metricData1Min2Repository;
+	
+	@Autowired
+	MetricData15Min2Repository metricData15Min2Repository;
+	
+	@Autowired
+	MetricData60Min2Repository metricData60Min2Repository;
 	
 	public String getMetricDataFromApi() {
 		log.info("getMetrics2 ---- ");
@@ -64,6 +73,41 @@ public class MetricsDataService {
 		}
 		
 		return responseBody;
+	}
+	
+	
+	public void storeMetricsData15(){
+		List<MetricData1Min2> metricData = metricData1Min2Repository.findAll();
+		
+		double cpuUsage = 0;
+		for(int i=0; i< metricData.size(); i++){
+			MetricData15Min2 data15Min2 = new MetricData15Min2();
+			cpuUsage = cpuUsage + metricData.get(i).getCpuUsage();
+			if(i%15==0){
+				data15Min2.setCpuUsage(cpuUsage);
+				data15Min2.setDate(new Date());
+				metricData15Min2Repository.save(data15Min2);
+				cpuUsage = 0;
+			}
+		}
+		
+	}
+	
+	public void storeMetricsData60(){
+		List<MetricData1Min2> metricData = metricData1Min2Repository.findAll();
+		
+		double cpuUsage = 0;
+		for(int i=0; i< metricData.size(); i++){
+			MetricData60Min2 data60Min2 = new MetricData60Min2();
+			cpuUsage = cpuUsage + metricData.get(i).getCpuUsage();
+			if(i%60==0){
+				data60Min2.setCpuUsage(cpuUsage);
+				data60Min2.setDate(new Date());
+				metricData60Min2Repository.save(data60Min2);
+				cpuUsage = 0;
+			}
+		}
+		
 	}
 	
 	
