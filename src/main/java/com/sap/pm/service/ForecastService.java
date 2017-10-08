@@ -18,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 import com.sap.core.connectivity.api.authentication.AuthenticationHeader;
+import com.sap.core.connectivity.api.configuration.DestinationConfiguration;
 import com.sap.pm.entity.MetricData15Min;
 import com.sap.pm.entity.MetricData1Min;
 import com.sap.pm.entity.MetricData60Min;
@@ -101,8 +102,10 @@ public class ForecastService {
 		log.info("Request body - " + jsonObject);
 		
 		try {
+			DestinationConfiguration destConfig = DestinationUtil.getDestConfig("ps");			
+			String url = destConfig.getProperty("URL")+"/forecast/sync";
 			
-			AuthenticationHeader appToAppSSOHeader = DestinationUtil.getAuthenticationHeader(FORECAST_URL);
+			AuthenticationHeader appToAppSSOHeader = DestinationUtil.getAuthenticationHeader(url);
 			if (null == appToAppSSOHeader) {
 				log.info("appToAppSSOHeader : NULL");
 			}
@@ -113,7 +116,7 @@ public class ForecastService {
 			headers.add(appToAppSSOHeader.getName(), appToAppSSOHeader.getValue());
 			HttpEntity<String> entity = new HttpEntity<String>(jsonObject, headers);
 
-			response = restTemplate.exchange(FORECAST_URL, HttpMethod.POST, entity, ForecastResponse.class);
+			response = restTemplate.exchange(url, HttpMethod.POST, entity, ForecastResponse.class);
 
 			if (response != null) {
 				responseBody = response.getBody();

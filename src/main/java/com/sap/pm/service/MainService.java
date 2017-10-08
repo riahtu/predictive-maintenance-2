@@ -43,7 +43,7 @@ public class MainService {
 
 	private static final Logger log = LoggerFactory.getLogger(MainService.class);
 	
-	private static final String REG_URL = "https://aac4paservicesp1942956795trial.hanatrial.ondemand.com/com.sap.aa.c4pa.services/api/analytics/dataset/sync";
+	private static final String REG_URL = "https://aac4paservicesi322364trial.hanatrial.ondemand.com/com.sap.aa.c4pa.services/api/analytics/dataset/sync";
 	
 	@Autowired 
 	MetricData1MinRepository metricData1MinRepository;
@@ -140,8 +140,10 @@ public class MainService {
 		log.info("Request body - " + jsonObject);
 		
 		try {
+			DestinationConfiguration destConfig = DestinationUtil.getDestConfig("ps");			
+			String url = destConfig.getProperty("URL")+"/dataset/sync";
 			
-			AuthenticationHeader appToAppSSOHeader = DestinationUtil.getAuthenticationHeader(REG_URL);
+			AuthenticationHeader appToAppSSOHeader = DestinationUtil.getAuthenticationHeader(url);
 			if (null == appToAppSSOHeader) {
 				log.info("appToAppSSOHeader : NULL");
 			}
@@ -152,7 +154,7 @@ public class MainService {
 			headers.add(appToAppSSOHeader.getName(), appToAppSSOHeader.getValue());
 			HttpEntity<String> entity = new HttpEntity<String>(jsonObject, headers);
 
-			response = restTemplate.exchange(REG_URL, HttpMethod.POST, entity, String.class);
+			response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
 
 			if (response != null) {
 				responseBody = response.getBody();
