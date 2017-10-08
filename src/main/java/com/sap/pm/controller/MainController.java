@@ -20,6 +20,7 @@ import com.sap.core.connectivity.api.configuration.DestinationConfiguration;
 import com.sap.pm.entity.MetricData1Min;
 import com.sap.pm.model.MetricUI;
 import com.sap.pm.model.Metrics;
+import com.sap.pm.pojo.ForecastResponse;
 import com.sap.pm.service.MainService;
 import com.sap.pm.util.DestinationUtil;
 
@@ -62,7 +63,6 @@ public class MainController implements ApplicationContextAware {
 		}
 		return "Scheduler is started";
 	}
-	
 	
 	@RequestMapping("/stopFetchingMonitoringData")
 	public String stopFetchingMonitoringData(){
@@ -118,12 +118,12 @@ public class MainController implements ApplicationContextAware {
 		return result;
 	}
 	
-	@RequestMapping("/forecastMetric")
-	public String forecastMetric(){
-		String result = "success";
-		result = mainService.forecastMetric();
-		return result;
-	}
+//	@RequestMapping("/forecastMetric")
+//	public String forecastMetric(){
+//		String result = "success";
+//		result = mainService.forecastMetric();
+//		return result;
+//	}
 	
 	@RequestMapping("/getDestinationURL")
 	public String getDestinationURL(){

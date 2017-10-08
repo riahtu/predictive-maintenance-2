@@ -31,6 +31,7 @@ import com.sap.pm.model.Location;
 import com.sap.pm.model.MetricUI;
 import com.sap.pm.model.Metrics;
 import com.sap.pm.model.RegDatasourceBody;
+import com.sap.pm.pojo.ForecastResponse;
 import com.sap.pm.repository.MetricData1Min2Repository;
 import com.sap.pm.repository.MetricData1MinRepository;
 import com.sap.pm.util.CommonUtils;
@@ -43,8 +44,6 @@ public class MainService {
 	private static final Logger log = LoggerFactory.getLogger(MainService.class);
 	
 	private static final String REG_URL = "https://aac4paservicesp1942956795trial.hanatrial.ondemand.com/com.sap.aa.c4pa.services/api/analytics/dataset/sync";
-	
-	private static final String FORECAST_URL = "https://aac4paservicesp1942956795trial.hanatrial.ondemand.com/com.sap.aa.c4pa.services/api/analytics/forecast/sync";
 	
 	@Autowired 
 	MetricData1MinRepository metricData1MinRepository;
@@ -168,51 +167,51 @@ public class MainService {
 		return responseBody;
 	}
 	
-	public String forecastMetric(){
-		log.info("forecastmetric ---- ");
-		
-		ResponseEntity<String> response = null;
-		String responseBody = null;
-
-		ForecastBody body = new ForecastBody();
-		body.setDatasetID(8);
-		body.setTargetColumn("CPU_USAGE");
-		body.setDateColumn("DATE");
-		body.setNumberOfForecasts(10);
-		body.setReferenceDate("2017-10-13 19:01:00");
-		
-		Gson gson = new Gson();
-		String jsonObject = gson.toJson(body);
-		log.info("Request body - " + jsonObject);
-		
-		try {
-			
-			AuthenticationHeader appToAppSSOHeader = DestinationUtil.getAuthenticationHeader(FORECAST_URL);
-			if (null == appToAppSSOHeader) {
-				log.info("appToAppSSOHeader : NULL");
-			}
-			
-			RestTemplate restTemplate = new RestTemplate();
-			HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.APPLICATION_JSON);
-			headers.add(appToAppSSOHeader.getName(), appToAppSSOHeader.getValue());
-			HttpEntity<String> entity = new HttpEntity<String>(jsonObject, headers);
-
-			response = restTemplate.exchange(FORECAST_URL, HttpMethod.POST, entity, String.class);
-
-			if (response != null) {
-				responseBody = response.getBody();
-			}			log.debug("response payload : " + response);
-
-		} catch (HttpClientErrorException | HttpServerErrorException e) {
-			log.error("Exception ");
-			responseBody = e.getResponseBodyAsString();
-			log.debug("response payload " + responseBody);
-		}
-		
-		return responseBody;
-	}
-	
+//	public String forecastMetric(){
+//		log.info("forecastmetric ---- ");
+//		
+//		ResponseEntity<String> response = null;
+//		String responseBody = null;
+//
+//		ForecastBody body = new ForecastBody();
+//		body.setDatasetID(8);
+//		body.setTargetColumn("CPU_USAGE");
+//		body.setDateColumn("DATE");
+//		body.setNumberOfForecasts(10);
+//		body.setReferenceDate("2017-10-13 19:01:00");
+//		
+//		Gson gson = new Gson();
+//		String jsonObject = gson.toJson(body);
+//		log.info("Request body - " + jsonObject);
+//		
+//		try {
+//			
+//			AuthenticationHeader appToAppSSOHeader = DestinationUtil.getAuthenticationHeader(FORECAST_URL);
+//			if (null == appToAppSSOHeader) {
+//				log.info("appToAppSSOHeader : NULL");
+//			}
+//			
+//			RestTemplate restTemplate = new RestTemplate();
+//			HttpHeaders headers = new HttpHeaders();
+//			headers.setContentType(MediaType.APPLICATION_JSON);
+//			headers.add(appToAppSSOHeader.getName(), appToAppSSOHeader.getValue());
+//			HttpEntity<String> entity = new HttpEntity<String>(jsonObject, headers);
+//
+//			response = restTemplate.exchange(FORECAST_URL, HttpMethod.POST, entity, String.class);
+//
+//			if (response != null) {
+//				responseBody = response.getBody();
+//			}			log.debug("response payload : " + response);
+//
+//		} catch (HttpClientErrorException | HttpServerErrorException e) {
+//			log.error("Exception ");
+//			responseBody = e.getResponseBodyAsString();
+//			log.debug("response payload " + responseBody);
+//		}
+//		
+//		return responseBody;
+//	}
+//	
 	public String getMetrics2(){
 		log.info("getMetrics2 ---- ");
 		
@@ -231,7 +230,9 @@ public class MainService {
 
 			if (response != null) {
 				responseBody = response.getBody();
-			}			log.debug("response payload : " + response);
+				
+			}			
+			log.debug("response payload : " + response);
 
 		} catch (HttpClientErrorException | HttpServerErrorException e) {
 			log.error("Exception ");
