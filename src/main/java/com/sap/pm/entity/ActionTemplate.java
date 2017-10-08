@@ -21,20 +21,20 @@ public class ActionTemplate {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
 	private Long id;
 	
-	@Column(name = "NAME", columnDefinition = "varchar")
+	@Column(name = "NAME")
 	private String name;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "TIME")
 	private Date time;
 	
-	@Column(name = "TYPE", columnDefinition = "varchar")
+	@Column(name = "TYPE")
 	private String type;
 	
 	@Column(name = "CRITICALITY", columnDefinition = "INT")
 	private int criticality;
 	
-	@Column(name = "DESCRIPTION", columnDefinition = "varchar")
+	@Column(name = "DESCRIPTION")
 	private String description;
 
 	public Long getId() {

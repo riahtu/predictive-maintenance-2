@@ -17,10 +17,10 @@ public class TActionManager {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
 	private Long id;
 	
-	@Column(name = "METRIC_TYPE", columnDefinition = "varchar")
+	@Column(name = "METRIC_TYPE")
 	private String metrictype;
 	
-	@Column(name = "ACTION_TYPE", columnDefinition = "varchar")
+	@Column(name = "ACTION_TYPE")
 	private String actionType;
 	
 	@Column(name = "CRITICALITY", columnDefinition = "INT")

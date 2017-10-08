@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sap.pm.service.ActionManager;
 import com.sap.pm.service.ForecastService;
 
 @RestController
@@ -11,6 +12,9 @@ public class JobsController {
 	
 	@Autowired
 	private ForecastService forecastService;
+	
+	@Autowired
+	ActionManager actionManager;
 	
 	@RequestMapping("/start1MinCpuJob")
 	public String start1MinCpuJob(){		
@@ -26,6 +30,25 @@ public class JobsController {
 			}
 		}
 	}
+	
+	@RequestMapping("/startActionTemplate")
+	public String startActionTemplate(){		
+		while(true){
+			actionManager.saveActionTemplate("cpu");
+		//	actionManager.saveActionTemplate("disk");
+			//actionManager.saveActionTemplate("ram");
+//			
+			try {
+				Thread.sleep(60000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	
 	@RequestMapping("/start1MinRamJob")
 	public String start1MinRamJob(){		
 		while(true){
