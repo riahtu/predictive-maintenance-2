@@ -299,7 +299,10 @@ public class MainService {
 			}
 			
 		}else{
-			fromTime = CommonUtils.convertToDate(date);
+			//fromTime = CommonUtils.convertToDate(date);
+			Date dateTemp = new Date();
+			dateTemp.setTime(Long.parseLong(date));
+			fromTime = dateTemp;
 			toTime = CommonUtils.addMinutesToDate(fromTime, 10);
 		}
 		
