@@ -137,11 +137,11 @@ public class ForecastService {
 					MetricData1Min metricData1Min = metricData1MinRepository.findOne(response.getForecasts().get(i).getDate());
 					
 					if("cpu".equals(metricName)){
-						metricData1Min.setCpuUsage(response.getForecasts().get(i).getForecastValue());
+						metricData1Min.setCpuUsageForecast(response.getForecasts().get(i).getForecastValue());
 					}else if("ram".equals(metricName)){
-						metricData1Min.setCpuUsage(response.getForecasts().get(i).getForecastValue());
+						metricData1Min.setRamUsageForecast(response.getForecasts().get(i).getForecastValue());
 					}else if("disk".equals(metricName)){
-						metricData1Min.setCpuUsage(response.getForecasts().get(i).getForecastValue());
+						metricData1Min.setDiskUsageForecast(response.getForecasts().get(i).getForecastValue());
 					}
 					
 					
@@ -150,11 +150,11 @@ public class ForecastService {
 					MetricData15Min metricData15Min = metricData15MinRepository.findOne(response.getForecasts().get(i).getDate());
 					
 					if("cpu".equals(metricName)){
-						metricData15Min.setCpuUsage(response.getForecasts().get(i).getForecastValue());
+						metricData15Min.setCpuUsageForecast(response.getForecasts().get(i).getForecastValue());
 					}else if("ram".equals(metricName)){
-						metricData15Min.setCpuUsage(response.getForecasts().get(i).getForecastValue());
+						metricData15Min.setRamUsageForecast(response.getForecasts().get(i).getForecastValue());
 					}else if("disk".equals(metricName)){
-						metricData15Min.setCpuUsage(response.getForecasts().get(i).getForecastValue());
+						metricData15Min.setDiskUsageForecast(response.getForecasts().get(i).getForecastValue());
 					}
 					
 					
@@ -163,11 +163,11 @@ public class ForecastService {
 					MetricData60Min metricData60Min = metricData60MinRepository.findOne(response.getForecasts().get(i).getDate());
 					
 					if("cpu".equals(metricName)){
-						metricData60Min.setCpuUsage(response.getForecasts().get(i).getForecastValue());
+						metricData60Min.setCpuUsageForecast(response.getForecasts().get(i).getForecastValue());
 					}else if("ram".equals(metricName)){
-						metricData60Min.setCpuUsage(response.getForecasts().get(i).getForecastValue());
+						metricData60Min.setRamUsageForecast(response.getForecasts().get(i).getForecastValue());
 					}else if("disk".equals(metricName)){
-						metricData60Min.setCpuUsage(response.getForecasts().get(i).getForecastValue());
+						metricData60Min.setDiskUsageForecast(response.getForecasts().get(i).getForecastValue());
 					}
 					
 					
