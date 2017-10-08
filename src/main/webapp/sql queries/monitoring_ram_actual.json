@@ -1,0 +1,252 @@
+{"data":[
+											{
+												"readingId":0,
+												"readingValue": 32,
+												"timestamp":"2017-09-29 12:05 AM"
+											},
+											{
+												"readingId":1,
+												"readingValue": 12,
+												"timestamp":"2017-09-29 01:05 AM"
+											},
+											{
+												"readingId":2,
+												"readingValue": 15,
+												"timestamp":"2017-09-29 02:05 AM"
+											},
+											{
+												"readingId":3,
+												"readingValue": 18,
+												"timestamp":"2017-09-29 03:05 AM"
+											},
+											{
+												"readingId":4,
+												"readingValue": 25,
+												"timestamp":"2017-09-29 04:05 AM"
+											},
+											{
+												"readingId":5,
+												"readingValue": 32,
+												"timestamp":"2017-09-29 05:05 AM"
+											},
+											{
+												"readingId":6,
+												"readingValue": 19,
+												"timestamp":"2017-09-29 06:05 AM"
+											},
+											{
+												"readingId":7,
+												"readingValue": 48,
+												"timestamp":"2017-09-29 07:05 AM"
+											},
+											{
+												"readingId":8,
+												"readingValue": 38,
+												"timestamp":"2017-09-29 08:05 AM"
+											},
+											{
+												"readingId":9,
+												"readingValue": 50,
+												"timestamp":"2017-09-29 09:05 AM"
+											},
+											{
+												"readingId":10,
+												"readingValue": 30,
+												"timestamp":"2017-09-29 10:05 AM"
+											},
+											{
+												"readingId":11,
+												"readingValue": 18,
+												"timestamp":"2017-09-29 11:05 AM"
+											},
+											{
+												"readingId":12,
+												"readingValue": 11,
+												"timestamp":"2017-09-29 12:05 PM"
+											},
+											{
+												"readingId":13,
+												"readingValue": 8,
+												"timestamp":"2017-09-29 01:05 PM"
+											},
+											{
+												"readingId":14,
+												"readingValue": 25,
+												"timestamp":"2017-09-29 02:05 PM"
+											},
+											{
+												"readingId":15,
+												"readingValue": 38,
+												"timestamp":"2017-09-29 03:05 PM"
+											},
+											{
+												"readingId":16,
+												"readingValue": 56,
+												"timestamp":"2017-09-29 04:05 PM"
+											},
+											{
+												"readingId":17,
+												"readingValue": 48,
+												"timestamp":"2017-09-29 05:05 PM"
+											},
+											{
+												"readingId":18,
+												"readingValue": 32,
+												"timestamp":"2017-10-01 06:05 PM"
+											},
+											{
+												"readingId":19,
+												"readingValue": 18,
+												"timestamp":"2017-10-01 07:05 PM"
+											},
+											{
+												"readingId":20,
+												"readingValue": 8,
+												"timestamp":"2017-09-29 08:05 PM"
+											},
+											{
+												"readingId":21,
+												"readingValue": 12,
+												"timestamp":"2017-09-29 09:05 PM"
+											},
+											{
+												"readingId":22,
+												"readingValue": 9,
+												"timestamp":"2017-09-29 10:05 PM"
+											},
+											{
+												"readingId":23,
+												"readingValue": 22,
+												"timestamp":"2017-09-29 11:05 PM"
+											},
+											{
+												"readingId":24,
+												"readingValue": 29,
+												"timestamp":"2017-09-29 12:05 AM"
+											},
+											{
+												"readingId":25,
+												"readingValue": 48,
+												"timestamp":"2017-09-29 01:05 AM"
+											},
+											{
+												"readingId":26,
+												"readingValue": 59,
+												"timestamp":"2017-09-29 02:05 AM"
+											},
+											{
+												"readingId":27,
+												"readingValue": 48,
+												"timestamp":"2017-09-29 03:05 AM"
+											},
+											{
+												"readingId":28,
+												"readingValue": 42,
+												"timestamp":"2017-10-01 04:05 AM"
+											},
+											{
+												"readingId":29,
+												"readingValue": 29,
+												"timestamp":"2017-10-01 05:05 AM"
+											},
+											{
+												"readingId":30,
+												"readingValue": 18,
+												"timestamp":"2017-09-29 06:05 AM"
+											},
+											{
+												"readingId":31,
+												"readingValue": 11,
+												"timestamp":"2017-09-29 07:05 AM"
+											},
+											{
+												"readingId":32,
+												"readingValue": 19,
+												"timestamp":"2017-09-29 08:05 AM"
+											},
+											{
+												"readingId":33,
+												"readingValue": 10,
+												"timestamp":"2017-09-29 09:05 AM"
+											},
+											{
+												"readingId":34,
+												"readingValue": 35,
+												"timestamp":"2017-09-29 10:05 AM"
+											},
+											{
+												"readingId":35,
+												"readingValue": 53,
+												"timestamp":"2017-09-29 11:05 AM"
+											},
+											{
+												"readingId":36,
+												"readingValue": 45,
+												"timestamp":"2017-09-29 12:05 PM"
+											},
+											{
+												"readingId":37,
+												"readingValue": 39,
+												"timestamp":"2017-09-29 01:05 PM"
+											},
+											{
+												"readingId":38,
+												"readingValue": 24,
+												"timestamp":"2017-10-01 02:05 PM"
+											},
+											{
+												"readingId":39,
+												"readingValue": 42,
+												"timestamp":"2017-10-01 03:05 PM"
+											},
+											{
+												"readingId":40,
+												"readingValue": 18,
+												"timestamp":"2017-09-29 06:05 AM"
+											},
+											{
+												"readingId":41,
+												"readingValue": 11,
+												"timestamp":"2017-09-29 07:05 AM"
+											},
+											{
+												"readingId":42,
+												"readingValue": 19,
+												"timestamp":"2017-09-29 08:05 AM"
+											},
+											{
+												"readingId":43,
+												"readingValue": 10,
+												"timestamp":"2017-09-29 09:05 AM"
+											},
+											{
+												"readingId":44,
+												"readingValue": 35,
+												"timestamp":"2017-09-29 10:05 AM"
+											},
+											{
+												"readingId":45,
+												"readingValue": 53,
+												"timestamp":"2017-09-29 11:05 AM"
+											},
+											{
+												"readingId":46,
+												"readingValue": 45,
+												"timestamp":"2017-09-29 12:05 PM"
+											},
+											{
+												"readingId":47,
+												"readingValue": null,
+												"timestamp":"2017-09-29 01:05 PM"
+											},
+											{
+												"readingId":48,
+												"readingValue": null,
+												"timestamp":"2017-10-01 02:05 PM"
+											},
+											{
+												"readingId":49,
+												"readingValue": null,
+												"timestamp":"2017-10-01 03:05 PM"
+											}
+											]}

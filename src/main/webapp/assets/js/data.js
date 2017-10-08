@@ -1,284 +1,47 @@
-var keyInfluencerData = {
-						'cpu': [
-									{
-										label1:'Busy Threads',
-										value1:45,
-										label2:'Service Instances',
-										value2:25,
-										label3:'CPU Usage',
-										value3:15,
-										label4:'Others',
-										value4:15
-									},
-									{
-										label1:'Busy Threads',
-										value1:25,
-										label2:'Service Instances',
-										value2:45,
-										label3:'CPU Usage',
-										value3:20,
-										label4:'Others',
-										value4:10
-									},
-									{
-										label1:'Busy Threads',
-										value1:27,
-										label2:'Service Instances',
-										value2:23,
-										label3:'CPU Usage',
-										value3:22,
-										label4:'Others',
-										value4:28
-									},
-									{
-										label1:'Busy Threads',
-										value1:39,
-										label2:'Service Instances',
-										value2:25,
-										label3:'CPU Usage',
-										value3:21,
-										label4:'Others',
-										value4:15
-									},
-									{
-										label1:'Busy Threads',
-										value1:32,
-										label2:'Service Instances',
-										value2:28,
-										label3:'CPU Usage',
-										value3:15,
-										label4:'Others',
-										value4:25
-									},
-									{
-										label1:'Busy Threads',
-										value1:30,
-										label2:'Service Instances',
-										value2:32,
-										label3:'CPU Usage',
-										value3:20,
-										label4:'Others',
-										value4:18
-									},
-									{
-										label1:'Busy Threads',
-										value1:31,
-										label2:'Service Instances',
-										value2:29,
-										label3:'CPU Usage',
-										value3:18,
-										label4:'Others',
-										value4:22
-									},
-									{
-										label1:'Busy Threads',
-										value1:48,
-										label2:'Service Instances',
-										value2:22,
-										label3:'CPU Usage',
-										value3:15,
-										label4:'Others',
-										value4:15
-									},
-									{
-										label1:'Busy Threads',
-										value1:45,
-										label2:'Service Instances',
-										value2:25,
-										label3:'CPU Usage',
-										value3:15,
-										label4:'Others',
-										value4:15
-									},
-								],
-						
-						'ram': [
-									{
-										label1:'Processor Speed',
-										value1:45,
-										label2:'Disk Space',
-										value2:25,
-										label3:'CPU Usage',
-										value3:15,
-										label4:'Others',
-										value4:15
-									},
-									{
-										label1:'Processor Speed',
-										value1:25,
-										label2:'Disk Space',
-										value2:45,
-										label3:'CPU Usage',
-										value3:20,
-										label4:'Others',
-										value4:10
-									},
-									{
-										label1:'Processor Speed',
-										value1:27,
-										label2:'Disk Space',
-										value2:23,
-										label3:'CPU Usage',
-										value3:22,
-										label4:'Others',
-										value4:28
-									},
-									{
-										label1:'Processor Speed',
-										value1:39,
-										label2:'Disk Space',
-										value2:25,
-										label3:'CPU Usage',
-										value3:21,
-										label4:'Others',
-										value4:15
-									},
-									{
-										label1:'Processor Speed',
-										value1:32,
-										label2:'Disk Space',
-										value2:28,
-										label3:'CPU Usage',
-										value3:15,
-										label4:'Others',
-										value4:25
-									},
-									{
-										label1:'Processor Speed',
-										value1:30,
-										label2:'Disk Space',
-										value2:32,
-										label3:'CPU Usage',
-										value3:20,
-										label4:'Others',
-										value4:18
-									},
-									{
-										label1:'Processor Speed',
-										value1:31,
-										label2:'Disk Space',
-										value2:29,
-										label3:'CPU Usage',
-										value3:18,
-										label4:'Others',
-										value4:22
-									},
-									{
-										label1:'Processor Speed',
-										value1:48,
-										label2:'Disk Space',
-										value2:22,
-										label3:'CPU Usage',
-										value3:15,
-										label4:'Others',
-										value4:15
-									},
-									{
-										label1:'Processor Speed',
-										value1:38,
-										label2:'Disk Space',
-										value2:32,
-										label3:'CPU Usage',
-										value3:15,
-										label4:'Others',
-										value4:15
-									}
-								],
-								
-						'disk': [
-									{
-										label1:'Busy Threads',
-										value1:45,
-										label2:'RAM Usage',
-										value2:25,
-										label3:'CPU Usage',
-										value3:15,
-										label4:'Others',
-										value4:15
-									},
-									{
-										label1:'Busy Threads',
-										value1:25,
-										label2:'RAM Usage',
-										value2:45,
-										label3:'CPU Usage',
-										value3:20,
-										label4:'Others',
-										value4:10
-									},
-									{
-										label1:'Busy Threads',
-										value1:27,
-										label2:'RAM Usage',
-										value2:23,
-										label3:'CPU Usage',
-										value3:22,
-										label4:'Others',
-										value4:28
-									},
-									{
-										label1:'Busy Threads',
-										value1:39,
-										label2:'RAM Usage',
-										value2:25,
-										label3:'CPU Usage',
-										value3:21,
-										label4:'Others',
-										value4:15
-									},
-									{
-										label1:'Busy Threads',
-										value1:32,
-										label2:'RAM Usage',
-										value2:28,
-										label3:'CPU Usage',
-										value3:15,
-										label4:'Others',
-										value4:25
-									},
-									{
-										label1:'Busy Threads',
-										value1:30,
-										label2:'RAM Usage',
-										value2:32,
-										label3:'CPU Usage',
-										value3:20,
-										label4:'Others',
-										value4:18
-									},
-									{
-										label1:'Busy Threads',
-										value1:31,
-										label2:'RAM Usage',
-										value2:29,
-										label3:'CPU Usage',
-										value3:18,
-										label4:'Others',
-										value4:22
-									},
-									{
-										label1:'Busy Threads',
-										value1:48,
-										label2:'RAM Usage',
-										value2:22,
-										label3:'CPU Usage',
-										value3:15,
-										label4:'Others',
-										value4:15
-									},
-									{
-										label1:'Busy Threads',
-										value1:45,
-										label2:'RAM Usage',
-										value2:25,
-										label3:'CPU Usage',
-										value3:15,
-										label4:'Others',
-										value4:15
-									}
-								]
-						
-					};
+var metricInfo = {
+	"dataArr": [{
+		"date": 1507391220000,
+		"actual": 2.27326,
+		"predicted": 0.0
+	}, {
+		"date": 1507391280000,
+		"actual": 5.175746,
+		"predicted": 0.0
+	}, {
+		"date": 1507391340000,
+		"actual": 4.417829,
+		"predicted": 0.0
+	}, {
+		"date": 1507391400000,
+		"actual": 0.681754,
+		"predicted": 0.0
+	}, {
+		"date": 1507391460000,
+		"actual": 3.005619,
+		"predicted": 0.0
+	}, {
+		"date": 1507391520000,
+		"actual": 4.543702,
+		"predicted": 0.0
+	}, {
+		"date": 1507391580000,
+		"actual": 7.023067,
+		"predicted": 0.0
+	}, {
+		"date": 1507391640000,
+		"actual": 8.651545,
+		"predicted": 0.0
+	}, {
+		"date": 1507391700000,
+		"actual": 8.505938,
+		"predicted": 0.0
+	}, {
+		"date": 1507391760000,
+		"actual": 11.063456,
+		"predicted": 0.0
+	}]
+};
+
 
 var monitoringData = {
 					'disk': {
@@ -408,32 +171,32 @@ var monitoringData = {
 											{
 												readingId:24,
 												readingValue: 110,
-												timestamp:'2017-09-29 12:05 AM'
+												timestamp:'2017-09-30 12:05 AM'
 											},
 											{
 												readingId:25,
 												readingValue: 130,
-												timestamp:'2017-09-29 01:05 AM'
+												timestamp:'2017-09-30 01:05 AM'
 											},
 											{
 												readingId:26,
 												readingValue: 85,
-												timestamp:'2017-09-29 02:05 AM'
+												timestamp:'2017-09-30 02:05 AM'
 											},
 											{
 												readingId:27,
 												readingValue: 265,
-												timestamp:'2017-09-29 03:05 AM'
+												timestamp:'2017-09-30 03:05 AM'
 											},
 											{
 												readingId:28,
 												readingValue: 490,
-												timestamp:'2017-10-01 04:05 AM'
+												timestamp:'2017-09-30 04:05 AM'
 											},
 											{
 												readingId:29,
 												readingValue: 445,
-												timestamp:'2017-10-01 05:05 AM'
+												timestamp:'2017-09-30 05:05 AM'
 											},
 											{
 												readingId:30,
@@ -733,6 +496,156 @@ var monitoringData = {
 											{
 												readingId:89,
 												readingValue: null,
+												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:90,
+												readingValue: 350,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:91,
+												readingValue: 420,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:92,
+												readingValue: 540,
+												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:93,
+												readingValue: 85,
+												timestamp:'2017-09-29 02:05 AM'
+											},
+											{
+												readingId:94,
+												readingValue: 250,
+												timestamp:'2017-09-29 03:05 AM'
+											},
+											{
+												readingId:95,
+												readingValue: 340,
+												timestamp:'2017-10-01 04:05 AM'
+											},
+											{
+												readingId:96,
+												readingValue: 420,
+												timestamp:'2017-10-01 05:05 AM'
+											},
+											{
+												readingId:97,
+												readingValue: 130,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:98,
+												readingValue: 90,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:99,
+												readingValue: 80,
+												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:100,
+												readingValue: 350,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:101,
+												readingValue: 420,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:102,
+												readingValue: 540,
+												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:103,
+												readingValue: 85,
+												timestamp:'2017-09-29 02:05 AM'
+											},
+											{
+												readingId:104,
+												readingValue: null,
+												timestamp:'2017-09-29 03:05 AM'
+											},
+											{
+												readingId:105,
+												readingValue: null,
+												timestamp:'2017-10-01 04:05 AM'
+											},
+											{
+												readingId:106,
+												readingValue: null,
+												timestamp:'2017-10-01 05:05 AM'
+											},
+											{
+												readingId:107,
+												readingValue: null,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:108,
+												readingValue: null,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:109,
+												readingValue: null,
+												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:110,
+												readingValue: 350,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:111,
+												readingValue: 420,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:112,
+												readingValue: 540,
+												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:113,
+												readingValue: 85,
+												timestamp:'2017-09-29 02:05 AM'
+											},
+											{
+												readingId:114,
+												readingValue: 208,
+												timestamp:'2017-09-29 03:05 AM'
+											},
+											{
+												readingId:115,
+												readingValue: 280,
+												timestamp:'2017-10-01 04:05 AM'
+											},
+											{
+												readingId:116,
+												readingValue: 310,
+												timestamp:'2017-10-01 05:05 AM'
+											},
+											{
+												readingId:117,
+												readingValue: 180,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:118,
+												readingValue: 110,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:119,
+												readingValue: 120,
 												timestamp:'2017-10-02 07:05 AM'
 											}
 											],
@@ -1187,6 +1100,156 @@ var monitoringData = {
 												readingId:89,
 												readingValue: null,
 												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:90,
+												readingValue: 0,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:91,
+												readingValue: 12,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:92,
+												readingValue: 0,
+												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:93,
+												readingValue: 0,
+												timestamp:'2017-09-29 02:05 AM'
+											},
+											{
+												readingId:94,
+												readingValue: 15,
+												timestamp:'2017-09-29 03:05 AM'
+											},
+											{
+												readingId:95,
+												readingValue: 16,
+												timestamp:'2017-10-01 04:05 AM'
+											},
+											{
+												readingId:96,
+												readingValue: 27,
+												timestamp:'2017-10-01 05:05 AM'
+											},
+											{
+												readingId:97,
+												readingValue: 0,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:98,
+												readingValue: 0,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:99,
+												readingValue: 50,
+												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:100,
+												readingValue: 0,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:101,
+												readingValue: 12,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:102,
+												readingValue: 0,
+												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:103,
+												readingValue: 0,
+												timestamp:'2017-09-29 02:05 AM'
+											},
+											{
+												readingId:104,
+												readingValue: null,
+												timestamp:'2017-09-29 03:05 AM'
+											},
+											{
+												readingId:105,
+												readingValue: null,
+												timestamp:'2017-10-01 04:05 AM'
+											},
+											{
+												readingId:106,
+												readingValue: null,
+												timestamp:'2017-10-01 05:05 AM'
+											},
+											{
+												readingId:107,
+												readingValue: null,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:108,
+												readingValue: null,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:109,
+												readingValue: null,
+												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:110,
+												readingValue: 0,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:111,
+												readingValue: 12,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:112,
+												readingValue: 0,
+												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:113,
+												readingValue: 0,
+												timestamp:'2017-09-29 02:05 AM'
+											},
+											{
+												readingId:114,
+												readingValue: 15,
+												timestamp:'2017-09-29 03:05 AM'
+											},
+											{
+												readingId:115,
+												readingValue: 0,
+												timestamp:'2017-10-01 04:05 AM'
+											},
+											{
+												readingId:116,
+												readingValue: 0,
+												timestamp:'2017-10-01 05:05 AM'
+											},
+											{
+												readingId:117,
+												readingValue: 21,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:118,
+												readingValue: 1,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:119,
+												readingValue: 14,
+												timestamp:'2017-10-02 07:05 AM'
 											}
 											],
 							
@@ -1638,6 +1701,156 @@ var monitoringData = {
 											},
 											{
 												readingId:89,
+												readingValue: 520,
+												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:90,
+												readingValue: 330,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:91,
+												readingValue: 520,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:92,
+												readingValue: 520,
+												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:93,
+												readingValue: 85,
+												timestamp:'2017-10-02 04:05 AM'
+											},
+											{
+												readingId:94,
+												readingValue: 330,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:95,
+												readingValue: 520,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:96,
+												readingValue: 520,
+												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:97,
+												readingValue: 330,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:98,
+												readingValue: 520,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:99,
+												readingValue: 520,
+												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:100,
+												readingValue: 330,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:101,
+												readingValue: 520,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:102,
+												readingValue: 520,
+												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:103,
+												readingValue: 85,
+												timestamp:'2017-10-02 04:05 AM'
+											},
+											{
+												readingId:104,
+												readingValue: 330,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:105,
+												readingValue: 520,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:106,
+												readingValue: 520,
+												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:107,
+												readingValue: 330,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:108,
+												readingValue: 520,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:109,
+												readingValue: 520,
+												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:110,
+												readingValue: 330,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:111,
+												readingValue: 520,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:112,
+												readingValue: 520,
+												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:113,
+												readingValue: 85,
+												timestamp:'2017-10-02 04:05 AM'
+											},
+											{
+												readingId:114,
+												readingValue: 330,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:115,
+												readingValue: 520,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:116,
+												readingValue: 520,
+												timestamp:'2017-10-02 07:05 AM'
+											},
+											{
+												readingId:117,
+												readingValue: 330,
+												timestamp:'2017-10-02 05:05 AM'
+											},
+											{
+												readingId:118,
+												readingValue: 520,
+												timestamp:'2017-10-02 06:05 AM'
+											},
+											{
+												readingId:119,
 												readingValue: 520,
 												timestamp:'2017-10-02 07:05 AM'
 											}
@@ -3169,3 +3382,288 @@ var monitoringData = {
 											]
 					}};
 
+
+
+
+
+var keyInfluencerData = {
+						'cpu': [
+									{
+										label1:'Busy Threads',
+										value1:45,
+										label2:'Service Instances',
+										value2:25,
+										label3:'CPU Usage',
+										value3:15,
+										label4:'Others',
+										value4:15
+									},
+									{
+										label1:'Busy Threads',
+										value1:25,
+										label2:'Service Instances',
+										value2:45,
+										label3:'CPU Usage',
+										value3:20,
+										label4:'Others',
+										value4:10
+									},
+									{
+										label1:'Busy Threads',
+										value1:27,
+										label2:'Service Instances',
+										value2:23,
+										label3:'CPU Usage',
+										value3:22,
+										label4:'Others',
+										value4:28
+									},
+									{
+										label1:'Busy Threads',
+										value1:39,
+										label2:'Service Instances',
+										value2:25,
+										label3:'CPU Usage',
+										value3:21,
+										label4:'Others',
+										value4:15
+									},
+									{
+										label1:'Busy Threads',
+										value1:32,
+										label2:'Service Instances',
+										value2:28,
+										label3:'CPU Usage',
+										value3:15,
+										label4:'Others',
+										value4:25
+									},
+									{
+										label1:'Busy Threads',
+										value1:30,
+										label2:'Service Instances',
+										value2:32,
+										label3:'CPU Usage',
+										value3:20,
+										label4:'Others',
+										value4:18
+									},
+									{
+										label1:'Busy Threads',
+										value1:31,
+										label2:'Service Instances',
+										value2:29,
+										label3:'CPU Usage',
+										value3:18,
+										label4:'Others',
+										value4:22
+									},
+									{
+										label1:'Busy Threads',
+										value1:48,
+										label2:'Service Instances',
+										value2:22,
+										label3:'CPU Usage',
+										value3:15,
+										label4:'Others',
+										value4:15
+									},
+									{
+										label1:'Busy Threads',
+										value1:45,
+										label2:'Service Instances',
+										value2:25,
+										label3:'CPU Usage',
+										value3:15,
+										label4:'Others',
+										value4:15
+									}
+								],
+						
+						'ram': [
+									{
+										label1:'Processor Speed',
+										value1:45,
+										label2:'Disk Space',
+										value2:25,
+										label3:'CPU Usage',
+										value3:15,
+										label4:'Others',
+										value4:15
+									},
+									{
+										label1:'Processor Speed',
+										value1:25,
+										label2:'Disk Space',
+										value2:45,
+										label3:'CPU Usage',
+										value3:20,
+										label4:'Others',
+										value4:10
+									},
+									{
+										label1:'Processor Speed',
+										value1:27,
+										label2:'Disk Space',
+										value2:23,
+										label3:'CPU Usage',
+										value3:22,
+										label4:'Others',
+										value4:28
+									},
+									{
+										label1:'Processor Speed',
+										value1:39,
+										label2:'Disk Space',
+										value2:25,
+										label3:'CPU Usage',
+										value3:21,
+										label4:'Others',
+										value4:15
+									},
+									{
+										label1:'Processor Speed',
+										value1:32,
+										label2:'Disk Space',
+										value2:28,
+										label3:'CPU Usage',
+										value3:15,
+										label4:'Others',
+										value4:25
+									},
+									{
+										label1:'Processor Speed',
+										value1:30,
+										label2:'Disk Space',
+										value2:32,
+										label3:'CPU Usage',
+										value3:20,
+										label4:'Others',
+										value4:18
+									},
+									{
+										label1:'Processor Speed',
+										value1:31,
+										label2:'Disk Space',
+										value2:29,
+										label3:'CPU Usage',
+										value3:18,
+										label4:'Others',
+										value4:22
+									},
+									{
+										label1:'Processor Speed',
+										value1:48,
+										label2:'Disk Space',
+										value2:22,
+										label3:'CPU Usage',
+										value3:15,
+										label4:'Others',
+										value4:15
+									},
+									{
+										label1:'Processor Speed',
+										value1:38,
+										label2:'Disk Space',
+										value2:32,
+										label3:'CPU Usage',
+										value3:15,
+										label4:'Others',
+										value4:15
+									}
+								],
+								
+						'disk': [
+									{
+										label1:'Busy Threads',
+										value1:45,
+										label2:'RAM Usage',
+										value2:25,
+										label3:'CPU Usage',
+										value3:15,
+										label4:'Others',
+										value4:15
+									},
+									{
+										label1:'Busy Threads',
+										value1:25,
+										label2:'RAM Usage',
+										value2:45,
+										label3:'CPU Usage',
+										value3:20,
+										label4:'Others',
+										value4:10
+									},
+									{
+										label1:'Busy Threads',
+										value1:27,
+										label2:'RAM Usage',
+										value2:23,
+										label3:'CPU Usage',
+										value3:22,
+										label4:'Others',
+										value4:28
+									},
+									{
+										label1:'Busy Threads',
+										value1:39,
+										label2:'RAM Usage',
+										value2:25,
+										label3:'CPU Usage',
+										value3:21,
+										label4:'Others',
+										value4:15
+									},
+									{
+										label1:'Busy Threads',
+										value1:32,
+										label2:'RAM Usage',
+										value2:28,
+										label3:'CPU Usage',
+										value3:15,
+										label4:'Others',
+										value4:25
+									},
+									{
+										label1:'Busy Threads',
+										value1:30,
+										label2:'RAM Usage',
+										value2:32,
+										label3:'CPU Usage',
+										value3:20,
+										label4:'Others',
+										value4:18
+									},
+									{
+										label1:'Busy Threads',
+										value1:31,
+										label2:'RAM Usage',
+										value2:29,
+										label3:'CPU Usage',
+										value3:18,
+										label4:'Others',
+										value4:22
+									},
+									{
+										label1:'Busy Threads',
+										value1:48,
+										label2:'RAM Usage',
+										value2:22,
+										label3:'CPU Usage',
+										value3:15,
+										label4:'Others',
+										value4:15
+									},
+									{
+										label1:'Busy Threads',
+										value1:45,
+										label2:'RAM Usage',
+										value2:25,
+										label3:'CPU Usage',
+										value3:15,
+										label4:'Others',
+										value4:15
+									}
+								]
+						
+					};

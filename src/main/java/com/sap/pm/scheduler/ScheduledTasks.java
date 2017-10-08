@@ -29,7 +29,7 @@ public class ScheduledTasks {
         String metricName = "cpu";
         String granularity = "1min";
         
-        ForecastResponse result = forecastService.forecastMetric1Min(metricName, granularity);
+       // ForecastResponse result = forecastService.forecastMetric1Min(metricName, granularity);
         
     }
     	

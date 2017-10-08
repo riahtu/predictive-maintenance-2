@@ -4,6 +4,137 @@ var timeChartPointer = 0;
 var metricGlobal = '';
 var donutDataPointer = 0;
 
+var cpuThresholdValue = 92;
+var ramThresholdValue = 60;
+var diskThresholdValue = 500;
+
+var initialDate = new Date();
+
+var globalDateArr = [new Date('Sun Oct 08 2017 09:49:57 GMT+0530 (India Standard Time)'), 
+						new Date('Sun Oct 08 2017 09:50:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 09:51:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 09:52:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 09:53:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 09:54:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 09:55:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 09:56:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 09:57:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 09:58:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 09:59:57 GMT+0530 (India Standard Time)'), 
+						new Date('Sun Oct 08 2017 10:00:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:01:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:02:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:03:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:04:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:05:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:06:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:07:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:08:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:09:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:10:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:11:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:12:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:13:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:14:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:15:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:16:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:17:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:18:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:19:57 GMT+0530 (India Standard Time)'), 
+						new Date('Sun Oct 08 2017 10:20:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:21:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:22:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:23:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:24:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:25:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:26:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:27:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:28:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:29:57 GMT+0530 (India Standard Time)'), 
+						new Date('Sun Oct 08 2017 10:30:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:31:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:32:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:33:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:34:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:35:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:36:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:37:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:38:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:39:57 GMT+0530 (India Standard Time)'), 
+						new Date('Sun Oct 08 2017 10:40:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:41:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:42:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:43:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:44:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:45:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:46:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:47:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:48:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:49:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:50:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:51:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:52:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:53:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:54:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:55:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:56:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:57:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:58:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 10:59:57 GMT+0530 (India Standard Time)'), 
+						new Date('Sun Oct 08 2017 11:00:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:01:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:02:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:03:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:04:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:05:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:06:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:07:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:08:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:09:57 GMT+0530 (India Standard Time)'), 
+						new Date('Sun Oct 08 2017 11:10:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:11:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:12:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:13:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:14:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:15:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:16:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:17:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:18:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:09:57 GMT+0530 (India Standard Time)'), 
+						new Date('Sun Oct 08 2017 11:10:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:11:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:12:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:13:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:14:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:15:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:16:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:17:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:18:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:19:57 GMT+0530 (India Standard Time)'), 
+						new Date('Sun Oct 08 2017 11:20:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:21:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:22:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:23:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:24:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:25:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:26:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:27:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:28:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:19:57 GMT+0530 (India Standard Time)'), 
+						new Date('Sun Oct 08 2017 11:20:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:21:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:22:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:23:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:24:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:25:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:26:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:27:57 GMT+0530 (India Standard Time)'),
+						new Date('Sun Oct 08 2017 11:28:57 GMT+0530 (India Standard Time)')];
+
+
+var startTime = new Date();
+
+
 function pushNotification()
 {
 	console.log('Notification Pushed...');
@@ -12,9 +143,6 @@ function pushNotification()
 function checkForNotification(readingIdArr)
 {
 	console.log('Checking for Notifications...');
-	var cpuThresholdValue = 92;
-	var ramThresholdValue = 60;
-	var diskThresholdValue = 590;
 	
 	for(var k=1;k<readingIdArr.length;k++)
 	{
@@ -89,13 +217,15 @@ function initializeTimeChart()
 	timeChart = c3.generate({
 		bindto: '#chartData',
 		color: {
-			pattern: ['#3c78b4', '#eb7e26', '#d75151']
+			pattern: ['#3c78b4', '#eb7e26', '#ccffcc', '#d75151']
 		},
 		data: {
+			x:'x',
 			columns: [
 			
 			  ]
 		},
+		
 		tooltip: {
 			contents: function(d, defaultTitleFormat, defaultValueFormat, color){
 				var $$ = this, config = $$.config,
@@ -108,7 +238,7 @@ function initializeTimeChart()
 				  lineIndex = d[i].id
 				  if (! text) {
 					  title = titleFormat ? titleFormat(d[i].x) : d[i].x;
-					  text = "<table style='color:black;' class='" + $$.CLASS.tooltip + "'>" + (title || title === 0 ? "<tr><th style='color:black;' colspan='2'>Reading ID: " + title + "</th></tr>" : "");
+					  text = "<table style='color:black;' class='" + $$.CLASS.tooltip + "'>" + (title || title === 0 ? "<tr><th style='color:black;' colspan='2'>Time: " + title + "</th></tr>" : "");
 				  }
 
 				  name = nameFormat(d[i].name);
@@ -120,19 +250,10 @@ function initializeTimeChart()
 				  text += "<td class='value'>" + value + "</td>";
 				  text += "</tr>";
 			  }
-			  // Adding extra time row in the tooltip.
-			  var dateValue = "";
-			  for(var i=0; i<monitoringData[metricGlobal].Predicted.length;i++)
-			  {
-				  if(title === monitoringData[metricGlobal].Predicted[i].readingId)
-				  {
-					  dateValue = monitoringData[metricGlobal].Predicted[i].timestamp;
-					  break;
-				  }
-			  }
+			  
 			  text += "<tr class='" + $$.CLASS.tooltipName + "-" + lineIndex + "'>";
 			  text += "<td class='name'><span style='background-color:#555555'></span>Time</td>";
-			  text += "<td class='value'>" + dateValue + "</td>";
+			  text += "<td class='value'>" + formatTimestampToYearTime(d[0].x) + "</td>";
 			  text += "</tr>";
 			  
 			  return text + "</table>";
@@ -147,6 +268,9 @@ function initializeTimeChart()
 				show: true
 			}
 		},
+		zoom: {
+			enabled: false
+		},
 		axis: {
 			y:{
 				label: {
@@ -156,6 +280,15 @@ function initializeTimeChart()
 				
 			},
 			x: {
+				type:'timeseries',
+				tick:{
+					// format:'%Y-%m-%d'
+					format: function(x){
+						// return x.getDate() +'/'+ x.getMonth() +' '+ x.getHours() + ':'+ x.getMinutes() +':'+ x.getSeconds();
+						return x.getHours() + ':'+ x.getMinutes() +':'+ x.getSeconds();
+						// return x;
+					}
+				},
 				label: {
 					text: 'X-Axis Label',
 					position: 'outer-middle'
@@ -187,6 +320,36 @@ function initializeTimeChart()
 	// }, 2500);
 
 
+function formatTimestampToYearTime(date) {
+	var d = new Date(date),
+	month = '' + (d.getMonth() + 1),
+	day = '' + d.getDate(),
+	year = d.getFullYear();
+	hours = d.getHours();
+	minutes = d.getMinutes();
+	seconds = d.getSeconds();
+
+	if (month.length < 2) month = '0' + month;
+	if (day.length < 2) day = '0' + day;
+	var formattedTime = [year, month, day].join('-') +' '+ [hours, minutes, seconds].join(':');
+	return formattedTime;
+}
+	
+function formatDate(date) {
+	var d = new Date(date),
+	month = '' + (d.getMonth() + 1),
+	day = '' + d.getDate(),
+	year = d.getFullYear();
+	hours = d.getHours();
+	minutes = d.getMinutes();
+	seconds = d.getSeconds();
+
+	if (month.length < 2) month = '0' + month;
+	if (day.length < 2) day = '0' + day;
+	var formattedTime = [year, month, day].join('-');// +' '+ [hours, minutes, seconds].join(':');
+	return formattedTime;
+}
+
 function loadChartData()
 {
 	console.log("loadChartData() called with metric: "+metricGlobal);
@@ -197,6 +360,8 @@ function loadChartData()
 		var predictedDataArr = ["Predicted"];
 		var issuesDataArr = ["Issues"];
 		var readingIdArr = ["IDArray"];
+		var thresholdDataArr = ["Threshold"];
+		var dateArr = ['x'];
 		
 		// Get metric specific details for data and labels and append below.
 		if(!isLiveStreamPaused)
@@ -205,9 +370,12 @@ function loadChartData()
 			{
 				var metricData = monitoringData[metricGlobal];
 				
+				var metricData2 = metricInfo.dataArr;
+				
 				for(var i=timeChartPointer;i<timeChartPointer+10;i++)
 				{
-					actualDataArr.push(metricData.Actual[i].readingValue);
+					// actualDataArr.push(metricData.Actual[i].readingValue);
+					actualDataArr.push(metricData2[i].actual);
 				}
 				
 				for(var i=timeChartPointer;i<timeChartPointer+10;i++)
@@ -225,6 +393,28 @@ function loadChartData()
 					readingIdArr.push(metricData.Issues[i].readingId);
 				}
 				
+				for(var i=timeChartPointer;i<timeChartPointer+10;i++)
+				{
+					var thresholdValue = 0;
+					if(metricGlobal === 'cpu')
+						thresholdDataArr.push(cpuThresholdValue);
+					if(metricGlobal === 'ram')
+						thresholdDataArr.push(ramThresholdValue);
+					if(metricGlobal === 'disk')
+						thresholdDataArr.push(diskThresholdValue);
+				}
+				
+				for(var i=timeChartPointer;i<timeChartPointer+10;i++)
+				{
+					// var datedate = startTime;
+					// dateArr.push(globalDateArr[i]);
+					dateArr.push(new Date(metricData2[i].date));
+					
+					
+					
+				}
+				
+				
 				timeChartPointer +=10;
 				
 				timeChart.flow({
@@ -232,14 +422,16 @@ function loadChartData()
 									// ['Actual', 40, 800, 25, 150],
 									// ['Predicted', 120, 200, 50, 600],
 									// ['Issues', 0, 35, 0, 0]
+									dateArr,
 									actualDataArr,
-									predictedDataArr,
-									issuesDataArr
+									// predictedDataArr,
+									// issuesDataArr,
+									// thresholdDataArr
 								],
-								// length: 0,
-								duration: 15000,
-								done:loadChartData
-							});
+							// length: 0,
+							duration: 2000,
+							done:loadChartData
+						});
 				
 				// Setting X and Y Axis legends
 				timeChart.axis.labels({
@@ -384,6 +576,35 @@ function initializeDonut(title, valuePairArr)
 		},
 		donut: {
 			title: title
+		},
+		tooltip: {
+			contents: function(d, defaultTitleFormat, defaultValueFormat, color){
+				var $$ = this, config = $$.config,
+				  titleFormat = config.tooltip_format_title || defaultTitleFormat,
+				  nameFormat = config.tooltip_format_name || function (name) { return name; },
+				  valueFormat = config.tooltip_format_value || defaultValueFormat,
+				  text, i, title, value, name, bgcolor, lineIndex;
+			  for (i = 0; i < d.length; i++) {
+				  if (! (d[i] && (d[i].value || d[i].value === 0))) { continue; }
+				  lineIndex = d[i].id
+				  if (! text) {
+					  title = titleFormat ? titleFormat(d[i].x) : d[i].x;
+					  text = "<table style='color:black;' class='" + $$.CLASS.tooltip + "'>" + (title || title === 0 ? "<tr><th style='color:black;' colspan='2'>Reading ID: " + title + "</th></tr>" : "");
+				  }
+
+				  name = nameFormat(d[i].name);
+				  value = valueFormat(d[i].value, d[i].ratio, d[i].id, d[i].index);
+				  bgcolor = $$.levelColor ? $$.levelColor(d[i].value) : color(d[i].id);
+
+				  text += "<tr class='" + $$.CLASS.tooltipName + "-" + d[i].id + "'>";
+				  text += "<td class='name'><span style='background-color:" + bgcolor + "'></span>" + name + "</td>";
+				  text += "<td class='value'>" + value + "</td>";
+				  text += "</tr>";
+			  }
+			  
+			  return text + "</table>";
+			},
+			format: {}
 		}
 	});
 }
@@ -410,8 +631,6 @@ function initializeDonut(title, valuePairArr)
     // });
 // }, 2500);
 
-
-
 // ################
 
 var gaugeChart = null;
@@ -422,7 +641,7 @@ function initializeGauge(gaugeValue)
 		bindto: '#chartGauge',
 		data: {
 			columns: [
-				['data', gaugeValue]
+				[metricGlobal.toUpperCase()+' Usage', gaugeValue]
 			],
 			type: 'gauge',
 			onclick: function (d, i) { console.log("onclick", d, i); },
@@ -455,6 +674,34 @@ function initializeGauge(gaugeValue)
 		label: {
 			format: function (value, ratio) {
 			  return value + 'm';
+			}
+		},
+		tooltip: {
+			contents: function(d, defaultTitleFormat, defaultValueFormat, color){
+				var $$ = this, config = $$.config,
+				  titleFormat = config.tooltip_format_title || defaultTitleFormat,
+				  nameFormat = config.tooltip_format_name || function (name) { return name; },
+				  valueFormat = config.tooltip_format_value || defaultValueFormat,
+				  text, i, title, value, name, bgcolor, lineIndex;
+			  for (i = 0; i < d.length; i++) {
+				  if (! (d[i] && (d[i].value || d[i].value === 0))) { continue; }
+				  lineIndex = d[i].id
+				  if (! text) {
+					  title = titleFormat ? titleFormat(d[i].x) : d[i].x;
+					  text = "<table style='color:black;' class='" + $$.CLASS.tooltip + "'>" + (title || title === 0 ? "<tr><th style='color:black;' colspan='2'>Reading ID: " + title + "</th></tr>" : "");
+				  }
+
+				  name = nameFormat(d[i].name);
+				  value = valueFormat(d[i].value, d[i].ratio, d[i].id, d[i].index);
+				  bgcolor = $$.levelColor ? $$.levelColor(d[i].value) : color(d[i].id);
+
+				  text += "<tr class='" + $$.CLASS.tooltipName + "-" + d[i].id + "'>";
+				  text += "<td class='name'><span style='background-color:" + bgcolor + "'></span>" + name + "</td>";
+				  text += "<td class='value'>" + value + "</td>";
+				  text += "</tr>";
+			  }
+			  
+			  return text + "</table>";
 			}
 		}
 	});

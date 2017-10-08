@@ -21,6 +21,7 @@ import com.sap.pm.entity.MetricData1Min;
 import com.sap.pm.model.MetricUI;
 import com.sap.pm.model.Metrics;
 import com.sap.pm.pojo.ForecastResponse;
+import com.sap.pm.service.ForecastService;
 import com.sap.pm.service.MainService;
 import com.sap.pm.util.DestinationUtil;
 

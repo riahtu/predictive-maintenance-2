@@ -77,17 +77,17 @@ public class ForecastService {
 		if("cpu".equals(metricName)){
 			targetColumn = "CPU_USAGE";
 		}else if("ram".equals(metricName)){
-			
+			targetColumn = "RAM_USAGE";
 		}else if("disk".equals(metricName)){
-			
+			targetColumn = "DISK_USAGE";
 		}	
 		
 		if("1min".equals(granularity)){
-			datasetId = 9;
+			datasetId = 23;
 		}else if("15min".equals(granularity)){
-			datasetId = 10;
+			datasetId = 24;
 		}else if("60min".equals(granularity)){
-			datasetId = 11;
+			datasetId = 25;
 		}
 
 		ForecastBody body = new ForecastBody();
@@ -141,10 +141,13 @@ public class ForecastService {
 					
 					if("cpu".equals(metricName)){
 						metricData1Min.setCpuUsageForecast(response.getForecasts().get(i).getForecastValue());
+						metricData1Min.setCpuUsageMape(response.getModelPerformance().getMape());
 					}else if("ram".equals(metricName)){
 						metricData1Min.setRamUsageForecast(response.getForecasts().get(i).getForecastValue());
+						metricData1Min.setRamUsageMape(response.getModelPerformance().getMape());
 					}else if("disk".equals(metricName)){
 						metricData1Min.setDiskUsageForecast(response.getForecasts().get(i).getForecastValue());
+						metricData1Min.setDiskUsageMape(response.getModelPerformance().getMape());
 					}
 					
 					
@@ -154,10 +157,13 @@ public class ForecastService {
 					
 					if("cpu".equals(metricName)){
 						metricData15Min.setCpuUsageForecast(response.getForecasts().get(i).getForecastValue());
+						metricData15Min.setCpuUsageMape(response.getModelPerformance().getMape());
 					}else if("ram".equals(metricName)){
 						metricData15Min.setRamUsageForecast(response.getForecasts().get(i).getForecastValue());
+						metricData15Min.setRamUsageMape(response.getModelPerformance().getMape());
 					}else if("disk".equals(metricName)){
 						metricData15Min.setDiskUsageForecast(response.getForecasts().get(i).getForecastValue());
+						metricData15Min.setDiskUsageMape(response.getModelPerformance().getMape());
 					}
 					
 					
@@ -167,10 +173,13 @@ public class ForecastService {
 					
 					if("cpu".equals(metricName)){
 						metricData60Min.setCpuUsageForecast(response.getForecasts().get(i).getForecastValue());
+						metricData60Min.setCpuUsageMape(response.getModelPerformance().getMape());
 					}else if("ram".equals(metricName)){
 						metricData60Min.setRamUsageForecast(response.getForecasts().get(i).getForecastValue());
+						metricData60Min.setRamUsageMape(response.getModelPerformance().getMape());
 					}else if("disk".equals(metricName)){
 						metricData60Min.setDiskUsageForecast(response.getForecasts().get(i).getForecastValue());
+						metricData60Min.setDiskUsageMape(response.getModelPerformance().getMape());
 					}
 					
 					
