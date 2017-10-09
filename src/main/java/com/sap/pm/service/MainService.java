@@ -24,17 +24,19 @@ import org.springframework.web.client.RestTemplate;
 import com.google.gson.Gson;
 import com.sap.core.connectivity.api.authentication.AuthenticationHeader;
 import com.sap.core.connectivity.api.configuration.DestinationConfiguration;
+import com.sap.pm.entity.MetricData15Min;
 import com.sap.pm.entity.MetricData1Min;
 import com.sap.pm.entity.MetricData1Min2;
+import com.sap.pm.entity.MetricData60Min;
 import com.sap.pm.entity.TConfig;
-import com.sap.pm.model.ForecastBody;
 import com.sap.pm.model.Location;
 import com.sap.pm.model.MetricUI;
 import com.sap.pm.model.Metrics;
 import com.sap.pm.model.RegDatasourceBody;
-import com.sap.pm.pojo.ForecastResponse;
+import com.sap.pm.repository.MetricData15MinRepository;
 import com.sap.pm.repository.MetricData1Min2Repository;
 import com.sap.pm.repository.MetricData1MinRepository;
+import com.sap.pm.repository.MetricData60MinRepository;
 import com.sap.pm.repository.TConfigRepository;
 import com.sap.pm.util.CommonUtils;
 import com.sap.pm.util.DBUtils;
@@ -49,6 +51,12 @@ public class MainService {
 	
 	@Autowired 
 	MetricData1MinRepository metricData1MinRepository;
+	
+	@Autowired 
+	MetricData15MinRepository metricData15MinRepository;
+	
+	@Autowired 
+	MetricData60MinRepository metricData60MinRepository;
 	
 	@Autowired 
 	MetricData1Min2Repository metricData1Min2Repository;
@@ -298,9 +306,11 @@ public class MainService {
 				fromTime = CommonUtils.addMinutesToDate(currentDate, -60);
 				toTime = CommonUtils.addMinutesToDate(currentDate, -50);
 			}else if("15mins".equals(granularity)){
-				
+				fromTime = CommonUtils.addMinutesToDate(currentDate, -60*15);
+				toTime = CommonUtils.addMinutesToDate(currentDate, -50*15);
 			}else if("60mins".equals(granularity)){
-				
+				fromTime = CommonUtils.addMinutesToDate(currentDate, -60*60);
+				toTime = CommonUtils.addMinutesToDate(currentDate, -50*60);
 			}
 			
 		}else{
@@ -311,38 +321,110 @@ public class MainService {
 			toTime = CommonUtils.addMinutesToDate(fromTime, 10);
 		}
 		
-		List<MetricData1Min> metricData1Mins = metricData1MinRepository.retrieveData( fromTime, toTime);
-		if(metricData1Mins != null){
-			for(int i=0; i< metricData1Mins.size(); i++){
-				MetricUI metricUI = new MetricUI();
-				
-				metricUI.setDate(metricData1Mins.get(i).getDate());
-				
-				if("cpu".equals(metricName)){
-					if(fromTime.before(new Date()))
-						metricUI.setActual(metricData1Mins.get(i).getCpuUsage());
-					metricUI.setPredicted(metricData1Mins.get(i).getCpuUsageEnsembleForecast());
-					TConfig config = configRepository.findByMetrictype("cpu");
-					metricUI.setCapacity(config.getCapacity());
-					metricUI.setThreshold(config.getMetric_threshold());
-				}else if("ram".equals(metricName)){
-					if(fromTime.before(new Date()))
-						metricUI.setActual(metricData1Mins.get(i).getRamUsage());
-					metricUI.setPredicted(metricData1Mins.get(i).getRamUsageEnsembleForecast());
-					TConfig config = configRepository.findByMetrictype("ram");
-					metricUI.setCapacity(config.getCapacity());
-					metricUI.setThreshold(config.getMetric_threshold());
-				}else if("disk".equals(metricName)){
-					if(fromTime.before(new Date()))
-						metricUI.setActual(metricData1Mins.get(i).getDiskUsage());
-					metricUI.setPredicted(metricData1Mins.get(i).getDiskUsageEnsembleForecast());
-					TConfig config = configRepository.findByMetrictype("disk");
-					metricUI.setCapacity(config.getCapacity());
-					metricUI.setThreshold(config.getMetric_threshold());
-				}else{
+		if("1min".equals(granularity)){
+			List<MetricData1Min> metricData1Mins = metricData1MinRepository.retrieveData( fromTime, toTime);
+			if(metricData1Mins != null){
+				for(int i=0; i< metricData1Mins.size(); i++){
+					MetricUI metricUI = new MetricUI();
 					
+					metricUI.setDate(metricData1Mins.get(i).getDate());
+					
+					if("cpu".equals(metricName)){
+						if(fromTime.before(new Date()))
+							metricUI.setActual(metricData1Mins.get(i).getCpuUsage());
+						metricUI.setPredicted(metricData1Mins.get(i).getCpuUsageEnsembleForecast());
+						TConfig config = configRepository.findByMetrictype("cpu");
+						metricUI.setCapacity(config.getCapacity());
+						metricUI.setThreshold(config.getMetric_threshold());
+					}else if("ram".equals(metricName)){
+						if(fromTime.before(new Date()))
+							metricUI.setActual(metricData1Mins.get(i).getRamUsage());
+						metricUI.setPredicted(metricData1Mins.get(i).getRamUsageEnsembleForecast());
+						TConfig config = configRepository.findByMetrictype("ram");
+						metricUI.setCapacity(config.getCapacity());
+						metricUI.setThreshold(config.getMetric_threshold());
+					}else if("disk".equals(metricName)){
+						if(fromTime.before(new Date()))
+							metricUI.setActual(metricData1Mins.get(i).getDiskUsage());
+						metricUI.setPredicted(metricData1Mins.get(i).getDiskUsageEnsembleForecast());
+						TConfig config = configRepository.findByMetrictype("disk");
+						metricUI.setCapacity(config.getCapacity());
+						metricUI.setThreshold(config.getMetric_threshold());
+					}else{
+						
+					}
+					metricUIs.add(metricUI);
 				}
-				metricUIs.add(metricUI);
+			}
+		}else if("15mins".equals(granularity)){
+			List<MetricData15Min> metricData15Mins = metricData15MinRepository.retrieveData( fromTime, toTime);
+			if(metricData15Mins != null){
+				for(int i=0; i< metricData15Mins.size(); i++){
+					MetricUI metricUI = new MetricUI();
+					
+					metricUI.setDate(metricData15Mins.get(i).getDate());
+					
+					if("cpu".equals(metricName)){
+						if(fromTime.before(new Date()))
+							metricUI.setActual(metricData15Mins.get(i).getCpuUsage());
+						metricUI.setPredicted(metricData15Mins.get(i).getCpuUsageEnsembleForecast());
+						TConfig config = configRepository.findByMetrictype("cpu");
+						metricUI.setCapacity(config.getCapacity());
+						metricUI.setThreshold(config.getMetric_threshold());
+					}else if("ram".equals(metricName)){
+						if(fromTime.before(new Date()))
+							metricUI.setActual(metricData15Mins.get(i).getRamUsage());
+						metricUI.setPredicted(metricData15Mins.get(i).getRamUsageEnsembleForecast());
+						TConfig config = configRepository.findByMetrictype("ram");
+						metricUI.setCapacity(config.getCapacity());
+						metricUI.setThreshold(config.getMetric_threshold());
+					}else if("disk".equals(metricName)){
+						if(fromTime.before(new Date()))
+							metricUI.setActual(metricData15Mins.get(i).getDiskUsage());
+						metricUI.setPredicted(metricData15Mins.get(i).getDiskUsageEnsembleForecast());
+						TConfig config = configRepository.findByMetrictype("disk");
+						metricUI.setCapacity(config.getCapacity());
+						metricUI.setThreshold(config.getMetric_threshold());
+					}else{
+						
+					}
+					metricUIs.add(metricUI);
+				}
+			}
+		}else if("60mins".equals(granularity)){
+			List<MetricData60Min> metricData60Mins = metricData60MinRepository.retrieveData( fromTime, toTime);
+			if(metricData60Mins != null){
+				for(int i=0; i< metricData60Mins.size(); i++){
+					MetricUI metricUI = new MetricUI();
+					
+					metricUI.setDate(metricData60Mins.get(i).getDate());
+					
+					if("cpu".equals(metricName)){
+						if(fromTime.before(new Date()))
+							metricUI.setActual(metricData60Mins.get(i).getCpuUsage());
+						metricUI.setPredicted(metricData60Mins.get(i).getCpuUsageEnsembleForecast());
+						TConfig config = configRepository.findByMetrictype("cpu");
+						metricUI.setCapacity(config.getCapacity());
+						metricUI.setThreshold(config.getMetric_threshold());
+					}else if("ram".equals(metricName)){
+						if(fromTime.before(new Date()))
+							metricUI.setActual(metricData60Mins.get(i).getRamUsage());
+						metricUI.setPredicted(metricData60Mins.get(i).getRamUsageEnsembleForecast());
+						TConfig config = configRepository.findByMetrictype("ram");
+						metricUI.setCapacity(config.getCapacity());
+						metricUI.setThreshold(config.getMetric_threshold());
+					}else if("disk".equals(metricName)){
+						if(fromTime.before(new Date()))
+							metricUI.setActual(metricData60Mins.get(i).getDiskUsage());
+						metricUI.setPredicted(metricData60Mins.get(i).getDiskUsageEnsembleForecast());
+						TConfig config = configRepository.findByMetrictype("disk");
+						metricUI.setCapacity(config.getCapacity());
+						metricUI.setThreshold(config.getMetric_threshold());
+					}else{
+						
+					}
+					metricUIs.add(metricUI);
+				}
 			}
 		}
 		
