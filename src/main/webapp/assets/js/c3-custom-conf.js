@@ -198,6 +198,7 @@ function triggerDashboardChange(metric)
 		isLiveStreamPaused = false;
 		timeChart.destroy();
 		initializeTimeChart();
+		timeChartWindowLastTime = null;
 		initializeDonut('Sample Donut', [{key:'People who love Snooker', value:100}]);
 		loadChartData();
 	}
@@ -350,6 +351,10 @@ function formatDate(date) {
 	return formattedTime;
 }
 
+
+// Global Variable
+var timeChartWindowLastTime = null;
+
 function loadChartData()
 {
 	console.log("loadChartData() called with metric: "+metricGlobal);
@@ -368,76 +373,108 @@ function loadChartData()
 		{
 			try
 			{
-				var metricData = monitoringData[metricGlobal];
+				// Calling the Backend Predictive Service.
+				var urlText = '';
 				
-				var metricData2 = metricInfo.dataArr;
+				if(timeChartWindowLastTime === null)
+					urlText = '/predictivemaintenance/getMetricData?metricName='+metricGlobal+'&granularity=1min';
+				else
+					urlText = '/predictivemaintenance/getMetricData?metricName='+metricGlobal+'&granularity=1min&date='+timeChartWindowLastTime;
 				
-				for(var i=timeChartPointer;i<timeChartPointer+10;i++)
-				{
-					// actualDataArr.push(metricData.Actual[i].readingValue);
-					actualDataArr.push(metricData2[i].actual);
-				}
+				$.ajax({
+					url: urlText,
+					dataType:'json',
+					success: function(res)
+					{
+						var dataArr = res;
+						console.log(dataArr);
+						// alert(msgResponse);
+						var metricData2 = dataArr;
+						
+						var metricData = monitoringData[metricGlobal];
+						
+						for(var i=0;i<metricData2.length;i++)
+						{
+							// actualDataArr.push(metricData.Actual[i].readingValue);
+							actualDataArr.push(metricData2[i].actual);
+						}
+						
+						for(var i=0;i<metricData2.length;i++)
+						{
+							// predictedDataArr.push(metricData.Predicted[i].readingValue);
+							predictedDataArr.push(metricData2[i].predicted);							
+						}
+						
+						for(var i=timeChartPointer;i<timeChartPointer+metricData2.length;i++)
+						{
+							issuesDataArr.push(metricData.Issues[i].readingValue);
+						}
+						
+						for(var i=timeChartPointer;i<timeChartPointer+metricData2.length;i++)
+						{
+							readingIdArr.push(metricData.Issues[i].readingId);
+						}
+						
+						for(var i=timeChartPointer;i<timeChartPointer+metricData2.length;i++)
+						{
+							// var thresholdValue = 0;
+							// if(metricGlobal === 'cpu')
+								// thresholdDataArr.push(cpuThresholdValue);
+							// if(metricGlobal === 'ram')
+								// thresholdDataArr.push(ramThresholdValue);
+							// if(metricGlobal === 'disk')
+								// thresholdDataArr.push(diskThresholdValue);
+							
+							// thresholdDataArr.push(metricData2[i].threshold);
+							thresholdDataArr.push(90);
+						}
+						
+						for(var i=0;i<metricData2.length;i++)
+						{
+							// var datedate = startTime;
+							// dateArr.push(globalDateArr[i]);
+							dateArr.push(new Date(metricData2[i].date));
+							timeChartWindowLastTime = metricData2[i].date;
+							
+							
+						}
+						
+						
+						timeChartPointer +=metricData2.length;
+						
+						timeChart.flow({
+									columns: [
+											// ['Actual', 40, 800, 25, 150],
+											// ['Predicted', 120, 200, 50, 600],
+											// ['Issues', 0, 35, 0, 0]
+											dateArr,
+											actualDataArr,
+											predictedDataArr,
+											// issuesDataArr,
+											thresholdDataArr
+										],
+									// length: 0,
+									duration: 2000,
+									done:loadChartData
+								});
+						
+						// Setting X and Y Axis legends
+						timeChart.axis.labels({
+							  x: metricData.XLabel,
+							  y: metricData.YLabel
+							});
+						
+					},
+					error:function(err)
+					{
+						alert("Error: "+err.status+", Description: "+err.statusText+"\nSome Error Occurred!!");
+						console.log("Error: "+err.status+", Description: "+err.statusText);
+						
+					}
 				
-				for(var i=timeChartPointer;i<timeChartPointer+10;i++)
-				{
-					predictedDataArr.push(metricData.Predicted[i].readingValue);
-				}
-				
-				for(var i=timeChartPointer;i<timeChartPointer+10;i++)
-				{
-					issuesDataArr.push(metricData.Issues[i].readingValue);
-				}
-				
-				for(var i=timeChartPointer;i<timeChartPointer+10;i++)
-				{
-					readingIdArr.push(metricData.Issues[i].readingId);
-				}
-				
-				for(var i=timeChartPointer;i<timeChartPointer+10;i++)
-				{
-					var thresholdValue = 0;
-					if(metricGlobal === 'cpu')
-						thresholdDataArr.push(cpuThresholdValue);
-					if(metricGlobal === 'ram')
-						thresholdDataArr.push(ramThresholdValue);
-					if(metricGlobal === 'disk')
-						thresholdDataArr.push(diskThresholdValue);
-				}
-				
-				for(var i=timeChartPointer;i<timeChartPointer+10;i++)
-				{
-					// var datedate = startTime;
-					// dateArr.push(globalDateArr[i]);
-					dateArr.push(new Date(metricData2[i].date));
-					
-					
-					
-				}
+				});
 				
 				
-				timeChartPointer +=10;
-				
-				timeChart.flow({
-							columns: [
-									// ['Actual', 40, 800, 25, 150],
-									// ['Predicted', 120, 200, 50, 600],
-									// ['Issues', 0, 35, 0, 0]
-									dateArr,
-									actualDataArr,
-									// predictedDataArr,
-									// issuesDataArr,
-									// thresholdDataArr
-								],
-							// length: 0,
-							duration: 2000,
-							done:loadChartData
-						});
-				
-				// Setting X and Y Axis legends
-				timeChart.axis.labels({
-					  x: metricData.XLabel,
-					  y: metricData.YLabel
-					});
 					
 			}
 			catch(e)

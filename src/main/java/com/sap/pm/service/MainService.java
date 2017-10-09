@@ -317,9 +317,11 @@ public class MainService {
 					metricUI.setActual(metricData1Mins.get(i).getCpuUsage());
 					metricUI.setPredicted(metricData1Mins.get(i).getCpuUsageEnsembleForecast());
 				}else if("ram".equals(metricName)){
-					
+					metricUI.setActual(metricData1Mins.get(i).getRamUsage());
+					metricUI.setPredicted(metricData1Mins.get(i).getRamUsageEnsembleForecast());
 				}else if("disk".equals(metricName)){
-					
+					metricUI.setActual(metricData1Mins.get(i).getDiskUsage());
+					metricUI.setPredicted(metricData1Mins.get(i).getDiskUsageEnsembleForecast());
 				}else{
 					
 				}

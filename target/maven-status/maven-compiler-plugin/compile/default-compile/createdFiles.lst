@@ -1,4 +1,6 @@
 com\sap\pm\pojo\ModelInformation.class
+com\sap\pm\service\ActionManager.class
+com\sap\pm\entity\ActionTemplate.class
 com\sap\pm\model\MetricUI.class
 com\sap\pm\repository\MetricData1MinRepository.class
 com\sap\pm\model\ForecastBody.class
@@ -8,6 +10,7 @@ com\sap\pm\repository\MetricData60Min2Repository.class
 com\sap\pm\entity\MetricData1Min.class
 com\sap\pm\entity\MetricData1Min2.class
 com\sap\pm\service\MetricsDataService.class
+com\sap\pm\repository\TConfigRepository.class
 com\sap\pm\util\DBUtils.class
 com\sap\pm\pojo\ModelPerformance.class
 com\sap\pm\repository\MetricData15Min2Repository.class
@@ -18,13 +21,18 @@ com\sap\pm\entity\MetricInfo.class
 com\sap\pm\entity\MetricData60Min.class
 com\sap\pm\pojo\Process.class
 com\sap\pm\repository\MetricData1Min2Repository.class
+com\sap\pm\service\ActionManagerService.class
 com\sap\pm\util\CommonUtils.class
+com\sap\pm\entity\TConfig.class
+com\sap\pm\entity\TActionManager.class
 com\sap\pm\service\SampleJobService.class
 com\sap\pm\service\MetricsDataService$1.class
 com\sap\pm\util\DatabaseConfiguration.class
 com\sap\pm\AutoWiringSpringBeanJobFactory.class
 com\sap\pm\controller\JobsController.class
+com\sap\pm\repository\ActionTemplateRepository.class
 com\sap\pm\pojo\Parameters.class
+com\sap\pm\controller\ActionManagerController.class
 com\sap\pm\entity\MetricData15Min.class
 com\sap\pm\util\DestinationUtil.class
 com\sap\pm\model\Metrics.class
@@ -33,6 +41,7 @@ com\sap\pm\repository\MetricInfoRepository.class
 com\sap\pm\SpringBootWebApplication.class
 com\sap\pm\entity\MetricData60Min2.class
 com\sap\pm\controller\MainController.class
+com\sap\pm\repository\TActionManagerRepository.class
 com\sap\pm\controller\ForecastController.class
 com\sap\pm\repository\MetricData60MinRepository.class
 com\sap\pm\scheduler\ScheduledTasks.class

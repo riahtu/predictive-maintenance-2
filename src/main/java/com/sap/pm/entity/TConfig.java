@@ -17,7 +17,7 @@ public class TConfig {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
 	private Long id;
 	
-	@Column(name = "METRIC_TYPE")
+	@Column(name = "METRIC_TYPE", columnDefinition = "varchar(4)")
 	private String metrictype;
 	
 	@Column(name = "METRIC_THRESHOLD", columnDefinition = "decimal(16,6)")
@@ -26,7 +26,7 @@ public class TConfig {
 	@Column(name = "CAPACITY", columnDefinition = "decimal(16,6)")
 	private double capacity;
 	
-	@Column(name = "UNIT")
+	@Column(name = "UNIT", columnDefinition = "varchar(6)")
 	private String unit;
 
 	public Long getId() {

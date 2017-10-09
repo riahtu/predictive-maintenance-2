@@ -13,7 +13,7 @@ import com.sap.pm.entity.MetricData1Min;
 @Repository
 public interface MetricData1MinRepository  extends JpaRepository<MetricData1Min, Date>  {
 	
-	@Query("select metricDdate from MetricData1Min metricDdate where metricDdate.date > :date1 and metricDdate.date < :date2")
+	@Query("select metricDdate from MetricData1Min metricDdate where metricDdate.date > :date1 and metricDdate.date <= :date2")
 	public List<MetricData1Min> retrieveData(@Param("date1")Date date1,@Param("date2")Date date2);
 
 }
