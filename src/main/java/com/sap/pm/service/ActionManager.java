@@ -45,16 +45,16 @@ public class ActionManager {
 				avg = (avg+metric.getCpuUsageEnsembleForecast())/2;
 			}
 			
-			TConfig config = configRepository.findByMetrictype("CPU_USAGE");
-			TActionManager actionManager = actionManagerRepository.findByMetrictype("CPU_USAGE");
+			TConfig config = configRepository.findByMetrictype("cpu");
+			//TActionManager actionManager = actionManagerRepository.findByMetrictype("cpu");
 			if (avg > config.getMetric_threshold()) {
 				ActionTemplate actionTemplate = new ActionTemplate();
-				actionTemplate.setCriticality(actionManager.getCriticality());
-				actionTemplate.setName(actionManager.getMetrictype());
+				actionTemplate.setCriticality(1);
+				actionTemplate.setName("cpu");
 				actionTemplate.setTime(toDate);
-				actionTemplate.setType(actionManager.getActionType());
-				String message = "Server metric " + "CPU_USAGE " +"has seen a recording of " + avg + " and an "
-						+ "action of "+ actionManager.getActionType() +" is triggered.Additional comments : ";					
+				actionTemplate.setType("ADDED");
+				String message = "Server metric " + "cpu " +"has seen a recording of " + avg + " and an "
+						+ "action of "+ "ADDED" +" is triggered.Additional comments : ";					
 				actionTemplate.setDescription(message);
 				actionTemplateRepository.save(actionTemplate);
 			}
@@ -66,15 +66,15 @@ public class ActionManager {
 				avg = (avg+metric.getDiskUsageEnsembleForecast())/2;
 			}
 			
-			TConfig config = configRepository.findByMetrictype("DISK_USAGE");
-			TActionManager actionManager = actionManagerRepository.findByMetrictype("DISK_USAGE");
+			TConfig config = configRepository.findByMetrictype("disk");
+			TActionManager actionManager = actionManagerRepository.findByMetrictype("disk");
 			if (avg > config.getMetric_threshold()) {
 				ActionTemplate actionTemplate = new ActionTemplate();
-				actionTemplate.setCriticality(actionManager.getCriticality());
-				actionTemplate.setName(actionManager.getMetrictype());
+				actionTemplate.setCriticality(1);
+				actionTemplate.setName("disk");
 				actionTemplate.setTime(toDate);
-				actionTemplate.setType(actionManager.getActionType());
-				String message = "Server metric " + "DISK_USAGE " +"has seen a recording of " + avg + " and an "
+				actionTemplate.setType("ADDED");
+				String message = "Server metric " + "disk " +"has seen a recording of " + avg + " and an "
 						+ "action of "+ actionManager.getActionType() +" is triggered.Additional comments : ";					
 				actionTemplate.setDescription(message);
 				actionTemplateRepository.save(actionTemplate);
@@ -87,15 +87,15 @@ public class ActionManager {
 				avg = (avg+metric.getRamUsageEnsembleForecast())/2;
 			}
 			
-			TConfig config = configRepository.findByMetrictype("RAM_USAGE");
-			TActionManager actionManager = actionManagerRepository.findByMetrictype("RAM_USAGE");
+			TConfig config = configRepository.findByMetrictype("ram");
+			TActionManager actionManager = actionManagerRepository.findByMetrictype("ram");
 			if (avg > config.getMetric_threshold()) {
 				ActionTemplate actionTemplate = new ActionTemplate();
-				actionTemplate.setCriticality(actionManager.getCriticality());
-				actionTemplate.setName(actionManager.getMetrictype());
+				actionTemplate.setCriticality(1);
+				actionTemplate.setName("ram");
 				actionTemplate.setTime(toDate);
-				actionTemplate.setType(actionManager.getActionType());
-				String message = "Server metric " + "RAM_USAGE" +"has seen a recording of " + avg + " and an "
+				actionTemplate.setType("ADDED");
+				String message = "Server metric " + " ram " +"has seen a recording of " + avg + " and an "
 						+ "action of "+ actionManager.getActionType() +" is triggered.Additional comments : ";					
 				actionTemplate.setDescription(message);
 				actionTemplateRepository.save(actionTemplate);

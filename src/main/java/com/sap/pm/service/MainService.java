@@ -26,6 +26,7 @@ import com.sap.core.connectivity.api.authentication.AuthenticationHeader;
 import com.sap.core.connectivity.api.configuration.DestinationConfiguration;
 import com.sap.pm.entity.MetricData1Min;
 import com.sap.pm.entity.MetricData1Min2;
+import com.sap.pm.entity.TConfig;
 import com.sap.pm.model.ForecastBody;
 import com.sap.pm.model.Location;
 import com.sap.pm.model.MetricUI;
@@ -34,6 +35,7 @@ import com.sap.pm.model.RegDatasourceBody;
 import com.sap.pm.pojo.ForecastResponse;
 import com.sap.pm.repository.MetricData1Min2Repository;
 import com.sap.pm.repository.MetricData1MinRepository;
+import com.sap.pm.repository.TConfigRepository;
 import com.sap.pm.util.CommonUtils;
 import com.sap.pm.util.DBUtils;
 import com.sap.pm.util.DestinationUtil;
@@ -50,6 +52,9 @@ public class MainService {
 	
 	@Autowired 
 	MetricData1Min2Repository metricData1Min2Repository;
+	
+	@Autowired
+	TConfigRepository configRepository;
 	
 	public String readDB(){
 		String result = "success";
@@ -314,14 +319,26 @@ public class MainService {
 				metricUI.setDate(metricData1Mins.get(i).getDate());
 				
 				if("cpu".equals(metricName)){
-					metricUI.setActual(metricData1Mins.get(i).getCpuUsage());
+					if(fromTime.before(new Date()))
+						metricUI.setActual(metricData1Mins.get(i).getCpuUsage());
 					metricUI.setPredicted(metricData1Mins.get(i).getCpuUsageEnsembleForecast());
+					TConfig config = configRepository.findByMetrictype("cpu");
+					metricUI.setCapacity(config.getCapacity());
+					metricUI.setThreshold(config.getMetric_threshold());
 				}else if("ram".equals(metricName)){
-					metricUI.setActual(metricData1Mins.get(i).getRamUsage());
+					if(fromTime.before(new Date()))
+						metricUI.setActual(metricData1Mins.get(i).getRamUsage());
 					metricUI.setPredicted(metricData1Mins.get(i).getRamUsageEnsembleForecast());
+					TConfig config = configRepository.findByMetrictype("ram");
+					metricUI.setCapacity(config.getCapacity());
+					metricUI.setThreshold(config.getMetric_threshold());
 				}else if("disk".equals(metricName)){
-					metricUI.setActual(metricData1Mins.get(i).getDiskUsage());
+					if(fromTime.before(new Date()))
+						metricUI.setActual(metricData1Mins.get(i).getDiskUsage());
 					metricUI.setPredicted(metricData1Mins.get(i).getDiskUsageEnsembleForecast());
+					TConfig config = configRepository.findByMetrictype("disk");
+					metricUI.setCapacity(config.getCapacity());
+					metricUI.setThreshold(config.getMetric_threshold());
 				}else{
 					
 				}

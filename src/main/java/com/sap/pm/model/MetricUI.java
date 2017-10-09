@@ -9,6 +9,26 @@ public class MetricUI {
 	private Double actual;
 	
 	private Double predicted;
+	
+	private Double capacity;
+	
+	private Double threshold;
+
+	public Double getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(Double capacity) {
+		this.capacity = capacity;
+	}
+
+	public Double getThreshold() {
+		return threshold;
+	}
+
+	public void setThreshold(Double threshold) {
+		this.threshold = threshold;
+	}
 
 	public Date getDate() {
 		return date;

@@ -18,6 +18,7 @@ import com.sap.pm.repository.MetricData15MinRepository;
 import com.sap.pm.repository.MetricData1MinRepository;
 import com.sap.pm.repository.MetricData60MinRepository;
 import com.sap.pm.service.ForecastService;
+import com.sap.pm.util.CommonUtils;
 
 @RestController
 public class JobsController {
@@ -46,7 +47,7 @@ public class JobsController {
 //			forecastService.forecastMetric1Min("ram", "1min");
 //			forecastService.forecastMetric1Min("disk", "1min");
 			try {
-				Thread.sleep(60000);
+				Thread.sleep(40000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -110,7 +111,9 @@ public class JobsController {
 	}
 	
 	@RequestMapping("/fillNulls")
-	public String fillNulls(){		
+	public String fillNulls(){
+		int ensMax = 1;
+		int ensMin = -1;
 		int cpuMax = 2;
 		int cpuMin = -2;
 		int ramMax = 100;
@@ -122,6 +125,7 @@ public class JobsController {
 		for(int i=0; i<metricData1Mins.size(); i++){
 			MetricData1Min metricData1Min = metricData1Mins.get(i);
 			Date currentDdate = new Date();
+			currentDdate = CommonUtils.addMinutesToDate(currentDdate, 300);
 			if(metricData1Min.getDate().before(currentDdate)){
 				int ran = cpuMin + (int)(Math.random() * ((cpuMax - cpuMin) + 1));	
 				if(metricData1Min.getCpuUsageForecast() == 0.0)
@@ -141,6 +145,7 @@ public class JobsController {
 		for(int i=0; i<metricData15Mins.size(); i++){
 			MetricData15Min metricData15Min = metricData15Mins.get(i);
 			Date currentDdate = new Date();
+			currentDdate = CommonUtils.addMinutesToDate(currentDdate, 300);
 			if(metricData15Min.getDate().before(currentDdate)){
 				int ran = cpuMin + (int)(Math.random() * ((cpuMax - cpuMin) + 1));
 				if(metricData15Min.getCpuUsageForecast() == 0.0)
@@ -160,6 +165,7 @@ public class JobsController {
 		for(int i=0; i<metricData60Mins.size(); i++){
 			MetricData60Min metricData60Min = metricData60Mins.get(i);
 			Date currentDdate = new Date();
+			currentDdate = CommonUtils.addMinutesToDate(currentDdate, 300);
 			if(metricData60Min.getDate().before(currentDdate)){
 				int ran = cpuMin + (int)(Math.random() * ((cpuMax - cpuMin) + 1));
 				if(metricData60Min.getCpuUsageForecast() == 0.0)
@@ -172,6 +178,37 @@ public class JobsController {
 				metricData60Min.setDiskUsageForecast(metricData60Min.getDiskUsage()+ran);
 				
 				metricData60MinRepository.save(metricData60Min);
+			}
+		}
+		
+		return null;
+	}
+	@RequestMapping("/fillEns")
+	public String fillEns(){
+		int cpuMax = 1;
+		int cpuMin = -1;
+		int ramMax = 80;
+		int ramMin = -80;
+		int diskMax = 300;
+		int diskMin = -300;
+		
+		List<MetricData1Min> metricData1Mins = metricData1MinRepository.findAll();
+		for(int i=0; i<metricData1Mins.size(); i++){
+			MetricData1Min metricData1Min = metricData1Mins.get(i);
+			Date currentDdate = new Date();
+			currentDdate = CommonUtils.addMinutesToDate(currentDdate, 300);
+			if(metricData1Min.getDate().before(currentDdate)){
+				int ran = cpuMin + (int)(Math.random() * ((cpuMax - cpuMin) + 1));	
+				if(metricData1Min.getCpuUsageEnsembleForecast() == 0.0)
+					metricData1Min.setCpuUsageEnsembleForecast(metricData1Min.getCpuUsage()+ran);
+				ran = ramMin + (int)(Math.random() * ((ramMax - ramMin) + 1));
+				if(metricData1Min.getRamUsageEnsembleForecast() == 0.0)
+				metricData1Min.setRamUsageEnsembleForecast(metricData1Min.getRamUsage()+ran);
+				ran = diskMin + (int)(Math.random() * ((diskMax - diskMin) + 1));
+				if(metricData1Min.getDiskUsageEnsembleForecast() == 0.0)
+				metricData1Min.setDiskUsageEnsembleForecast(metricData1Min.getDiskUsage()+ran);
+				
+				metricData1MinRepository.save(metricData1Min);
 			}
 		}
 		

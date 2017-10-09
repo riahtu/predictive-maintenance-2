@@ -21,11 +21,8 @@ public class ActionManagerService {
 			List<ActionTemplate> actionList = actionTemplateRepository.findAll();
 			return actionList;
 		}else{
-			List<ActionTemplate> actionList = new ArrayList<ActionTemplate>();
-			ActionTemplate action =  actionTemplateRepository.findOne(id);
-			if(null != action){
-				actionList.add(action);
-			}
+			List<ActionTemplate> actionList = actionTemplateRepository.retrieveNextNotificaations(id);
+
 			return actionList;
 		}
 	}

@@ -34,7 +34,7 @@ public class ActionTemplate {
 	@Column(name = "CRITICALITY", columnDefinition = "INT")
 	private int criticality;
 	
-	@Column(name = "DESCRIPTION")
+	@Column(name = "DESCRIPTION", columnDefinition = "varchar(500)")
 	private String description;
 
 	public Long getId() {

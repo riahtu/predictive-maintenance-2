@@ -407,15 +407,15 @@ function loadChartData()
 						
 						for(var i=timeChartPointer;i<timeChartPointer+metricData2.length;i++)
 						{
-							issuesDataArr.push(metricData.Issues[i].readingValue);
+							// issuesDataArr.push(metricData.Issues[i].readingValue);
 						}
 						
 						for(var i=timeChartPointer;i<timeChartPointer+metricData2.length;i++)
 						{
-							readingIdArr.push(metricData.Issues[i].readingId);
+							// readingIdArr.push(metricData.Issues[i].readingId);
 						}
 						
-						for(var i=timeChartPointer;i<timeChartPointer+metricData2.length;i++)
+						for(var i=0;i<metricData2.length;i++)
 						{
 							// var thresholdValue = 0;
 							// if(metricGlobal === 'cpu')
@@ -426,7 +426,7 @@ function loadChartData()
 								// thresholdDataArr.push(diskThresholdValue);
 							
 							// thresholdDataArr.push(metricData2[i].threshold);
-							thresholdDataArr.push(90);
+							thresholdDataArr.push(metricData2[i].threshold);
 						}
 						
 						for(var i=0;i<metricData2.length;i++)
@@ -454,7 +454,7 @@ function loadChartData()
 											thresholdDataArr
 										],
 									// length: 0,
-									duration: 2000,
+									duration: 10000,
 									done:loadChartData
 								});
 						
@@ -463,6 +463,65 @@ function loadChartData()
 							  x: metricData.XLabel,
 							  y: metricData.YLabel
 							});
+							
+														
+						// ---- Plotting Gauge Chart
+						
+						var maxCapacity = metricData2[0].capacity;
+						console.log('Determining Gauge Chart Value from Time-series data for metric: '+metricGlobal);
+						var gaugeValue = 0;
+						var max = 0;
+						for(var j=1;j<actualDataArr.length;j++)
+						{
+							max = (actualDataArr[j] > max)?actualDataArr[j]:max;
+						}
+						
+						gaugeValue = (max/maxCapacity)*100;
+						
+						/*
+						switch(metricGlobal)
+						{
+							case 'cpu':
+								{
+									var sum = 0;
+									for(var j=1;j<actualDataArr.length;j++)
+									{
+										sum +=actualDataArr[j];
+									}
+									gaugeValue = sum/(actualDataArr.length-1);
+								}
+								break;
+							case 'ram':
+								{
+									var sumPercent = 0;
+									var overallRAMCapacity = 64;
+									for(var j=1;j<actualDataArr.length;j++)
+									{
+										sumPercent += (actualDataArr[j]/overallRAMCapacity)*100;
+									}
+									gaugeValue = sumPercent/(actualDataArr.length-1);
+								}
+								break;
+							case 'disk':
+								{
+									var sumPercent = 0;
+									var overallDISKCapacity = 650;
+									for(var j=1;j<actualDataArr.length;j++)
+									{
+										sumPercent += (actualDataArr[j]/overallDISKCapacity)*100;
+									}
+									gaugeValue = sumPercent/(actualDataArr.length-1);
+								}
+								break;
+							default:
+								alert("not a valid metric");
+						}
+						
+						*/
+						
+						//var gaugeValue = actualDataArr[5]/650;
+						initializeGauge(Math.ceil(gaugeValue));
+						
 						
 					},
 					error:function(err)
@@ -492,50 +551,6 @@ function loadChartData()
 		var donutValueArr = [{key:donutData.label1, value:donutData.value1}, {key:donutData.label2, value:donutData.value2}, {key:donutData.label3, value:donutData.value3}, {key:donutData.label4, value:donutData.value4}];
 		initializeDonut('Key Influencer', donutValueArr);
 		donutDataPointer += 1;
-		
-		// ---- Plotting Gauge Chart
-		console.log('Determining Gauge Chart Value from Time-series data for metric: '+metricGlobal);
-		var gaugeValue = 0;
-		
-		switch(metricGlobal)
-		{
-			case 'cpu':
-				{
-					var sum = 0;
-					for(var j=1;j<actualDataArr.length;j++)
-					{
-						sum +=actualDataArr[j];
-					}
-					gaugeValue = sum/(actualDataArr.length-1);
-				}
-				break;
-			case 'ram':
-				{
-					var sumPercent = 0;
-					var overallRAMCapacity = 64;
-					for(var j=1;j<actualDataArr.length;j++)
-					{
-						sumPercent += (actualDataArr[j]/overallRAMCapacity)*100;
-					}
-					gaugeValue = sumPercent/(actualDataArr.length-1);
-				}
-				break;
-			case 'disk':
-				{
-					var sumPercent = 0;
-					var overallDISKCapacity = 650;
-					for(var j=1;j<actualDataArr.length;j++)
-					{
-						sumPercent += (actualDataArr[j]/overallDISKCapacity)*100;
-					}
-					gaugeValue = sumPercent/(actualDataArr.length-1);
-				}
-				break;
-			default:
-				alert("not a valid metric");
-		}
-		//var gaugeValue = actualDataArr[5]/650;
-		initializeGauge(Math.ceil(gaugeValue));
 		
 		
 		// ---- Updating the Metric Cards Panel
@@ -772,3 +787,136 @@ function initializeGauge(gaugeValue)
         // columns: [['data', 70]]
     // });
 // }, 5000);
+
+
+var flagFirstNotif = true;
+var getNotifInt = setInterval(function(){
+	var urlText = '';
+				
+				// if(flagFirstNotif === true)
+					urlText = '/predictivemaintenance/getActionNotification?id=';
+				// else
+					// urlText = '/predictivemaintenance/getMetricData?metricName='+metricGlobal+'&granularity=1min&date='+timeChartWindowLastTime;
+				
+				$.ajax({
+					url: urlText,
+					dataType:'json',
+					success: function(res)
+					{
+						var notifArr = res;
+						
+						for(var i=0;i<notifArr.length;i++)
+						{
+							var listItemStr = '<li style="\
+										background-color: #6f6f6f;\
+										padding: 10px;\
+										color: white;\
+										margin-top:10px;\
+									">\
+										<a href="#" style="\
+											padding: 13px;\
+											/* background-color: grey; */\
+											/* color: white; */\
+										">\
+											<div class="photo" id="notifIconRect" style="border-radius: 2px; float: left; height: 10px; margin-top: 4px; margin-right: 6px; width: 10px; vertical-align: middle; background-color: rgb(211, 64, 33); transform: scale(1);"></div>\
+											<span class="subject" style="\
+												font-size: 16px;\
+												color: white;\
+												font-weight: 600;\
+												border-bottom: 2px solid;\
+											">\
+												<span class="from" id="notifTitleText">'+notifArr[i].name.toUpperCase()+' Resource</span>										\
+											</span>\
+											<div class="photo" style="border-radius: 2px;float: right;vertical-align: middle;transform: scale(1);">\
+											<img id="notifActionIcon" src="images/check.png" style="\
+												height: 20px;\
+												width: 20px;\
+											">\
+											</div>\
+											<p class="message" id="notifDesc" style="margin-top: 5px;color: white;font-size: 15px;">'+notifArr[i].description+'</p>\
+											<span class="time" id="notifTimestamp" style="\
+												float: right;\
+												/* margin-top: 5px; */\
+												color: #dfe4e8;\
+											">'+new Date(notifArr[i].time)+'</span>\
+											<span class="time" id="notifAction" style="\
+												float: left;\
+												/* margin-top: 5px; */\
+												font-family: monospace;\
+												font-weight: 700;\
+												color: #b2cbe4;\
+												font-size: 15px;\
+											">'+notifArr[i].type+'</span>\
+										</a>\
+									</li>';
+									
+							$('#notificationList').append(listItemStr);
+									
+						}
+
+						// notifIconRect
+						// notifTitleText
+						// notifActionIcon
+						// notifDesc
+						// notifTimestamp
+						// notifAction
+
+					},
+					error:function(err)
+					{
+						alert("Error: "+err.status+", Description: "+err.statusText+"\nSome Error Occurred!!");
+						console.log("Error: "+err.status+", Description: "+err.statusText);
+						
+					}
+				
+				});
+	}, 10000);
+	
+	
+	
+	
+// var listItemStr = '<li style="\
+										// background-color: #6f6f6f;\
+										// padding: 10px;\
+										// color: white;\
+										// margin-top:10px;\
+									// ">\
+										// <a href="#" style="\
+											// padding: 13px;\
+											// /* background-color: grey; */\
+											// /* color: white; */\
+										// ">\
+											// <div class="photo" id="notifIconRect" style="border-radius: 2px; float: left; height: 10px; margin-top: 4px; margin-right: 6px; width: 10px; vertical-align: middle; background-color: rgb(211, 64, 33); transform: scale(1);"></div>\
+											// <span class="subject" style="\
+												// font-size: 16px;\
+												// color: white;\
+												// font-weight: 600;\
+												// border-bottom: 2px solid;\
+											// ">\
+												// <span class="from" id="notifTitleText">_TITLE_</span>										\
+											// </span>\
+											// <div class="photo" style="border-radius: 2px;float: right;vertical-align: middle;transform: scale(1);">\
+											// <img id="notifActionIcon" src="images/refresh.png" style="\
+												// height: 20px;\
+												// width: 20px;\
+											// ">\
+											// </div>\
+											// <p class="message" id="notifDesc" style="margin-top: 5px;color: white;font-size: 15px;">_DESCRIPTION_</p>\
+											// <span class="time" id="notifTimestamp" style="\
+												// float: right;\
+												// /* margin-top: 5px; */\
+												// color: #dfe4e8;\
+											// ">_TIMESTAMP_</span>\
+											// <span class="time" id="notifAction" style="\
+												// float: left;\
+												// /* margin-top: 5px; */\
+												// font-family: monospace;\
+												// font-weight: 700;\
+												// color: #b2cbe4;\
+												// font-size: 15px;\
+											// ">_ACTION_</span>\
+										// </a>\
+									// </li>';
+									
+							// $('#notificationList').append(listItemStr);
+							// $('#notificationList').append(listItemStr);
