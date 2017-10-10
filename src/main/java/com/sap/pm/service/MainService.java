@@ -318,7 +318,14 @@ public class MainService {
 			Date dateTemp = new Date();
 			dateTemp.setTime(Long.parseLong(date));
 			fromTime = dateTemp;
-			toTime = CommonUtils.addMinutesToDate(fromTime, 10);
+			
+			if("1min".equals(granularity)){
+				toTime = CommonUtils.addMinutesToDate(fromTime, 10);
+			}else if("15mins".equals(granularity)){
+				toTime = CommonUtils.addMinutesToDate(fromTime, 10*15);
+			}else if("60mins".equals(granularity)){
+				toTime = CommonUtils.addMinutesToDate(fromTime, 10*60);
+			}
 		}
 		
 		if("1min".equals(granularity)){
