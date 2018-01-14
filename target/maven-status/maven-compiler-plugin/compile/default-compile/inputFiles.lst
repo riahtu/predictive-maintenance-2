@@ -15,6 +15,7 @@ C:\Users\I322364\git\Predictive-Maintenance\src\main\java\com\sap\pm\repository\
 C:\Users\I322364\git\Predictive-Maintenance\src\main\java\com\sap\pm\repository\MetricData60Min2Repository.java
 C:\Users\I322364\git\Predictive-Maintenance\src\main\java\com\sap\pm\entity\MetricData15Min2.java
 C:\Users\I322364\git\Predictive-Maintenance\src\main\java\com\sap\pm\entity\MetricData1Min2.java
+C:\Users\I322364\git\Predictive-Maintenance\src\main\java\com\sap\pm\entity\TEST.java
 C:\Users\I322364\git\Predictive-Maintenance\src\main\java\com\sap\pm\model\Location.java
 C:\Users\I322364\git\Predictive-Maintenance\src\main\java\com\sap\pm\util\CommonUtils.java
 C:\Users\I322364\git\Predictive-Maintenance\src\main\java\com\sap\pm\repository\MetricThresholdConfigRepository.java
@@ -60,3 +61,4 @@ C:\Users\I322364\git\Predictive-Maintenance\src\main\java\com\sap\pm\pojo\ModelI
 C:\Users\I322364\git\Predictive-Maintenance\src\main\java\com\sap\pm\scheduler\SampleJob.java
 C:\Users\I322364\git\Predictive-Maintenance\src\main\java\com\sap\pm\controller\MainController.java
 C:\Users\I322364\git\Predictive-Maintenance\src\main\java\com\sap\pm\entity\MetricData15Min.java
+C:\Users\I322364\git\Predictive-Maintenance\src\main\java\com\sap\pm\repository\TestRepository.java

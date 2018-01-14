@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sap.core.connectivity.api.configuration.DestinationConfiguration;
 import com.sap.pm.entity.MetricData1Min;
+import com.sap.pm.entity.TEST;
 import com.sap.pm.model.MetricUI;
 import com.sap.pm.model.Metrics;
 import com.sap.pm.pojo.ForecastResponse;
+import com.sap.pm.repository.MetricData1MinRepository;
+import com.sap.pm.repository.TestRepository;
 import com.sap.pm.service.ForecastService;
 import com.sap.pm.service.MainService;
 import com.sap.pm.util.DestinationUtil;
@@ -31,6 +34,9 @@ public class MainController implements ApplicationContextAware {
 	@Autowired
 	private MainService mainService;
 	
+	@Autowired 
+	TestRepository testRepository;
+	
 	private static ApplicationContext applicationContext;
 	
 	public static ApplicationContext getApplicationContext() {
@@ -40,6 +46,11 @@ public class MainController implements ApplicationContextAware {
 	@Override
 	public void setApplicationContext(ApplicationContext ac) throws BeansException {
 		applicationContext = ac;
+	}
+	
+	@RequestMapping("/test")
+	public List<TEST> test(){
+		return testRepository.findAll();
 	}
 	
 	@RequestMapping("/startFetchingMonitoringData")

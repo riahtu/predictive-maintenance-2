@@ -3391,9 +3391,9 @@ var keyInfluencerData = {
 									{
 										label1:'Busy Threads',
 										value1:45,
-										label2:'Service Instances',
+										label2:'Requests Per Minute',
 										value2:25,
-										label3:'CPU Usage',
+										label3:'RAM Usage',
 										value3:15,
 										label4:'Others',
 										value4:15
@@ -3401,9 +3401,9 @@ var keyInfluencerData = {
 									{
 										label1:'Busy Threads',
 										value1:25,
-										label2:'Service Instances',
+										label2:'Requests Per Minute',
 										value2:45,
-										label3:'CPU Usage',
+										label3:'RAM Usage',
 										value3:20,
 										label4:'Others',
 										value4:10
@@ -3411,9 +3411,9 @@ var keyInfluencerData = {
 									{
 										label1:'Busy Threads',
 										value1:27,
-										label2:'Service Instances',
+										label2:'Requests Per Minute',
 										value2:23,
-										label3:'CPU Usage',
+										label3:'RAM Usage',
 										value3:22,
 										label4:'Others',
 										value4:28
@@ -3421,9 +3421,9 @@ var keyInfluencerData = {
 									{
 										label1:'Busy Threads',
 										value1:39,
-										label2:'Service Instances',
+										label2:'Requests Per Minute',
 										value2:25,
-										label3:'CPU Usage',
+										label3:'RAM Usage',
 										value3:21,
 										label4:'Others',
 										value4:15
@@ -3431,9 +3431,9 @@ var keyInfluencerData = {
 									{
 										label1:'Busy Threads',
 										value1:32,
-										label2:'Service Instances',
+										label2:'Requests Per Minute',
 										value2:28,
-										label3:'CPU Usage',
+										label3:'RAM Usage',
 										value3:15,
 										label4:'Others',
 										value4:25
@@ -3441,9 +3441,9 @@ var keyInfluencerData = {
 									{
 										label1:'Busy Threads',
 										value1:30,
-										label2:'Service Instances',
+										label2:'Requests Per Minute',
 										value2:32,
-										label3:'CPU Usage',
+										label3:'RAM Usage',
 										value3:20,
 										label4:'Others',
 										value4:18
@@ -3451,9 +3451,9 @@ var keyInfluencerData = {
 									{
 										label1:'Busy Threads',
 										value1:31,
-										label2:'Service Instances',
+										label2:'Requests Per Minute',
 										value2:29,
-										label3:'CPU Usage',
+										label3:'RAM Usage',
 										value3:18,
 										label4:'Others',
 										value4:22
@@ -3461,9 +3461,9 @@ var keyInfluencerData = {
 									{
 										label1:'Busy Threads',
 										value1:48,
-										label2:'Service Instances',
+										label2:'Requests Per Minute',
 										value2:22,
-										label3:'CPU Usage',
+										label3:'RAM Usage',
 										value3:15,
 										label4:'Others',
 										value4:15
@@ -3471,9 +3471,9 @@ var keyInfluencerData = {
 									{
 										label1:'Busy Threads',
 										value1:45,
-										label2:'Service Instances',
+										label2:'Requests Per Minute',
 										value2:25,
-										label3:'CPU Usage',
+										label3:'RAM Usage',
 										value3:15,
 										label4:'Others',
 										value4:15

@@ -42,22 +42,23 @@ public class ActionManager {
 		if(metricType.equals("cpu")){
 			double avg = 0;
 			for(MetricData1Min metric : metricList){
-				avg = (avg+metric.getCpuUsageEnsembleForecast())/2;
+				//avg = (avg+metric.getCpuUsageEnsembleForecast())/2;
+				
+				TConfig config = configRepository.findByMetrictype("cpu");
+				//TActionManager actionManager = actionManagerRepository.findByMetrictype("cpu");
+				if (metric.getCpuUsageEnsembleForecast() > config.getMetric_threshold()) {
+					ActionTemplate actionTemplate = new ActionTemplate();
+					actionTemplate.setCriticality(1);
+					actionTemplate.setName("cpu");
+					actionTemplate.setTime(metric.getDate());
+					actionTemplate.setType("ADDED");
+					String message = "Server metric " + "cpu " +"has seen a recording of " + metric.getCpuUsageEnsembleForecast() + " and an "
+							+ "action of "+ "ADDED" +" is triggered.Additional comments : ";					
+					actionTemplate.setDescription(message);
+					actionTemplateRepository.save(actionTemplate);
+				}
 			}
 			
-			TConfig config = configRepository.findByMetrictype("cpu");
-			//TActionManager actionManager = actionManagerRepository.findByMetrictype("cpu");
-			if (avg > config.getMetric_threshold()) {
-				ActionTemplate actionTemplate = new ActionTemplate();
-				actionTemplate.setCriticality(1);
-				actionTemplate.setName("cpu");
-				actionTemplate.setTime(toDate);
-				actionTemplate.setType("ADDED");
-				String message = "Server metric " + "cpu " +"has seen a recording of " + avg + " and an "
-						+ "action of "+ "ADDED" +" is triggered.Additional comments : ";					
-				actionTemplate.setDescription(message);
-				actionTemplateRepository.save(actionTemplate);
-			}
 		}
 		
 		if(metricType.equals("disk")){

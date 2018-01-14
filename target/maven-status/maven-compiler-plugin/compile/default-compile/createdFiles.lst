@@ -1,5 +1,6 @@
 com\sap\pm\pojo\ModelInformation.class
 com\sap\pm\service\ActionManager.class
+com\sap\pm\repository\TestRepository.class
 com\sap\pm\entity\ActionTemplate.class
 com\sap\pm\model\MetricUI.class
 com\sap\pm\repository\MetricData1MinRepository.class
@@ -26,6 +27,7 @@ com\sap\pm\util\CommonUtils.class
 com\sap\pm\entity\TConfig.class
 com\sap\pm\entity\TActionManager.class
 com\sap\pm\service\SampleJobService.class
+com\sap\pm\entity\TEST.class
 com\sap\pm\service\MetricsDataService$1.class
 com\sap\pm\util\DatabaseConfiguration.class
 com\sap\pm\AutoWiringSpringBeanJobFactory.class
@@ -54,9 +56,6 @@ com\sap\pm\repository\MetricData15MinRepository.class
 com\sap\pm\pojo\Metric.class
 com\sap\pm\model\RegDatasourceBody.class
 com\sap\pm\entity\MetricActions.class
-com\sap\pm\entity\MetricThresholdConfig.class
-com\sap\pm\repository\MetricThresholdConfigRepository.class
 com\sap\pm\controller\TasksController.class
-com\sap\pm\entity\MetricThresholdConfigID.class
 com\sap\pm\pojo\ForecastResponse.class
 com\sap\pm\pojo\AccountMetric.class

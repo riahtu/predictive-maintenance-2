@@ -204,7 +204,7 @@ function triggerDashboardChange(metric)
 	}
 	else
 	{
-		alert('Select the Metric from Dropdown');
+		//alert('Select the Metric from Dropdown');
 	}
 }
 
@@ -526,7 +526,7 @@ function loadChartData()
 					},
 					error:function(err)
 					{
-						alert("Error: "+err.status+", Description: "+err.statusText+"\nSome Error Occurred!!");
+						//alert("Error: "+err.status+", Description: "+err.statusText+"\nSome Error Occurred!!");
 						console.log("Error: "+err.status+", Description: "+err.statusText);
 						
 					}
@@ -581,11 +581,11 @@ function loadChartData()
 		overallRAMHealth = ramSum/(readingIdArr.length-1);
 		overallDiskHealth = diskSum/(readingIdArr.length-1);
 		
-		$('#overallCPUValue').text((isNaN(overallCPUHealth)==true)?'_%':Math.ceil(overallCPUHealth)+'%');
-		$('#overallRAMValue').text((isNaN(overallRAMHealth)==true)?'_%':Math.ceil(overallRAMHealth)+'%');
-		$('#overallDiskValue').text((isNaN(overallDiskHealth)==true)?'_%':Math.ceil(overallDiskHealth)+'%');
-		var overallHealthIndex = ((100 - overallCPUHealth) + (100 - overallRAMHealth) + (100 - overallDiskHealth))/3;
-		$('#overallHealthValue').text((isNaN(overallHealthIndex)==true)?'_%':Math.ceil(overallHealthIndex)+'%');
+		// $('#overallCPUValue').text((isNaN(overallCPUHealth)==true)?'_%':Math.ceil(overallCPUHealth)+'%');
+		// $('#overallRAMValue').text((isNaN(overallRAMHealth)==true)?'_%':Math.ceil(overallRAMHealth)+'%');
+		// $('#overallDiskValue').text((isNaN(overallDiskHealth)==true)?'_%':Math.ceil(overallDiskHealth)+'%');
+		// var overallHealthIndex = ((100 - overallCPUHealth) + (100 - overallRAMHealth) + (100 - overallDiskHealth))/3;
+		// $('#overallHealthValue').text((isNaN(overallHealthIndex)==true)?'_%':Math.ceil(overallHealthIndex)+'%');
 
 		
 		// ---- Managing the Notifications
@@ -594,7 +594,7 @@ function loadChartData()
 	}
 	else
 	{
-		alert('Select the Metric from Dropdown');
+		//alert('Select the Metric from Dropdown');
 	}
 }
 // ################
@@ -789,14 +789,14 @@ function initializeGauge(gaugeValue)
 // }, 5000);
 
 
-var flagFirstNotif = true;
+var flagNotifId = null;
 var getNotifInt = setInterval(function(){
 	var urlText = '';
 				
-				// if(flagFirstNotif === true)
+				if(flagNotifId === null)
 					urlText = '/predictivemaintenance/getActionNotification?id=';
-				// else
-					// urlText = '/predictivemaintenance/getMetricData?metricName='+metricGlobal+'&granularity=1min&date='+timeChartWindowLastTime;
+				else
+					urlText = '/predictivemaintenance/getActionNotification?id='+flagNotifId;
 				
 				$.ajax({
 					url: urlText,
@@ -804,6 +804,9 @@ var getNotifInt = setInterval(function(){
 					success: function(res)
 					{
 						var notifArr = res;
+						
+						$('#notifCount').text(res.length);
+						$('#notifCountHeader').text(res.length);
 						
 						for(var i=0;i<notifArr.length;i++)
 						{
@@ -838,7 +841,7 @@ var getNotifInt = setInterval(function(){
 												float: right;\
 												/* margin-top: 5px; */\
 												color: #dfe4e8;\
-											">'+new Date(notifArr[i].time)+'</span>\
+											">'+formatTimestampToYearTime(notifArr[i].time)+'</span>\
 											<span class="time" id="notifAction" style="\
 												float: left;\
 												/* margin-top: 5px; */\
@@ -850,7 +853,9 @@ var getNotifInt = setInterval(function(){
 										</a>\
 									</li>';
 									
-							$('#notificationList').append(listItemStr);
+							$('#notificationList').prepend(listItemStr);
+							
+							flagNotifId = notifArr[i].id;
 									
 						}
 
@@ -864,7 +869,7 @@ var getNotifInt = setInterval(function(){
 					},
 					error:function(err)
 					{
-						alert("Error: "+err.status+", Description: "+err.statusText+"\nSome Error Occurred!!");
+						// alert("Error: "+err.status+", Description: "+err.statusText+"\nSome Error Occurred!!");
 						console.log("Error: "+err.status+", Description: "+err.statusText);
 						
 					}
@@ -920,3 +925,4 @@ var getNotifInt = setInterval(function(){
 									
 							// $('#notificationList').append(listItemStr);
 							// $('#notificationList').append(listItemStr);
+	

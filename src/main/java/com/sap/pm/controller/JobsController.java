@@ -1,7 +1,5 @@
 package com.sap.pm.controller;
 
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
-
 import java.util.Date;
 import java.util.List;
 
@@ -9,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sap.pm.service.ActionManager;
-import com.sap.pm.service.EnsembleService;
 import com.sap.pm.entity.MetricData15Min;
 import com.sap.pm.entity.MetricData1Min;
 import com.sap.pm.entity.MetricData60Min;
 import com.sap.pm.repository.MetricData15MinRepository;
 import com.sap.pm.repository.MetricData1MinRepository;
 import com.sap.pm.repository.MetricData60MinRepository;
+import com.sap.pm.service.ActionManager;
+import com.sap.pm.service.EnsembleService;
 import com.sap.pm.service.ForecastService;
 import com.sap.pm.util.CommonUtils;
 
@@ -63,7 +61,7 @@ public class JobsController {
 			//actionManager.saveActionTemplate("ram");
 //			
 			try {
-				Thread.sleep(60000);
+				Thread.sleep(20000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -112,14 +110,14 @@ public class JobsController {
 	
 	@RequestMapping("/fillNulls")
 	public String fillNulls(){
-		int ensMax = 1;
-		int ensMin = -1;
-		int cpuMax = 2;
-		int cpuMin = -2;
-		int ramMax = 100;
-		int ramMin = -100;
-		int diskMax = 700;
-		int diskMin = -700;
+		int ensMax = 3;
+		int ensMin = -3;
+		int cpuMax = 4;
+		int cpuMin = -4;
+		int ramMax = 300;
+		int ramMin = -300;
+		int diskMax = 1000;
+		int diskMin = -1000;
 		
 		List<MetricData1Min> metricData1Mins = metricData1MinRepository.findAll();
 		for(int i=0; i<metricData1Mins.size(); i++){
@@ -185,12 +183,12 @@ public class JobsController {
 	}
 	@RequestMapping("/fillEns")
 	public String fillEns(){
-		int cpuMax = 1;
-		int cpuMin = -1;
-		int ramMax = 80;
-		int ramMin = -80;
-		int diskMax = 300;
-		int diskMin = -300;
+		int cpuMax = 2;
+		int cpuMin = -2;
+		int ramMax = 130;
+		int ramMin = -130;
+		int diskMax = 700;
+		int diskMin = -700;
 		
 		List<MetricData1Min> metricData1Mins = metricData1MinRepository.findAll();
 		for(int i=0; i<metricData1Mins.size(); i++){
