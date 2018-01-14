@@ -83,7 +83,7 @@ public class ForecastService {
 		}	
 		
 		if("1min".equals(granularity)){
-			datasetId = 23;
+			datasetId = 1;
 		}else if("15min".equals(granularity)){
 			datasetId = 24;
 		}else if("60min".equals(granularity)){
