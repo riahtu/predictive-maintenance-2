@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import com.sap.pm.service.MetricsDataService;
 import com.sap.pm.service.SampleJobService;
 
-@Component
+//@Component
 public class SampleJob2 implements Job {
 
     Logger logger = LoggerFactory.getLogger(getClass());

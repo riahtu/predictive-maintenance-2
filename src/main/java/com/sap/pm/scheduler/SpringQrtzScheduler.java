@@ -1,4 +1,4 @@
-package com.sap.pm.scheduler;
+/*package com.sap.pm.scheduler;
 
 import javax.annotation.PostConstruct;
 
@@ -74,7 +74,7 @@ public class SpringQrtzScheduler {
         return jobDetailFactory;
     }
     
-   /* @Bean
+    @Bean
     @Qualifier("job2")
     public JobDetailFactoryBean jobDetail2() {
 
@@ -84,7 +84,7 @@ public class SpringQrtzScheduler {
         jobDetailFactory.setDescription(" 2 Invoke Sample Job service...");
         jobDetailFactory.setDurability(true);
         return jobDetailFactory;
-    }*/
+    }
 
     @Bean
     public SimpleTriggerFactoryBean trigger(JobDetail job) {
@@ -101,7 +101,7 @@ public class SpringQrtzScheduler {
         return trigger;
     }
     
-   /* @Bean
+    @Bean
     public SimpleTriggerFactoryBean trigger2(JobDetail job) {
 
         SimpleTriggerFactoryBean trigger = new SimpleTriggerFactoryBean();
@@ -114,5 +114,6 @@ public class SpringQrtzScheduler {
         trigger.setRepeatCount(SimpleTrigger.REPEAT_INDEFINITELY);
         trigger.setName("Qrtz_Trigger");
         return trigger;
-    }*/
+    }
 }
+*/

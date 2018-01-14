@@ -13,7 +13,7 @@ import com.sap.pm.service.ForecastService;
 
 import ch.qos.logback.classic.Logger;
 
-@Component
+//@Component
 public class ScheduledTasks {
 	
 	@Autowired
