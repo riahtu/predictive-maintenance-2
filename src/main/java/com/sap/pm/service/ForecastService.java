@@ -66,7 +66,7 @@ public class ForecastService {
 	}
 	
 	public ForecastResponse forecastMetric1Min(String metricName, String granularity){
-		log.info("forecastmetric ---- ");
+		log.error("forecastmetric ---- ");
 		
 		ResponseEntity<ForecastResponse> response = null;
 		ForecastResponse responseBody = null;
