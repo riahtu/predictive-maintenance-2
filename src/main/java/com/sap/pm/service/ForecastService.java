@@ -120,7 +120,7 @@ public class ForecastService {
 
 			if (response != null) {
 				responseBody = response.getBody();
-				//persistData(responseBody, metricName, granularity);
+				persistData(responseBody, metricName, granularity);
 			}			
 			log.error("response payload : " + response);
 
