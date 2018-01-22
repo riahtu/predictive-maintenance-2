@@ -17,7 +17,7 @@ public class ForecastController {
 	@RequestMapping("/forecastMetric1Min")
 	public ForecastResponse forecastMetric1Min(
 			@RequestParam("metricName")String metricName,
-			@RequestParam("granularity")String granularity){
+			@RequestParam("granularity")String granularity) throws Exception{
 		ForecastResponse result;
 		result = forecastService.forecastMetric1Min(metricName, granularity);
 		return result;

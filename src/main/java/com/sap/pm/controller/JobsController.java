@@ -39,7 +39,7 @@ public class JobsController {
 	EnsembleService ensembleService;
 	
 	@RequestMapping("/start1MinCpuJob")
-	public String start1MinCpuJob(){		
+	public String start1MinCpuJob() throws Exception{		
 		while(true){
 			forecastService.forecastMetric1Min("cpu", "1min");
 //			forecastService.forecastMetric1Min("ram", "1min");
@@ -72,7 +72,7 @@ public class JobsController {
 	
 	
 	@RequestMapping("/start1MinRamJob")
-	public String start1MinRamJob(){		
+	public String start1MinRamJob() throws Exception{		
 		while(true){
 			forecastService.forecastMetric1Min("ram", "1min");
 			try {
@@ -84,7 +84,7 @@ public class JobsController {
 		}
 	}
 	@RequestMapping("/start1MinDiskJob")
-	public String start1MinDiskJob(){		
+	public String start1MinDiskJob() throws Exception{		
 		while(true){
 			forecastService.forecastMetric1Min("disk", "1min");
 			try {

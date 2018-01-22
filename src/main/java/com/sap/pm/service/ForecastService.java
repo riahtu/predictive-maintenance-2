@@ -12,12 +12,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
-import com.sap.core.connectivity.api.authentication.AuthenticationHeader;
 import com.sap.core.connectivity.api.configuration.DestinationConfiguration;
 import com.sap.pm.entity.MetricData15Min;
 import com.sap.pm.entity.MetricData1Min;
@@ -65,7 +63,7 @@ public class ForecastService {
 		
 	}
 	
-	public ForecastResponse forecastMetric1Min(String metricName, String granularity){
+	public ForecastResponse forecastMetric1Min(String metricName, String granularity) throws Exception{
 		log.error("forecastmetric ---- ");
 		
 		ResponseEntity<ForecastResponse> response = null;
@@ -105,15 +103,21 @@ public class ForecastService {
 			DestinationConfiguration destConfig = DestinationUtil.getDestConfig("ps");			
 			String url = destConfig.getProperty("URL")+"/forecast/sync";
 			
-			AuthenticationHeader appToAppSSOHeader = DestinationUtil.getAuthenticationHeader(url);
+			/*AuthenticationHeader appToAppSSOHeader = DestinationUtil.getAuthenticationHeader(url);
 			if (null == appToAppSSOHeader) {
 				log.info("appToAppSSOHeader : NULL");
+			}*/
+			
+			String accessToken = "Bearer f37d707f7cda6ffe58e1b5cad62bc3e";//DestinationAccessUtil.getAccessToken("ps");
+			if (null == accessToken || accessToken.isEmpty()) {
+				throw new Exception("invalid.oauth.token");
 			}
 			
 			RestTemplate restTemplate = new RestTemplate();
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
-			headers.add(appToAppSSOHeader.getName(), appToAppSSOHeader.getValue());
+			headers.add(HttpHeaders.AUTHORIZATION, accessToken);
+			//	headers.add(appToAppSSOHeader.getName(), appToAppSSOHeader.getValue());
 			HttpEntity<String> entity = new HttpEntity<String>(jsonObject, headers);
 
 			response = restTemplate.exchange(url, HttpMethod.POST, entity, ForecastResponse.class);
@@ -122,12 +126,12 @@ public class ForecastService {
 				responseBody = response.getBody();
 				persistData(responseBody, metricName, granularity);
 			}			
-			log.debug("response payload : " + response);
+			log.error("response payload : " + response);
 
-		} catch (HttpClientErrorException | HttpServerErrorException e) {
+		} catch (RestClientException e) {
 			log.error("Exception ");
 			//responseBody = e.getResponseBodyAsString();
-			log.debug("response payload " + responseBody);
+			log.error("response payload " + responseBody);
 		}
 		
 		return responseBody;

@@ -21,6 +21,10 @@ public class SampleJob implements Job {
     public void execute(JobExecutionContext jobExecutionContext) {
        // service.hello();
     	log.error("In job execute");
-        forecastservice.forecastMetric1Min("CPU_USAGE", "1min");
+        try {
+			forecastservice.forecastMetric1Min("cpu", "1min");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     }
 }
