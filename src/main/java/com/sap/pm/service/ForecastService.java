@@ -103,28 +103,24 @@ public class ForecastService {
 			DestinationConfiguration destConfig = DestinationUtil.getDestConfig("ps");			
 			String url = destConfig.getProperty("URL")+"/forecast/sync";
 			
-			/*AuthenticationHeader appToAppSSOHeader = DestinationUtil.getAuthenticationHeader(url);
-			if (null == appToAppSSOHeader) {
-				log.info("appToAppSSOHeader : NULL");
-			}*/
-			
-			String accessToken = "Bearer f37d707f7cda6ffe58e1b5cad62bc3e";//DestinationAccessUtil.getAccessToken("ps");
-			if (null == accessToken || accessToken.isEmpty()) {
-				throw new Exception("invalid.oauth.token");
-			}
+//			AuthenticationHeader appToAppSSOHeader = DestinationUtil.getAuthenticationHeader(url);
+//			if (null == appToAppSSOHeader) {
+//				log.info("appToAppSSOHeader : NULL");
+//			}
 			
 			RestTemplate restTemplate = new RestTemplate();
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
-			headers.add(HttpHeaders.AUTHORIZATION, accessToken);
-			//	headers.add(appToAppSSOHeader.getName(), appToAppSSOHeader.getValue());
+			headers.add(HttpHeaders.AUTHORIZATION, "Bearer 6b24ea75e6532fc4bc891b0242b388e");
+			//headers.add(appToAppSSOHeader.getName(), appToAppSSOHeader.getValue());
+
 			HttpEntity<String> entity = new HttpEntity<String>(jsonObject, headers);
 
 			response = restTemplate.exchange(url, HttpMethod.POST, entity, ForecastResponse.class);
 
 			if (response != null) {
 				responseBody = response.getBody();
-				persistData(responseBody, metricName, granularity);
+				//persistData(responseBody, metricName, granularity);
 			}			
 			log.error("response payload : " + response);
 
